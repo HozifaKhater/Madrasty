@@ -71,9 +71,11 @@ export class CheckboxComponent implements OnInit {
     form1: FormGroup;
 	constructor(public _fb: FormBuilder,private DepartmentService: DepartmentDataService, private EmployeeService: EmployeeDataService) {
         this.form1 = this._fb.group({
+            dep_id: [{ value: '', disabled: true }],
             dep_name_f: ['', [Validators.required]],
-            dep_desc_f: ['', [Validators.required]],
-            emp_f: ['', [Validators.required]]
+            dep_desc_f: ['', [Validators.pattern]],
+               emp_f: ['', [Validators.pattern]]
+        
         });
 
         //this.form1 = this._fb.group({
@@ -117,21 +119,12 @@ export class CheckboxComponent implements OnInit {
 	}
 
 	add_department() {
-        //const controls = this.form1.controls;
-        //if (this.form1.invalid) {
-        //    Object.keys(controls).forEach(controlName =>
-        //        controls[controlName].markAsTouched()
-        //    );
-        //    return;
-        //}
-     
-
 
         if (this.form1.invalid) {
-            console.log('Form invalid...');
+            console.log('Form invalid...', this.form1.errors);
             this.form1.markAllAsTouched();
         } else {
-           	var chck;
+           	var chck: number;
 
 		if (this.butDisabled == true) {
 			chck = 0
@@ -140,7 +133,7 @@ export class CheckboxComponent implements OnInit {
 		 if (this.butDisabled == false)
 		{
 			 chck = Number(this.selecteddepartment.dep_id);
-			console.log("val", 1);
+             console.log("val", chck);
 		};
 
 
@@ -158,9 +151,12 @@ export class CheckboxComponent implements OnInit {
 
 
 	this.DepartmentService.addDepartment(val).subscribe(res => {
-		alert(res.toString());
+        alert(res.toString());
+        this.DepartmentService.BClicked('Component B is clicked!!');
+        this.butDisabled = true;
+        this.selecteddepartment = '';
 		})
-
+            
         console.log(val);
 
             this.form1.reset();
@@ -231,7 +227,7 @@ export class CheckboxComponent implements OnInit {
                 console.log("val", 0);
             }
             if (this.butDisabled == false) {
-                chck = Number(this.selecteddepartment);
+                chck = Number(this.selecteddepartment.dep_id);
                 console.log("val", 1);
             };
 
@@ -250,7 +246,10 @@ export class CheckboxComponent implements OnInit {
 
             this.DepartmentService.updateDepartment(val).subscribe(res => {
                 alert(res.toString());
+                this.DepartmentService.BClicked('Component B is clicked!!');
                 this.form1.reset();
+                this.butDisabled = true;
+                this.selecteddepartment = '';
                 (<HTMLInputElement>document.getElementById("save_btn")).disabled = false;
                 (<HTMLInputElement>document.getElementById("save_btn")).hidden = false;
                 (<HTMLInputElement>document.getElementById("update_btn")).hidden = true;
@@ -306,14 +305,16 @@ export class CheckboxComponent implements OnInit {
 		
 		this.DepartmentService.aClickedEvent
 			.subscribe((data: string) => {
-				this.dep_check = false;
+                this.dep_check = false;
+                this.butDisabled = true
 				if (Number(this.DepartmentService.parent_id) != 0) {
 					this.dep_check = true;
 					var selected_value = this.DepartmentService.parent_id
 					this.selecteddepartment = this.departments[this.departments.findIndex(function (el) {
 						return el.dep_id == selected_value
 					})];/*x => x.dep_id === this.DepartmentService.parent_id)];*/
-				}
+                    this.butDisabled=false
+                }
 				
 			
 				(<HTMLInputElement>document.getElementById("save_btn")).disabled = true;

@@ -83,12 +83,15 @@ export class ActivityListComponent implements OnInit, OnDestroy {
 		private store: Store<AppState>,
         private ActivityDataService: ActivityDataService
 	) {
-        
-        this.ActivityDataService.GetAllActivity().subscribe(data => this.ELEMENT_DATA = data,
-                error => console.log(error),
-                () => this.dataSource = new MatTableDataSource(this.ELEMENT_DATA));
+        this.dataSource = new MatTableDataSource([]);
+       
 
-	}
+    }
+    get_data() {
+        this.ActivityDataService.GetAllActivity().subscribe(data => this.ELEMENT_DATA = data,
+            error => console.log(error),
+            () => this.dataSource.data = this.ELEMENT_DATA);
+    }
 	activities_info: any[];
 	editCustomer(activity: activity, ActivityDataService: ActivityDataService) {
 
@@ -104,7 +107,7 @@ export class ActivityListComponent implements OnInit, OnDestroy {
 					
 					console.log('testdepname', item);
 					this.ActivityDataService.activity_name = item.activity_name;
-
+                    this.ActivityDataService.activity_school_year_id = item.activity_school_year_id;
 					this.ActivityDataService.activity_dep = item.activity_dep;
 					this.ActivityDataService.activity_school_year = item.activity_school_year;
 					this.ActivityDataService.activity_level = item.activity_level;
@@ -125,12 +128,9 @@ export class ActivityListComponent implements OnInit, OnDestroy {
 
 		console.log('CUSTOMER ID', activity.activity_id);
 		this.ActivityDataService.deleteActivity(Number(activity.activity_id)).subscribe(res => {
-			/*	this.get_departments(DepartmentService);;*/
-			this.ActivityDataService.GetAllActivity().subscribe(data => this.ELEMENT_DATA = data,
-				error => console.log(error),
-				() => this.dataSource = new MatTableDataSource(this.ELEMENT_DATA));
+           
 			alert(res.toString());
-
+            this.get_data();
 		})
 
 	}
@@ -142,8 +142,15 @@ export class ActivityListComponent implements OnInit, OnDestroy {
 	/**
 	 * On init
 	 */
-	ngOnInit() {
-       
+    ngAfterViewInit() {
+        this.dataSource.paginator = this.paginator;
+    }
+    ngOnInit() {
+        this.ActivityDataService.bClickedEvent
+            .subscribe((data: string) => {
+                this.get_data();
+            });
+        this.get_data()
 		let model: any = [{ 'id': 1, 'assetID': 2, 'severity': 3, 'riskIndex': 4, 'riskValue': 5, 'ticketOpened': true, 'lastModifiedDate': "2018 - 12 - 10", 'eventType': 'Add' }];  //get the model from the form
 		//this.dataSource.push(model);  //add the new model object to the dataSource
 		//this.dataSource = [...this.dataSource];  //refresh the dataSource
@@ -209,7 +216,10 @@ export class ActivityListComponent implements OnInit, OnDestroy {
             this.paginator.pageIndex,
             this.paginator.pageSize
            
-		);
+        );
+        this.dataSource.sort = this.sort;
+        const searchText: string = this.searchInput.nativeElement.value;
+        this.dataSource.filter = searchText;
 		// Call request from server
 		this.store.dispatch(new CustomersPageRequested({ page: queryParams }));
 		this.selection.clear();

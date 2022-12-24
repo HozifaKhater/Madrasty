@@ -9,7 +9,7 @@ import { HttpClient } from "@angular/common/http";
     providedIn: 'root'
 })
 export class Borrow_bookDataService {
-    readonly APIUrl = "https://localhost:44337/api";
+    readonly APIUrl = "https://madrastyapi.azurewebsites.net/api";
     private actionUrl: string;
     public borr_id: number;
     public borr_date: string;

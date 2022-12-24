@@ -42,7 +42,7 @@
 
                     <div class="col-md-2 kt-margin-bottom-10-mobile">
                         <mat-form-field class="mat-form-field-fluid">
-                            <input matInput placeholder="Search customer" #searchInput placeholder="بحث">
+                            <input matInput placeholder="Search customer"  #searchInput placeholder="بحث">
                             <mat-hint align="start">
                                 <strong>بحث</strong> في كل الخانات
                             </mat-hint>
@@ -84,7 +84,7 @@
                                 <mat-icon>clear_all</mat-icon>
                                 Fetch Selected
                             </button>&nbsp;<!-- Call 'fetch-entity-dialog' from _shared folder -->
-                            <button (click)="updateStatusForCustomers()" mat-raised-button matTooltip="Update status for selected customers" class="mat-button-mt-4">
+                            <button  mat-raised-button matTooltip="Update status for selected customers" class="mat-button-mt-4">
                                 <mat-icon>update</mat-icon>
                                 Update status
                             </button><!-- Call 'update-stated-dialog' from _shared folder -->
@@ -133,26 +133,22 @@
 
                 </ng-container>
 
-                <ng-container matColumnDef="firstName">
+                <ng-container matColumnDef="dep_name">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>الاسم</mat-header-cell>
                     <mat-cell *matCellDef="let customer">{{customer.dep_name}}</mat-cell>
                 </ng-container>
 
-                <ng-container matColumnDef="lastName">
+                <ng-container matColumnDef="dep_supervisor_name">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>اسم المشرف</mat-header-cell>
                     <mat-cell *matCellDef="let customer">{{customer.dep_supervisor_name}}</mat-cell>
                 </ng-container>
-                <ng-container matColumnDef="email">
+                <ng-container matColumnDef="parent_id">
                     <mat-header-cell *matHeaderCellDef mat-sort-header class="email-cell"> مسلسل القسم الرئيسى </mat-header-cell>
                     <mat-cell *matCellDef="let customer" class="email-cell">
                         <a href="ecommerce/customers#" class="kt-link">{{customer.parent_id}}</a>
                     </mat-cell>
                 </ng-container>
-                <ng-container matColumnDef="gender">
-
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>عنوان الدرس</mat-header-cell>
-                    <mat-cell *matCellDef="let customer">{{customer.gender}}</mat-cell>
-                </ng-container>
+  
                 <!--<ng-container matColumnDef="status">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>الحالة</mat-header-cell>
                     <mat-cell *matCellDef="let customer">

@@ -10,7 +10,7 @@ import { HttpClient } from "@angular/common/http";
 })
 export class EzonDataService
 {
-    readonly APIUrl = "https://localhost:44337/api";
+    readonly APIUrl = "https://madrastyapi.azurewebsites.net/api";
     private actionUrl: string;
     ezn_id: number;
     absent_ezn_id: string;

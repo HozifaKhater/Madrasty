@@ -33,7 +33,7 @@
                             <label class="col-lg-2 col-form-label">أسم نوع الزياره:</label>
                             <div class="col-lg-6">
                                 <mat-form-field class="example-full-width">
-                                    <input [(ngModel)]="visit_types_name" (childClick)="onChildButtonClick($event)" [ngModelOptions]="{standalone: true}" matInput>
+                                    <input [(ngModel)]="visit_types_name"  [ngModelOptions]="{standalone: true}" matInput>
                                     <!--<mat-hint align="start">من فضلك ادخل القسم</mat-hint>-->
                                 </mat-form-field>
                             </div>
@@ -46,7 +46,7 @@
                             <p style="float:right;">
                                 <mat-checkbox id="is_visit_date" (change)="is_visit_date_change($event)" [checked]="dep_check">
                                     <mat-form-field class="example-full-width">
-                                        <input [(ngModel)]="visit_date" id="visit_date_id" (childClick)="onChildButtonClick($event)" [ngModelOptions]="{standalone: true}" matInput>
+                                        <input [(ngModel)]="visit_date" id="visit_date_id"  [ngModelOptions]="{standalone: true}" matInput>
                                         <!--<mat-hint align="start">من فضلك ادخل القسم</mat-hint>-->
                                     </mat-form-field>
                                 </mat-checkbox>
@@ -57,7 +57,7 @@
                                     <p style="float:right;">
                                         <mat-checkbox id="is_phone" (change)="is_phone_chck_change($event)" [checked]="dep_check">
                                             <mat-form-field class="example-full-width">
-                                                <input [(ngModel)]="phone_label" id="is_phone_id" (childClick)="onChildButtonClick($event)" [ngModelOptions]="{standalone: true}" matInput>
+                                                <input [(ngModel)]="phone_label" id="is_phone_id"  [ngModelOptions]="{standalone: true}" matInput>
                                                 <!--<mat-hint align="start">من فضلك ادخل القسم</mat-hint>-->
                                             </mat-form-field>
                                         </mat-checkbox>
@@ -77,7 +77,7 @@
                             <p style="float:right;">
                                 <mat-checkbox id="is_start_time" (change)="is_start_time_change($event)" [checked]="dep_check">
                                     <mat-form-field class="example-full-width">
-                                        <input [(ngModel)]="start_time_label" id="is_start_time_id"  (childClick)="onChildButtonClick($event)" [ngModelOptions]="{standalone: true}" matInput>
+                                        <input [(ngModel)]="start_time_label" id="is_start_time_id"   [ngModelOptions]="{standalone: true}" matInput>
                                         <!--<mat-hint align="start">من فضلك ادخل القسم</mat-hint>-->
                                     </mat-form-field>
                                 </mat-checkbox>
@@ -88,7 +88,7 @@
                                     <p style="float:right;">
                                         <mat-checkbox id="is_end_time" (change)="is_end_time_change($event)" [checked]="dep_check">
                                             <mat-form-field class="example-full-width">
-                                                <input [(ngModel)]="end_time_label" id="is_end_time_id"  (childClick)="onChildButtonClick($event)" [ngModelOptions]="{standalone: true}" matInput>
+                                                <input [(ngModel)]="end_time_label" id="is_end_time_id"   [ngModelOptions]="{standalone: true}" matInput>
                                                 <!--<mat-hint align="start">من فضلك ادخل القسم</mat-hint>-->
                                             </mat-form-field>
                                         </mat-checkbox>
@@ -107,7 +107,7 @@
                             <p style="float:right;">
                                 <mat-checkbox id="is_name" (change)="is_name_change($event)" [checked]="dep_check">
                                     <mat-form-field class="example-full-width">
-                                        <input [(ngModel)]="name_label" id="is_name_id" (childClick)="onChildButtonClick($event)" [ngModelOptions]="{standalone: true}" matInput>
+                                        <input [(ngModel)]="name_label" id="is_name_id"  [ngModelOptions]="{standalone: true}" matInput>
                                         <!--<mat-hint align="start">من فضلك ادخل القسم</mat-hint>-->
                                     </mat-form-field>
                                 </mat-checkbox>
@@ -118,7 +118,7 @@
                                     <p style="float:right;">
                                         <mat-checkbox id="is_topic" (change)="is_topic_change($event)" [checked]="dep_check">
                                             <mat-form-field class="example-full-width">
-                                                <input [(ngModel)]="topic_label" id="is_topic_id" (childClick)="onChildButtonClick($event)" [ngModelOptions]="{standalone: true}" matInput>
+                                                <input [(ngModel)]="topic_label" id="is_topic_id"  [ngModelOptions]="{standalone: true}" matInput>
                                                 <!--<mat-hint align="start">من فضلك ادخل القسم</mat-hint>-->
                                             </mat-form-field>
                                         </mat-checkbox>
@@ -137,7 +137,7 @@
                             <p style="float:right;">
                                 <mat-checkbox id="is_instructions" (change)="is_instructions_change($event)" [checked]="dep_check">
                                     <mat-form-field class="example-full-width">
-                                        <input [(ngModel)]="instructions_label" id="is_instructions_id" (childClick)="onChildButtonClick($event)" [ngModelOptions]="{standalone: true}" matInput>
+                                        <input [(ngModel)]="instructions_label" id="is_instructions_id"  [ngModelOptions]="{standalone: true}" matInput>
                                         <!--<mat-hint align="start">من فضلك ادخل القسم</mat-hint>-->
                                     </mat-form-field>
                                 </mat-checkbox>
@@ -148,7 +148,7 @@
                                     <p style="float:right;">
                                         <mat-checkbox id="is_job" (change)="is_job_change($event)" [checked]="dep_check">
                                             <mat-form-field class="example-full-width">
-                                                <input [(ngModel)]="job_label"  id="is_job_id"  (childClick)="onChildButtonClick($event)" [ngModelOptions]="{standalone: true}" matInput>
+                                                <input [(ngModel)]="job_label"  id="is_job_id"   [ngModelOptions]="{standalone: true}" matInput>
                                                 <!--<mat-hint align="start">من فضلك ادخل القسم</mat-hint>-->
                                             </mat-form-field>
                                         </mat-checkbox>
@@ -167,7 +167,7 @@
                             <p style="float:right;">
                                 <mat-checkbox id="is_notes" (change)="is_notes_change($event)" [checked]="dep_check">
                                     <mat-form-field class="example-full-width">
-                                        <input [(ngModel)]="notes_label"  id="is_notes_id"  (childClick)="onChildButtonClick($event)" [ngModelOptions]="{standalone: true}" matInput>
+                                        <input [(ngModel)]="notes_label"  id="is_notes_id"   [ngModelOptions]="{standalone: true}" matInput>
                                         <!--<mat-hint align="start">من فضلك ادخل القسم</mat-hint>-->
                                     </mat-form-field>
                                 </mat-checkbox>
@@ -178,7 +178,7 @@
                                     <p style="float:right;">
                                         <mat-checkbox id="is_dep" (change)="is_dep_change($event)" [checked]="dep_check">
                                             <mat-form-field class="example-full-width">
-                                                <input [(ngModel)]="dep_label" id="is_dep_id" (childClick)="onChildButtonClick($event)" [ngModelOptions]="{standalone: true}" matInput>
+                                                <input [(ngModel)]="dep_label" id="is_dep_id"  [ngModelOptions]="{standalone: true}" matInput>
                                                 <!--<mat-hint align="start">من فضلك ادخل القسم</mat-hint>-->
                                             </mat-form-field>
                                         </mat-checkbox>
@@ -197,7 +197,7 @@
                             <p style="float:right;">
                                 <mat-checkbox id="is_vnote" (change)="is_vnote_change($event)" [checked]="dep_check">
                                     <mat-form-field class="example-full-width">
-                                        <input [(ngModel)]="vnote_label"  id="is_vnote_id" (childClick)="onChildButtonClick($event)" [ngModelOptions]="{standalone: true}" matInput>
+                                        <input [(ngModel)]="vnote_label"  id="is_vnote_id"  [ngModelOptions]="{standalone: true}" matInput>
                                         <!--<mat-hint align="start">من فضلك ادخل القسم</mat-hint>-->
                                     </mat-form-field>
                                 </mat-checkbox>
@@ -208,7 +208,7 @@
                                     <p style="float:right;">
                                         <mat-checkbox id="is_vpic" (change)="is_vpic_chck_change($event)" [checked]="dep_check">
                                             <mat-form-field class="example-full-width">
-                                                <input [(ngModel)]="vpic_label" id="is_vpic_id"  (childClick)="onChildButtonClick($event)" [ngModelOptions]="{standalone: true}" matInput>
+                                                <input [(ngModel)]="vpic_label" id="is_vpic_id"   [ngModelOptions]="{standalone: true}" matInput>
                                                 <!--<mat-hint align="start">من فضلك ادخل القسم</mat-hint>-->
                                             </mat-form-field>
                                         </mat-checkbox>

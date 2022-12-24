@@ -10,12 +10,13 @@ import { HttpClient } from "@angular/common/http";
 })
 export class ActivityDataService
 {
-    readonly APIUrl = "https://localhost:44337/api";
+    readonly APIUrl = "https://madrastyapi.azurewebsites.net/api";
     private actionUrl: string;
     activity_id: number;
     activity_name: string;
     activity_dep: string = "";
     activity_school_year: string = "";
+    activity_school_year_id: string = "";
     activity_level: string = "";
     activity_date: string = "";
     activity_school_term: string = "";
@@ -50,5 +51,9 @@ export class ActivityDataService
     AClicked(msg: string) {
         this.aClickedEvent.emit(msg);
     }
-
+    @Output() bClickedEvent = new EventEmitter<string>();
+    /*   @Output() deparmentClickedEvent = new EventEmitter<string>();*/
+    BClicked(msg: string) {
+        this.bClickedEvent.emit(msg);
+    }
 }  

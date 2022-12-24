@@ -10,7 +10,7 @@ import { HttpClient } from "@angular/common/http";
 })
     
 export class Logo_converterDataService {
-    readonly APIUrl = "https://localhost:44337/api";
+    readonly APIUrl = "https://madrastyapi.azurewebsites.net/api";
     private actionUrl: string;
 
     public logo: any="";

@@ -11,7 +11,7 @@
                         <!-- 'm  margin-bottom-10-mobile' for adaptive make-up  -->
                         <div class="kt-form__control">
                             <mat-form-field class="mat-form-field-fluid">
-                                <mat-select [(value)]="filterStatus" (selectionChange)="loadDefinitionList()">
+                                <mat-select [(value)]="filterStatus" >
                                     <mat-option value="">كل</mat-option>
                                     <mat-option value="0">Suspended</mat-option>
                                     <mat-option value="1">Active</mat-option>
@@ -27,7 +27,7 @@
                     <div class="col-md-2 kt-margin-bottom-10-mobile">
                         <div class="kt-form__control">
                             <mat-form-field class="mat-form-field-fluid">
-                                <mat-select [(value)]="filterType" (selectionChange)="loadDefinitionList()">
+                                <mat-select [(value)]="filterType" >
                                     <mat-option value="">كل</mat-option>
                                     <mat-option value="0">Business</mat-option>
                                     <mat-option value="1">Individual</mat-option>
@@ -79,11 +79,11 @@
                                 </button>&nbsp;<!-- Call 'delete-entity-dialog' from _shared folder -->
                             </ng-template>
 
-                            <button (click)="fetchCustomers()" mat-raised-button matTooltip="Fetch selected customers" class="mat-button-mt-4">
+                            <button  mat-raised-button matTooltip="Fetch selected customers" class="mat-button-mt-4">
                                 <mat-icon>clear_all</mat-icon>
                                 Fetch Selected
                             </button>&nbsp;<!-- Call 'fetch-entity-dialog' from _shared folder -->
-                            <button (click)="updateStatusForCustomers()" mat-raised-button matTooltip="Update status for selected customers" class="mat-button-mt-4">
+                            <button  mat-raised-button matTooltip="Update status for selected customers" class="mat-button-mt-4">
                                 <mat-icon>update</mat-icon>
                                 Update status
                             </button><!-- Call 'update-stated-dialog' from _shared folder -->

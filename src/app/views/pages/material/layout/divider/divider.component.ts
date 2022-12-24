@@ -47,7 +47,8 @@ export class DividerComponent implements OnInit {
 	bad_da3f_reasons: string = "";
 	bad_cure_ways: string = "";
 	bad_result: string = "";
-
+    level_change() { }
+    class_change() {}
 	folders = [
 		{
 			name: 'Photos',
@@ -83,7 +84,8 @@ export class DividerComponent implements OnInit {
     subjects: Subjects[];
     level: Levels[];
     class: Classes[];
-    
+    selected_levels: any ;
+    selected_class: any ;
     form1: FormGroup;
     constructor(private ClassesDataService:ClassesDataService,private LevelsDataService:LevelsDataService,public _fb: FormBuilder,private Good_bad_students_cardService: Good_bad_students_cardDataService, private SubjectDataService: SubjectDataService) {
         this.form1 = this._fb.group({
@@ -119,14 +121,14 @@ export class DividerComponent implements OnInit {
         } else {
             var val = {
 
-                good_card_id: this.good_card_id,
-                bad_card_id: Number(this.bad_card_id),
-                grade_id: Number(this.grade_id),
-                garde_name: this.garde_name,
-                class_id: this.class_id,
-                class_name: this.class_name,
-                subject_id: Number(this.subject_id),
-                subject_name: this.subject_name,
+                good_card_id: 0,
+                bad_card_id: 0,
+                grade_id: Number(this.selected_levels.lev_id),
+                garde_name: this.selected_levels.lev_name,
+                class_id: Number(this.selected_class.class_id),
+                class_name: this.selected_class.class_name,
+                subject_id: Number(this.selectedsubject.subject_id),
+                subject_name: this.selectedsubject.subject_name,
                 student_id: this.student_id,
                 student_name: this.student_name,
                 good_ebda3: this.good_ebda3,
@@ -142,12 +144,13 @@ export class DividerComponent implements OnInit {
             console.log("asd", val)
             this.Good_bad_students_cardService.addGood_bad_students_card(val).subscribe(res => {
                 alert(res.toString());
+                this.Good_bad_students_cardService.BClicked("")
             })
             console.log(val)
             this.form1.reset();
         }
 	}
-
+    selectedsubject: any;
 	update_goodbadstudents() {
 
     /*console.log("emp", emp, this.employeedepartment );*/
@@ -158,14 +161,14 @@ export class DividerComponent implements OnInit {
             var val = {
 
                 student_card_id: this.student_card_id,
-                good_card_id: this.good_card_id,
-                bad_card_id: this.bad_card_id,
-                grade_id: this.grade_id,
-                garde_name: this.garde_name,
-                class_id: this.class_id,
-                class_name: this.class_name,
-                subject_id: this.subject_id,
-                subject_name: this.subject_name,
+                good_card_id: 0,
+                bad_card_id: 0,
+                grade_id: Number(this.selected_levels.lev_id),
+                garde_name: this.selected_levels.lev_name,
+                class_id: Number(this.selected_class.class_id),
+                class_name: this.selected_class.class_name,
+                subject_id: Number(this.selectedsubject.subject_id),
+                subject_name: this.selectedsubject.subject_name,
                 student_id: this.student_id,
                 student_name: this.student_name,
                 good_ebda3: this.good_ebda3,
@@ -186,6 +189,7 @@ export class DividerComponent implements OnInit {
 
             this.Good_bad_students_cardService.updateGood_bad_students_card(val).subscribe(res => {
                 alert(res.toString());
+                this.Good_bad_students_cardService.BClicked("")
                 this.form1.reset();
                 (<HTMLInputElement>document.getElementById("save_btn")).disabled = false;
                 (<HTMLInputElement>document.getElementById("save_btn")).hidden = false;
@@ -233,31 +237,28 @@ export class DividerComponent implements OnInit {
 				this.bad_da3f = this.Good_bad_students_cardService.bad_da3f;
 				this.bad_da3f_reasons = this.Good_bad_students_cardService.bad_da3f_reasons;
 				this.bad_cure_ways = this.Good_bad_students_cardService.bad_cure_ways;
-				this.bad_result = this.Good_bad_students_cardService.bad_result;
+                this.bad_result = this.Good_bad_students_cardService.bad_result;
 
-		
+                var selected_subject = String(this.Good_bad_students_cardService.subject_id);
+                this.selectedsubject = this.subjects[this.subjects.findIndex(function (el) {
+                    return String(el.subject_id) == selected_subject;
+
+                })];
+
+                var selected_level = String(this.Good_bad_students_cardService.grade_id);
+                this.selected_levels = this.level[this.level.findIndex(function (el) {
+                    return String(el.lev_id) == selected_level;
+
+                })];
+
+                var selected_class = String(this.Good_bad_students_cardService.class_id);
+                this.selected_class = this.class[this.class.findIndex(function (el) {
+                    return String(el.class_id) == selected_class;
+
+                })];
 				console.log("edited")
 
 			});
-		var test1
-
-		this.student_card_id = this.student_card_id;
-		this.good_card_id = this.good_card_id;
-		this.bad_card_id = this.bad_card_id;
-		this.grade_id = this.grade_id;
-		this.garde_name = this.garde_name;
-		this.class_id = this.class_id;
-		this.class_name = this.class_name;
-		this.subject_id = this.subject_id;
-		this.subject_name = this.subject_name;
-		this.student_id = this.student_id;
-		this.student_name = this.student_name;
-		this.good_ebda3 = this.good_ebda3;
-		this.good_tahfeez = this.good_tahfeez;
-		this.good_result = this.good_result;
-		this.bad_da3f = this.bad_da3f;
-		this.bad_da3f_reasons = this.bad_da3f_reasons;
-		this.bad_cure_ways = this.bad_cure_ways;
-		this.bad_result = this.bad_result;
+		
 	}
 }

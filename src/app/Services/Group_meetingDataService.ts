@@ -9,7 +9,7 @@ import { HttpClient } from "@angular/common/http";
     providedIn: 'root'
 })
 export class Group_meetingDataService {
-    readonly APIUrl = "https://localhost:44337/api";
+    readonly APIUrl = "https://madrastyapi.azurewebsites.net/api";
     private actionUrl: string;
     public group_id: number;
     public group_name: string;

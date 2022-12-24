@@ -2,8 +2,8 @@
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { DepartmentDataService } from '../../../../../Services/DepartmentDataService';
-import { DepartmentMaster, SideDepartmentMaster } from '../../../../../DepartmentMaster.Model';
-import { MasterJobMaster } from '../../../../../MasterJobMaster.Model';
+import { DepartmentMaster, SideDepartmentMaster,Departments } from '../../../../../DepartmentMaster.Model';
+import { MasterJobMaster, MasterJob } from '../../../../../MasterJobMaster.Model';
 import { EmployeeDataService } from '../../../../../Services/EmployeeDataService';
 import { MasterJobsDataService } from '../../../../../Services/MasterJobsDataService';
 import { EmployeeMaster } from '../../../../../EmployeeMaster.Model';
@@ -58,7 +58,8 @@ export class InputComponent implements OnInit {
 
     //    return this.country.filter(country => country);
     //}
-	@Input() employee_data: any;
+    @Input() employee_data: any;
+    field: any;
 	emp_id: number;
 	emp_civilian_id: string = "";
 	emp_sex: string = "";
@@ -112,9 +113,9 @@ export class InputComponent implements OnInit {
 	trainig_to: string = "";
 	traing_desc: string = "";
 
-	departments: DepartmentMaster[];
+	departments: Departments[];
     side_departments: SideDepartmentMaster[];
-    jobs: DepartmentMaster[];
+    jobs: MasterJob[];
     subjects: Subjects[];
     sex: def.sex[];
     nat: def.nat[];
@@ -136,20 +137,47 @@ export class InputComponent implements OnInit {
     formName: any;
     errorMessage: string;
 
+    selecteddepartment: any;
+    selectedsidedepartment: any;
+    selectedsex: any;
+    selectednat: any;
+    selectedstatus: any;
+    selectedrel: any;
+    selectedjob_tybe: any;
+    selectedrelation: any;
+    selectedsubject: any;
+    selectedcrit: any;
+    selectedcountry: any;
+    selectedemp_status: any;
     form1: FormGroup;
+
 	constructor(public _fb: FormBuilder, private DepartmentService: DepartmentDataService, private Training_coursesDataService: Training_coursesDataService, private EmployeeService: EmployeeDataService, MasterJobsDataService: MasterJobsDataService
         , private SubjectDataService: SubjectDataService) {
         this.form1 = this._fb.group({
             emp_civilian_id: ['', [Validators.required]],
             emp_file_ser: ['', [Validators.required]],
             emp_name: ['', [Validators.required]],
+            selectedsex: ['', [Validators.required]],
+            selectednat: ['', [Validators.required]],
+            selectedstatus: ['', [Validators.required]],
+            selectedrel: ['', [Validators.required]],
+            emp_dob: [{ value: '', disabled: true }, [Validators.required]],
+            selectedjob_tybe: ['', [Validators.required]],
             selectedjob: ['', [Validators.required]],
-            emp_dob: ['', [Validators.required]],
             selecteddepartment: ['', [Validators.required]],
-            emp_employment_date: ['', [Validators.required]],
+            selectedsidedepartment: ['', [Validators.required]],
+
+            emp_employment_date: [{ value: '', disabled: true }, [Validators.required]],
+            //
+            selectedrelation: ['', [Validators.required]],
+
+
             selectedsubject: ['', [Validators.required]],
-            emp_educationa_qualification_date: ['', [Validators.required]],
-            myControl: ['', [Validators.required]],
+            selectedcrit: ['', [Validators.required]],
+          
+
+            emp_educationa_qualification_date: [{ value: '', disabled: true }, [Validators.required]],
+            selectedemp_status: ['', [Validators.required]],
             emp_password: ['', [Validators.required]],
             emp_exp_out_country: ['', [Validators.required]],
             emp_exp_in_country_another_grade: ['', [Validators.required]],
@@ -158,6 +186,15 @@ export class InputComponent implements OnInit {
             emp_address: ['', [Validators.required]],
             emp_email: ['', [Validators.required]],
             emp_mob: ['', [Validators.required]],
+          
+           
+         
+          
+           
+         
+          
+            
+          
             
         });
 		this.DepartmentService.GetAllMasterdepartment().subscribe(data => this.departments = data,
@@ -206,7 +243,7 @@ export class InputComponent implements OnInit {
         return this.country.slice().find(item => item.country_id === permission.country_id);
     }
     get_side_dep(event) {
-        console.log("changeevent", event.dep_id)
+   
         this.DepartmentService.get_department_def_with_master_id(event.dep_id).subscribe(data => this.side_departments = data,
             error => console.log(error),
             () => console.log("ok", this.side_departments));
@@ -251,7 +288,8 @@ export class InputComponent implements OnInit {
 
 	matcher = new MyErrorStateMatcher();
 	value = 'Clear me';
-	add_employee() {
+    add_employee() {
+        console.log("subjectsss", this.selectedsubject.subject_id, this.selectedsubject.subject_name)
 		//var test1
 		//test1 = this.departments[this.selecteddepartment]
 		//var schoolterm
@@ -263,36 +301,36 @@ export class InputComponent implements OnInit {
             var val = {
 
                 emp_civilian_id: this.emp_civilian_id,
-                emp_sex: this.emp_sex,
-                emp_sex_id: Number(this.emp_sex_id),
+                emp_sex: this.selectedsex.def_name,
+                emp_sex_id: Number(this.selectedsex.def_id),
                 emp_name: this.emp_name,
-                emp_nationality: this.emp_nationality,
-                emp_nationality_id: Number(this.emp_nationality_id),
-                emp_marital_status: this.emp_marital_status,
-                emp_marital_status_id: Number(this.emp_marital_status_id),
+                emp_nationality: this.selectednat.def_name,
+                emp_nationality_id: Number(this.selectednat.def_id),
+                emp_marital_status: this.selectedstatus.def_name,
+                emp_marital_status_id: Number(this.selectedstatus.def_id),
                 emp_file_ser: Number(this.emp_file_ser),
                 emp_dob: this.emp_dob,
                 emp_age_year: Number(this.emp_age_year),
                 emp_age_month: Number(this.emp_age_month),
                 emp_age_day: Number(this.emp_age_day),
-                emp_pos_type: this.emp_pos_type,
-                emp_pos_type_id: Number(this.emp_pos_type_id),
+                emp_pos_type: this.selectedjob_tybe.def_name,
+                emp_pos_type_id: Number(this.selectedjob_tybe.def_id),
                 emp_pos: this.job_name_from_function,
                 emp_pos_id: Number(this.job_id_from_function),
-                emp_dep: this.emp_dep,
-                emp_dep_id: Number(this.emp_dep_id),
-                emp_subject: this.emp_subject,
-                emp_subject_id: Number(this.emp_subject_id),
+                emp_dep: this.selecteddepartment.dep_name,
+                emp_dep_id: Number(this.selecteddepartment.dep_id),
+                emp_subject: this.selectedsubject.subject_name,
+                emp_subject_id: Number(this.selectedsubject.subject_id),
                 emp_div: this.emp_div,
                 emp_div_id: Number(this.emp_div_id),
-                emp_contract: this.emp_contract,
-                emp_contract_id: Number(this.emp_contract_id),
+                emp_contract: this.selectedrelation.def_name,
+                emp_contract_id: Number(this.selectedrelation.def_id),
                 emp_employment_date: this.emp_employment_date,
-                emp_educationa_qualification: this.emp_educationa_qualification,
-                emp_educationa_qualification_id: Number(this.emp_educationa_qualification_id),
+                emp_educationa_qualification: this.selectedcrit.def_name,
+                emp_educationa_qualification_id: Number(this.selectedcrit.def_id),
                 emp_educationa_qualification_date: this.emp_educationa_qualification_date,
-                emp_educationa_qualification_country: this.emp_educationa_qualification_country,
-                emp_educationa_qualification_country_id: Number(this.emp_educationa_qualification_country_id),
+                emp_educationa_qualification_country: this.selectedcountry.country_name,
+                emp_educationa_qualification_country_id: Number(this.selectedcountry.country_id),
                 emp_exp_out_country: Number(this.emp_exp_out_country),
                 emp_exp_in_country_same_grade: Number(this.emp_exp_in_country_same_grade),
                 emp_exp_in_country_another_grade: Number(this.emp_exp_in_country_another_grade),
@@ -313,6 +351,7 @@ export class InputComponent implements OnInit {
             this.EmployeeService.addEmployee(val).subscribe(res => {
                 this.EmployeeService.BClicked("saved_emppp");
                 alert(res.toString());
+                this.form1.reset();
             })
             console.log(val)
         }
@@ -352,50 +391,51 @@ export class InputComponent implements OnInit {
 		console.log("empsssssssss",this.EmployeeService)
 		var val = {
 			emp_id: Number(this.EmployeeService.emp_id),
-			emp_civilian_id: this.emp_civilian_id,
-			emp_sex: this.emp_sex,
-			emp_sex_id: Number(this.emp_sex_id),
-			emp_name: this.emp_name,
-			emp_nationality: this.emp_nationality,
-			emp_nationality_id: Number(this.emp_nationality_id),
-			emp_marital_status: this.emp_marital_status,
-			emp_marital_status_id: Number(this.emp_marital_status_id),
-			emp_file_ser: Number(this.emp_file_ser),
-			emp_dob: this.emp_dob,
-			emp_age_year: Number(this.emp_age_year),
-			emp_age_month: Number(this.emp_age_month),
-			emp_age_day: Number(this.emp_age_day),
-			emp_pos_type: this.emp_pos_type,
-			emp_pos_type_id: Number(this.emp_pos_type_id),
-			emp_pos: this.job_name_from_function,
-			emp_pos_id: Number(this.job_id_from_function),
-			emp_dep: this.emp_dep,
-			emp_dep_id: Number(this.emp_dep_id),
-			emp_subject: this.emp_subject,
-			emp_subject_id: Number(this.emp_subject_id),
-			emp_div: this.emp_div,
-			emp_div_id: Number(this.emp_div_id),
-			emp_contract: this.emp_contract,
-			emp_contract_id: Number(this.emp_contract_id),
-			emp_employment_date: this.emp_employment_date,
-			emp_educationa_qualification: this.emp_educationa_qualification,
-			emp_educationa_qualification_id: Number(this.emp_educationa_qualification_id),
-			emp_educationa_qualification_date: this.emp_educationa_qualification_date,
-			emp_educationa_qualification_country: this.emp_educationa_qualification_country,
-			emp_educationa_qualification_country_id: Number(this.emp_educationa_qualification_country_id),
-			emp_exp_out_country: Number(this.emp_exp_out_country),
-			emp_exp_in_country_same_grade: Number(this.emp_exp_in_country_same_grade),
-			emp_exp_in_country_another_grade: Number(this.emp_exp_in_country_another_grade),
-			emp_exp_in_country_same_school: Number(this.emp_exp_in_country_same_school),
-			emp_address: this.emp_address,
-			emp_email: this.emp_email,
-			emp_mob: String(this.emp_mob),
-			emp_mob1: String(this.emp_mob1),
-			emp_tel: String(this.emp_tel),
-			emp_username: this.emp_username,
-			emp_password: this.emp_password,
-			in_class_priv: Number(this.in_class_priv),
-			dep_work: Number(this.dep_work)
+
+            emp_civilian_id: this.emp_civilian_id,
+            emp_sex: this.selectedsex.def_name,
+            emp_sex_id: Number(this.selectedsex.def_id),
+            emp_name: this.emp_name,
+            emp_nationality: this.selectednat.def_name,
+            emp_nationality_id: Number(this.selectednat.def_id),
+            emp_marital_status: this.selectedstatus.def_name,
+            emp_marital_status_id: Number(this.selectedstatus.def_id),
+            emp_file_ser: Number(this.emp_file_ser),
+            emp_dob: this.emp_dob,
+            emp_age_year: Number(this.emp_age_year),
+            emp_age_month: Number(this.emp_age_month),
+            emp_age_day: Number(this.emp_age_day),
+            emp_pos_type: this.selectedjob_tybe.def_name,
+            emp_pos_type_id: Number(this.selectedjob_tybe.def_id),
+            emp_pos: this.job_name_from_function,
+            emp_pos_id: Number(this.job_id_from_function),
+            emp_dep: this.selecteddepartment.dep_name,
+            emp_dep_id: Number(this.selecteddepartment.dep_id),
+            emp_subject: this.selectedsubject.subject_name,
+            emp_subject_id: Number(this.selectedsubject.subject_id),
+            emp_div: this.emp_div,
+            emp_div_id: Number(this.emp_div_id),
+            emp_contract: this.selectedrelation.def_name,
+            emp_contract_id: Number(this.selectedrelation.def_id),
+            emp_employment_date: this.emp_employment_date,
+            emp_educationa_qualification: this.selectedcrit.def_name,
+            emp_educationa_qualification_id: Number(this.selectedcrit.def_id),
+            emp_educationa_qualification_date: this.emp_educationa_qualification_date,
+            emp_educationa_qualification_country: this.selectedcountry.country_name,
+            emp_educationa_qualification_country_id: Number(this.selectedcountry.country_id),
+            emp_exp_out_country: Number(this.emp_exp_out_country),
+            emp_exp_in_country_same_grade: Number(this.emp_exp_in_country_same_grade),
+            emp_exp_in_country_another_grade: Number(this.emp_exp_in_country_another_grade),
+            emp_exp_in_country_same_school: Number(this.emp_exp_in_country_same_school),
+            emp_address: this.emp_address,
+            emp_email: this.emp_email,
+            emp_mob: String(this.emp_mob),
+            emp_mob1: String(this.emp_mob1),
+            emp_tel: String(this.emp_tel),
+            emp_username: this.emp_username,
+            emp_password: this.emp_password,
+            in_class_priv: Number(this.in_class_priv),
+            dep_work: Number(this.dep_work)
 		};
 
 		console.log("val", val);
@@ -403,7 +443,8 @@ export class InputComponent implements OnInit {
 
         this.EmployeeService.updateEmployee(val).subscribe(res => {
             this.EmployeeService.BClicked("saved_emppp");
-			alert(res.toString());
+            alert(res.toString());
+            this.form1.reset();
 			(<HTMLInputElement>document.getElementById("save_btn")).disabled = false;
 			(<HTMLInputElement>document.getElementById("save_btn")).hidden = false;
 			(<HTMLInputElement>document.getElementById("update_btn")).hidden = true;
@@ -418,8 +459,7 @@ export class InputComponent implements OnInit {
 		(<HTMLInputElement>document.getElementById("update_btn")).hidden = true;
 		(<HTMLInputElement>document.getElementById("cancel_btn")).hidden = true;
 	}
-	selecteddepartment: any;
-	selectedsidedepartment: any;
+
     myControl = new FormControl('');
   //  options: string[];
     filteredOptions: Observable<any[]>;
@@ -430,12 +470,7 @@ export class InputComponent implements OnInit {
     displayFn(selectedoption) {
         return selectedoption ? selectedoption.country_name : undefined;
     }
-    checkValidation(): void {
-        if (!this.emp_name.match(/^[a-zA-Z \-\']+/)) {
-            this.formName.controls.name.setErrors({});
-            this.errorMessage = 'set here your message';
-        }
-    }
+ 
 
 	ngOnInit() {
        
@@ -509,9 +544,78 @@ export class InputComponent implements OnInit {
 				this.in_class_priv = this.EmployeeService.in_class_priv;
 				this.dep_work = this.EmployeeService.dep_work;
 
-				console.log(this.departments)
+                var selected_sex = String(this.EmployeeService.emp_sex_id);
+                this.selectedsex = this.sex[this.sex.findIndex(function (el) {
+
+                    return String(el.def_id) == selected_sex;
+
+                })];
+
+                var selected_nat = String(this.EmployeeService.emp_nationality_id);
+                this.selectednat = this.nat[this.nat.findIndex(function (el) {
+
+                    return String(el.def_id) == selected_nat;
+
+                })];
+
+                var selected_status = String(this.EmployeeService.emp_marital_status_id);
+                this.selectedstatus = this.status[this.status.findIndex(function (el) {
+
+                    return String(el.def_id) == selected_status;
+
+                })];
+
+                var selected_status = String(this.EmployeeService.emp_marital_status_id);
+                this.selectedstatus = this.status[this.status.findIndex(function (el) {
+                    return String(el.def_id) == selected_status;
+                })];
+
+                var selected_job_tybe = String(this.EmployeeService.emp_pos_type_id);
+                this.selectedjob_tybe = this.job_type[this.job_type.findIndex(function (el) {
+                    return String(el.def_id) == selected_job_tybe;
+                })];
+
+                var selected_relation = String(this.EmployeeService.emp_contract_id);
+                this.selectedrelation = this.relation_type[this.relation_type.findIndex(function (el) {
+                    return String(el.def_id) == selected_relation;
+                })];
+
+                var selected_crit = String(this.EmployeeService.emp_educationa_qualification_id);
+                this.selectedcrit = this.crit_level[this.crit_level.findIndex(function (el) {
+                    return String(el.def_id) == selected_crit;
+                })];
+
+                var selected_emp_status = String(this.EmployeeService.emp_educationa_qualification_id);
+                this.selectedemp_status = this.emp_status[this.emp_status.findIndex(function (el) {
+                    return String(el.def_id) == selected_emp_status;
+                })];
+
+                var selected_job = String(this.EmployeeService.emp_pos_id);
+                this.selectedjob = this.jobs[this.jobs.findIndex(function (el) {
+                    return String(el.job_id) == selected_job;
+                })];
+
+                var selected_dep = String(this.EmployeeService.emp_dep_id);
+                this.selecteddepartment = this.departments[this.departments.findIndex(function (el) {
+                    return String(el.dep_id) == selected_dep;
+                })];
+
+                var selected_subject = String(this.EmployeeService.emp_subject_id);
+                this.selectedsubject = this.subjects[this.subjects.findIndex(function (el) {
+                    return String(el.subject_id) == selected_subject;
+                })];
+
+                var selected_subject = String(this.EmployeeService.emp_dep_id);
+                this.selectedsubject = this.subjects[this.subjects.findIndex(function (el) {
+                    return String(el.subject_id) == selected_subject;
+                })];
+
+                var selected_country = String(this.EmployeeService.emp_educationa_qualification_country_id);
+                this.selectedcountry = this.country[this.country.findIndex(function (el) {
+                    return String(el.country_id) == selected_country;
+                })];
 				/*	document.getElementById("save_btn").innerHTML="asdasd"*/
-				console.log("edited")
+                console.log("edited", this.country)
 
 			});
 
@@ -533,52 +637,7 @@ export class InputComponent implements OnInit {
 
 			});
 
-		this.emp_id = this.emp_id;
-		this.emp_civilian_id = this.emp_civilian_id;
-		this.emp_sex = this.emp_sex;
-		this.emp_sex_id = this.emp_sex_id;
-		this.emp_name = this.emp_name;
-		this.emp_nationality = this.emp_nationality;
-		this.emp_nationality_id = this.emp_nationality_id;
-		this.emp_marital_status = this.emp_marital_status;
-		this.emp_marital_status_id = this.emp_marital_status_id;
-		this.emp_file_ser = this.emp_file_ser;
-		this.emp_dob = this.emp_dob;
-		this.emp_age_year = this.emp_age_year;
-		this.emp_age_month = this.emp_age_month;
-		this.emp_age_day = this.emp_age_day;
-		this.emp_pos_type = this.emp_pos_type;
-		this.emp_pos_type_id = this.emp_pos_type_id;
-		this.emp_pos = this.emp_pos;
-		this.emp_pos_id = this.emp_pos_id;
-		this.emp_dep = this.emp_dep;
-		this.emp_dep_id = this.emp_dep_id;
-		this.emp_subject = this.emp_subject;
-		this.emp_subject_id = this.emp_subject_id;
-		this.emp_div = this.emp_div;
-		this.emp_div_id = this.emp_div_id;
-		this.emp_contract = this.emp_contract;
-		this.emp_contract_id = this.emp_contract_id;
-		this.emp_employment_date = this.emp_employment_date;
-		this.emp_educationa_qualification = this.emp_educationa_qualification;
-		this.emp_educationa_qualification_id = this.emp_educationa_qualification_id;
-		this.emp_educationa_qualification_date = this.emp_educationa_qualification_date;
-		this.emp_educationa_qualification_country = this.emp_educationa_qualification_country;
-		this.emp_educationa_qualification_country_id = this.emp_educationa_qualification_country_id;
-		this.emp_exp_out_country = this.emp_exp_out_country;
-		this.emp_exp_in_country_same_grade = this.emp_exp_in_country_same_grade;
-		this.emp_exp_in_country_another_grade = this.emp_exp_in_country_another_grade;
-		this.emp_exp_in_country_same_school = this.emp_exp_in_country_same_school;
-		this.emp_address = this.emp_address;
-		this.emp_email = this.emp_email;
-		this.emp_mob = this.emp_mob;
-		this.emp_mob1 = this.emp_mob1;
-		this.emp_tel = this.emp_tel;
-		this.emp_username = this.emp_username;
-		this.emp_password = this.emp_password;
-		this.in_class_priv = this.in_class_priv;
-		this.dep_work = this.dep_work;
-		this.selectedjob = this.selectedjob;
+	
 
 		this.trainig_id = this.trainig_id;
 		this.trainig_name = this.trainig_name;

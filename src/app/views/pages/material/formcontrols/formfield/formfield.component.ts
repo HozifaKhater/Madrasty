@@ -86,8 +86,9 @@ export class FormfieldComponent implements OnInit {
 			floatLabel: 'auto',
         });
         this.form1 = this._fb.group({
+            job_id: [{ value: '', disabled: true }],
             job_name: ['', [Validators.required]],
-            job_desc: ['', [Validators.required]]
+            job_desc: ['',[Validators.pattern]]
         });
 
 		this.options2 = fb.group({
@@ -191,15 +192,24 @@ export class FormfieldComponent implements OnInit {
 							dep_work: Number(this.butdisablework)
 						}
 						this.MasterJobsDataService.adddetails_job(val2).subscribe(res => { console.log("val2", val2) })
-						console.log("checkbox array", this.newArray[i])
+                        console.log("checkbox array", this.newArray[i]);
+                      
 					}
 
-				})})
+                })
+            })
+            this.form1.reset();
+            this.MasterJobsDataService.BClicked("");
+            
+
 		})
 
 	}
-    cancel_department() {
+    cancel_jobs() {
         this.form1.reset();
+        //for (var j = 0; j < this.privs_edit.length; j++) {
+        //    this.privs[j].checked = false;
+        //}
 		(<HTMLInputElement>document.getElementById("save_btn")).disabled = false;
 		(<HTMLInputElement>document.getElementById("save_btn")).hidden = false;
 		(<HTMLInputElement>document.getElementById("update_btn")).hidden = true;
@@ -240,7 +250,10 @@ export class FormfieldComponent implements OnInit {
                 }
 
             })
+            
+          
             alert("Saved Successfuly");
+            this.MasterJobsDataService.BClicked("");
             console.log(val)
             this.form1.reset();
         }
@@ -255,15 +268,12 @@ export class FormfieldComponent implements OnInit {
 	myForm: FormGroup = this.initModelForm();
 	onCheckChange(event) {
 		const formArray: FormArray = this.myForm.get('myChoices') as FormArray;
-
-		/* Selected */
 		if (event.target.checked) {
-			// Add a new control in the arrayForm
 			formArray.push(new FormControl(event.target.value));
 		}
-		/* unselected */
+	
 		else {
-			// find the unselected element
+		
 			let i: number = 0;
 
 			formArray.controls.forEach((ctrl: FormControl) => {
@@ -288,7 +298,7 @@ export class FormfieldComponent implements OnInit {
 
 		this.MasterJobsDataService.aClickedEvent
 			.subscribe((data: string) => {
-				this.newArray = [];
+			
 				console.log("edited");
 				(<HTMLInputElement>document.getElementById("save_btn")).disabled = true;
 				(<HTMLInputElement>document.getElementById("save_btn")).hidden = true;
@@ -308,11 +318,11 @@ export class FormfieldComponent implements OnInit {
 				this.MasterJobsDataService.GetAllprivs().subscribe(data => this.privs = data,
 					error => console.log(error),
 					() => {
-					
+                        this.newArray = [];
 						for (var i = 0; i < this.privs.length; i++) {
 
 							var ismatch = false; // we haven't found it yet
-
+                           
 							for (var j = 0; j < this.privs_edit.length; j++) {
 							
 								//console.log("301:this.privs[i]", this.privs[i].priv_id, this.privs_edit[j].priv_id);
@@ -336,14 +346,6 @@ export class FormfieldComponent implements OnInit {
 				
 			});
 	
-		var test1
 	
-
-		this.job_id = this.job_id;
-		this.job_name = this.job_name;
-
-		this.job_desc = this.job_desc;
-		this.in_class_priv = this.in_class_priv;
-		this.dep_work = this.dep_work;
 	}
 }

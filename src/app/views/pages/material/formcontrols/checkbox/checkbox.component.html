@@ -17,7 +17,7 @@
                 </div>
             </div>
             <!--begin::Form-->
-            <form class="kt-form">
+            <form class="kt-form" [formGroup]="form1">
                 <div class="kt-portlet__body">
                     <div class="kt-form__section kt-form__section--first">
                         <div class="form-group kt-form__group row">
@@ -27,7 +27,7 @@
                             <label class="col-lg-3 col-form-label">مسلسل:</label>
                             <div class="col-lg-6 example-container">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="" [(ngModel)]="dep_id" name="dep_id" disabled="disabled">
+                                    <input matInput placeholder="" [(ngModel)]="dep_id" name="dep_id" disabled formControlName="dep_id">
 
                                 </mat-form-field>
                             </div>
@@ -37,7 +37,7 @@
                             <div class="col-lg-6 example-container">
                                 <mat-form-field class="example-full-width">
                                     <input [(ngModel)]="dep_name" name="dep_name" formControlName="dep_name_f" pattern="^[أ-ي-a-zA-Z-_. ]{0,200}"
-                                           required (childClick)="onChildButtonClick($event)" placeholder="اسم القسم" matInput>
+                                           required  placeholder="اسم القسم" matInput>
                                     <!--<mat-hint align="start">من فضلك ادخل القسم</mat-hint>-->
                                     <!--<mat-error *ngIf="isControlHasError('dep_name_f','pattern') ">
                                        ادخل اسم القسم المكون من حروف فقط
@@ -111,7 +111,7 @@
                 </div>
             </div>
             <!--begin::Form-->
-            <form class="kt-form">
+            <form class="kt-form" [formGroup]="form1">
                 <div class="kt-portlet__body">
                     <div class="kt-form__section kt-form__section--first">
 
@@ -152,15 +152,10 @@
                             <div class="col-lg-6 example-container">
                                 <mat-form-field class="example-full-width">
                                     <textarea [(ngModel)]="dep_desc" name="dep_desc" formControlName="dep_desc_f" pattern="^[أ-ي-a-zA-Z0-9-_.@_#!?^%$ ]{0,200}"
-                                              required matInput placeholder="الوصف" type="email"></textarea>
+                                               matInput placeholder="الوصف" type="email"></textarea>
                                     <mat-hint align="start">من فضلك ادخل الوصف</mat-hint>
 
-                                    <mat-error *ngIf="
-        form1.controls.dep_desc_f.hasError('required') &&
-        (form1.controls.dep_desc_f.dirty || form1.controls.dep_desc_f.touched)
-      ">
-                                        ادخل وصف
-                                    </mat-error>
+                                   
                                     <mat-error *ngIf="
         form1.controls.dep_desc_f.hasError('pattern') &&
         (form1.controls.dep_desc_f.dirty || form1.controls.dep_desc_f.touched)
@@ -180,8 +175,8 @@
 
                             <div class="col-lg-6">
                                 <button id="save_btn" type="button" (click)="add_department()" mat-raised-button color="accent">حفظ</button>&nbsp;
-                                <button id="update_btn" (click)="update_department()" mat-raised-button color="accent">تعديل</button>&nbsp;
-                                <button id="cancel_btn" (click)="cancel_department()" mat-raised-button color="accent">الغاء</button>&nbsp;
+                                <button id="update_btn"  type="button" (click)="update_department()" mat-raised-button color="accent">تعديل</button>&nbsp;
+                                <button id="cancel_btn"  type="button" (click)="cancel_department()" mat-raised-button color="accent">الغاء</button>&nbsp;
                                 <button mat-raised-button type="reset">حذف</button>
                             </div>
                         </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
-import { PizzaPartyComponent } from './pizza-party.component';
+//import { PizzaParty1Component } from './pizza-party.component';
 
 import {Visity_typesMaster,Visit_types} from '../../../../../Visit_typesMaster.Model';
 import { Visit_typesDataService } from '../../../../../Services/Visit_typesDataService';
@@ -15,6 +15,7 @@ import moment from 'moment';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { ChangeEvent } from "@ckeditor/ckeditor5-angular/ckeditor.component";
 import { DatePipe } from '@angular/common';
+//import { PizzaPartyComponent } from '../snackbar/pizza-party.component';
 
 @Component({
 	selector: 'kt-visit',
@@ -138,11 +139,11 @@ export class VisitComponent implements OnInit {
 		});
 	}
 
-	openSnackBar2() {
-		this.snackBar.openFromComponent(PizzaPartyComponent, {
-		  duration: 500,
-		});
-	}
+	//openSnackBar2() {
+	//	this.snackBar.openFromComponent(PizzaPartyComponent, {
+	//	  duration: 500,
+	//	});
+	//}
 
 	openSnackBar3(message: string, action: string) {
 		this.snackBar.open(message, action, {

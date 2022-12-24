@@ -14,7 +14,7 @@ import { AppState } from '../../../../../../core/reducers';
 // CRUD
 import { LayoutUtilsService, MessageType, QueryParamsModel } from '../../../../../../core/_base/crud';
 // Services and Models
-import { CustomerModel, CustomersDataSource, CustomersPageRequested, OneCustomerDeleted, ManyCustomersDeleted, CustomersStatusUpdated } from '../../../../../../core/e-commerce';
+import {  CustomersDataSource, CustomersPageRequested, OneCustomerDeleted, ManyCustomersDeleted, CustomersStatusUpdated } from '../../../../../../core/e-commerce';
 // Components
 import { CustomerEditDialogComponent } from '../customer-edit/customer-edit.dialog.component';
 import { DepartmentDataService } from '../../../../../../Services/DepartmentDataService';
@@ -41,7 +41,7 @@ export class CustomersListComponent implements OnInit, OnDestroy {
 
     Element1: [{ id: "1" },
         { id: "2" }];
-	displayedColumns = ['select', 'dep_id', 'firstName', 'lastName', 'email', 'actions'];
+    displayedColumns = ['select', 'dep_id', 'dep_name', 'dep_supervisor_name', 'parent_id', 'actions'];
 
 	ELEMENT_DATA: Element[];
         //= [{ "dep_id": 1, "dep_name": "main dep", "dep_desc": null, "dep_supervisor_id": 0, "dep_supervisor_name": null },
@@ -65,8 +65,8 @@ export class CustomersListComponent implements OnInit, OnDestroy {
 	filterStatus: string = '';
 	filterType: string = '';
 	// Selection
-	selection = new SelectionModel<CustomerModel>(true, []);
-	customersResult: CustomerModel[] = [];
+    selection = new SelectionModel<Departments>(true, []);
+    customersResult: Departments[] = [];
 	// Subscriptions
 	private subscriptions: Subscription[] = [];
 	
@@ -86,18 +86,33 @@ export class CustomersListComponent implements OnInit, OnDestroy {
 		private translate: TranslateService,
 		private store: Store<AppState>,
 		private DepartmentService: DepartmentDataService
-	) {
-		this.get_departments(DepartmentService);
+    ) {
+        this.dataSource = new MatTableDataSource([]);
+	
 
 	}
-	get_departments( DepartmentService: DepartmentDataService) {
+    get_departments() {
+        
 		this.DepartmentService.GetAlldepartment().subscribe(data => this.departments = data,
 			error => console.log(error),
 			() => console.log("ok"));
 		this.DepartmentService.GetAlldepartment().subscribe(data => this.ELEMENT_DATA = data,
 			error => console.log(error),
-			() => this.dataSource = new MatTableDataSource(this.ELEMENT_DATA)
-		); }
+            () => {
+                this.dataSource.data = this.ELEMENT_DATA;
+                //this.dataSource = new MatTableDataSource(this.ELEMENT_DATA)
+            }
+        );
+    }
+    //applyFilter(filterValue: string) {
+    //    filterValue = filterValue.trim(); // Remove whitespace
+    //    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    //    this.dataSource.filter = filterValue;
+    //    console.log(filterValue.lastIndexOf);
+    //}
+    ngAfterViewInit() {
+        this.dataSource.paginator = this.paginator;
+    }
 	/**
 	 * @ Lifecycle sequences => https://angular.io/guide/lifecycle-hooks
 	 */
@@ -106,7 +121,17 @@ export class CustomersListComponent implements OnInit, OnDestroy {
 	 * On init
 	 */
 	ngOnInit() {
-       
+        this.get_departments();
+        this.DepartmentService.bClickedEvent
+            .subscribe((data: string) => {
+              
+                this.get_departments()
+
+                console.log("edited2")
+
+            });
+
+
 		let model: any = [{ 'id': 1, 'assetID': 2, 'severity': 3, 'riskIndex': 4, 'riskValue': 5, 'ticketOpened': true, 'lastModifiedDate': "2018 - 12 - 10", 'eventType': 'Add' }];  //get the model from the form
 		//this.dataSource.push(model);  //add the new model object to the dataSource
 		//this.dataSource = [...this.dataSource];  //refresh the dataSource
@@ -130,7 +155,8 @@ export class CustomersListComponent implements OnInit, OnDestroy {
 			// tslint:disable-next-line:max-line-length
 			debounceTime(50), // The user can type quite quickly in the input box, and that could trigger a lot of server requests. With this operator, we are limiting the amount of server requests emitted to a maximum of one every 150ms
 			distinctUntilChanged(), // This operator will eliminate duplicate values
-			tap(() => {
+            tap(() => {
+                console.log("searchhhh", searchSubscription)
 				this.paginator.pageIndex = 0;
 				this.loadCustomersList();
 			})
@@ -172,11 +198,16 @@ export class CustomersListComponent implements OnInit, OnDestroy {
             this.paginator.pageIndex,
             this.paginator.pageSize
            
-		);
+        );
+        if (this.dataSource) {
+            console.log("zzz", this.dataSource)
+            this.dataSource.sort = this.sort;
+        }
+      
 		// Call request from server
-		this.store.dispatch(new CustomersPageRequested({ page: queryParams }));
+		//this.store.dispatch(new CustomersPageRequested({ page: queryParams }));
 		this.selection.clear();
-        console.log("yyyy",this.ELEMENT_DATA);
+        console.log("yyyy", queryParams);
 	}
 
 	/**
@@ -194,14 +225,16 @@ export class CustomersListComponent implements OnInit, OnDestroy {
 			filter.type = +this.filterType;
 		}
 
-		filter.lastName = searchText;
+		//filter.lastName = searchText;
 		if (!searchText) {
 			return filter;
 		}
-
-		filter.firstName = searchText;
-		filter.email = searchText;
-		filter.ipAddress = searchText;
+        filter.dep_name = searchText;
+        this.dataSource.filter = searchText;
+		//filter.firstName = searchText;
+		//filter.email = searchText;
+  //      filter.ipAddress = searchText;
+       // console.log("filter",filter)
 		return filter;
 	}
 
@@ -230,7 +263,7 @@ export class CustomersListComponent implements OnInit, OnDestroy {
 
 			const idsForDeletion: number[] = [];
 			for (let i = 0; i < this.selection.selected.length; i++) {
-				idsForDeletion.push(this.selection.selected[i].dep_id);
+				idsForDeletion.push(Number(this.selection.selected[i].dep_id));
 				console.log("motb3a", this.selection.selected[i].dep_id)
 			}
 			//this.store.dispatch(new ManyCustomersDeleted({ ids: idsForDeletion }));
@@ -246,7 +279,7 @@ export class CustomersListComponent implements OnInit, OnDestroy {
 		const messages = [];
 		this.selection.selected.forEach(elem => {
 			messages.push({
-				text: `${elem.lastName}, ${elem.firstName}`,
+				text: `${elem.dep_name}, ${elem.dep_desc}`,
 				id: elem.dep_id.toString(),
 				/*status: elem.status*/
 			});
@@ -258,47 +291,47 @@ export class CustomersListComponent implements OnInit, OnDestroy {
 	/**
 	 * Show UpdateStatuDialog for selected customers
 	 */
-	updateStatusForCustomers() {
-		const _title = this.translate.instant('ECOMMERCE.CUSTOMERS.UPDATE_STATUS.TITLE');
-		const _updateMessage = this.translate.instant('ECOMMERCE.CUSTOMERS.UPDATE_STATUS.MESSAGE');
-		const _statuses = [{ value: 0, text: 'Suspended' }, { value: 1, text: 'Active' }, { value: 2, text: 'Pending' }];
-		const _messages = [];
+	//updateStatusForCustomers() {
+	//	const _title = this.translate.instant('ECOMMERCE.CUSTOMERS.UPDATE_STATUS.TITLE');
+	//	const _updateMessage = this.translate.instant('ECOMMERCE.CUSTOMERS.UPDATE_STATUS.MESSAGE');
+	//	const _statuses = [{ value: 0, text: 'Suspended' }, { value: 1, text: 'Active' }, { value: 2, text: 'Pending' }];
+	//	const _messages = [];
 
-		this.selection.selected.forEach(elem => {
-			_messages.push({
-				text: `${elem.lastName}, ${elem.firstName}`,
-				id: elem.dep_id.toString(),
-				//status: elem.status,
-				//statusTitle: this.getItemStatusString(elem.status),
-				//statusCssClass: this.getItemCssClassByStatus(elem.status)
-			});
-		});
+	//	this.selection.selected.forEach(elem => {
+	//		_messages.push({
+ //               text: `${elem.dep_name}, ${elem.dep_desc}`,
+	//			id: elem.dep_id.toString(),
+	//			//status: elem.status,
+	//			//statusTitle: this.getItemStatusString(elem.status),
+	//			//statusCssClass: this.getItemCssClassByStatus(elem.status)
+	//		});
+	//	});
 
-		const dialogRef = this.layoutUtilsService.updateStatusForEntities(_title, _statuses, _messages);
-		dialogRef.afterClosed().subscribe(res => {
-			if (!res) {
-				this.selection.clear();
-				return;
-			}
+	//	const dialogRef = this.layoutUtilsService.updateStatusForEntities(_title, _statuses, _messages);
+	//	dialogRef.afterClosed().subscribe(res => {
+	//		if (!res) {
+	//			this.selection.clear();
+	//			return;
+	//		}
 
-			this.store.dispatch(new CustomersStatusUpdated({
-				status: +res,
-				customers: this.selection.selected
-			}));
+	//		this.store.dispatch(new CustomersStatusUpdated({
+	//			status: +res,
+	//			customers: this.selection.selected
+	//		}));
 
-			this.layoutUtilsService.showActionNotification(_updateMessage, MessageType.Update, 10000, true, true);
-			this.selection.clear();
-		});
-	}
+	//		this.layoutUtilsService.showActionNotification(_updateMessage, MessageType.Update, 10000, true, true);
+	//		this.selection.clear();
+	//	});
+	//}
 
 	/**
 	 * Show add customer dialog
 	 */
-	addCustomer() {
-		const newCustomer = new CustomerModel();
-		newCustomer.clear(); // Set all defaults fields
-		/*this.editCustomer(newCustomer);*/
-	}
+	//addCustomer() {
+ //       const newCustomer = new Departments();
+	//	newCustomer.clear(); // Set all defaults fields
+	//	/*this.editCustomer(newCustomer);*/
+	//}
 
 	/**
 	 * Show Edit customer dialog and save after success close result
@@ -306,7 +339,7 @@ export class CustomersListComponent implements OnInit, OnDestroy {
 	 */
 	public activeFilters: string[];
 	departments_info: any [];
-	editCustomer(customer: CustomerModel, DepartmentService: DepartmentDataService ) {
+    editCustomer(customer: Departments, DepartmentService: DepartmentDataService ) {
 
 		//this.DepartmentService.data = Number(customer.dep_id)
 		//console.log('CUSTOMER ID', Number(customer.dep_id));
@@ -333,11 +366,11 @@ export class CustomersListComponent implements OnInit, OnDestroy {
 		
 
 	}
-	deleteCustomer( customer: CustomerModel, DepartmentService: DepartmentDataService) {
+	deleteCustomer( customer: Departments, DepartmentService: DepartmentDataService) {
 	
 		console.log('CUSTOMER ID', customer.dep_id);
 		this.DepartmentService.deleteDepartment(Number(customer.dep_id)).subscribe(res => {
-			this.get_departments(DepartmentService);;
+			this.get_departments();;
 			alert(res.toString());
 		
 		})

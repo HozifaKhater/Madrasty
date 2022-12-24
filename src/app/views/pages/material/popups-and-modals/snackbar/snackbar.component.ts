@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
-import { PizzaPartyComponent } from './pizza-party.component';
+//import { PizzaPartyComponent } from './pizza-party.component';
 
 import { School_year_data,School_year_dataMaster} from '../../../../../School_year_dataMaster.Model';
 import { School_year_dataDataService } from '../../../../../Services/School_year_dataDataService';
@@ -27,13 +27,8 @@ export class SnackbarComponent implements OnInit {
 		});
 	}
 
-	openSnackBar2() {
-		this.snackBar.openFromComponent(PizzaPartyComponent, {
-		  duration: 500,
-		});
-	}
-
-	openSnackBar3(message: string, action: string) {
+    field: any;
+    openSnackBar3(message: string, action: string) {
 		this.snackBar.open(message, action, {
 		  duration: 6500,
 		});

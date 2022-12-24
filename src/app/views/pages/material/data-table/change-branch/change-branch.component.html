@@ -1,0 +1,158 @@
+﻿
+<div class="row">
+    <div class="col-lg-12">
+        <div class="kt-portlet">
+            <div class="kt-portlet__head">
+                <div class="kt-portlet__head-caption">
+                    <div class="kt-portlet__head-title">
+                        <span class="kt-portlet__head-icon kt-hide">
+                            <i class="la la-gear"></i>
+                        </span>
+                        <h3 class="kt-portlet__head-text">
+                            تغيير التشعيب
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <!--begin::Form-->
+            <form class="kt-form kt-form--label-align-right kt-form--group-seperator-dashed">
+                <div class="kt-portlet__body">
+                    <div class="form-group kt-form__group row">
+                        <b class="col-lg-2 col-form-label">الصف:</b>
+                        <div class="col-lg-6 example-container">
+                            <mat-form-field class="example-full-width">
+                                <mat-select required
+                                            [formControl]="myControl"
+                                            type="text"
+                                            matInput
+                                            [(ngModel)]="selected_level"
+                                            placeholder="الصف"
+                                            (ngModelChange)="change_level($event)"
+                                         
+                                            forceSelection="lev_name"
+                                            formControlName="selected_level">
+
+                                        <mat-option *ngFor="let level of level" [value]="level">
+                                            {{ level.lev_name }}
+                                        </mat-option>
+
+                                
+                                </mat-select>
+                                <mat-error *ngIf="
+        form1.controls.selected_level.hasError('required') &&
+        (form1.controls.selected_level.dirty || form1.controls.selected_level.touched)
+      ">
+                                    اختر الصف
+                                </mat-error>
+                            </mat-form-field>
+
+
+
+                        </div>
+                    </div>
+
+                    <div class="form-group kt-form__group row">
+                        <b class="col-lg-2 col-form-label">الفصل:</b>
+                        <div class="col-lg-6 example-container">
+                            <mat-form-field class="example-full-width">
+                                <mat-select required
+                                            type="text"
+                                            matInput
+                                            [(ngModel)]="selected_class"
+                                            placeholder="الفصل"
+                                            (ngModelChange)="change_class($event)"
+                                            forceSelection="class_name"
+                                            formControlName="selected_class">
+
+
+                                    <mat-option *ngFor="let class of class" [value]="class">
+                                        {{ class.class_name }}
+                                    </mat-option>
+
+                                </mat-select>
+                                <mat-error *ngIf="
+        form1.controls.selected_class.hasError('required') &&
+        (form1.controls.selected_class.dirty || form1.controls.selected_class.touched)
+      ">
+                                    اختر الفصل
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group kt-form__group row">
+                        <b class="col-lg-2 col-form-label">الطالب:</b>
+                        <div class="col-lg-6 example-container">
+                            <mat-form-field class="example-full-width">
+                                <mat-select required
+                                            type="text"
+                                            matInput
+                                            [(ngModel)]="selected_student"
+                                            placeholder="الطالب"
+                                            (ngModelChange)="change_student($event)"
+                                            forceSelection="student_name"
+                                            formControlName="selected_student">
+
+                                    <mat-option *ngFor="let student of student" [value]="student">
+                                        {{ student.student_name }}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="
+        form1.controls.selected_student.hasError('required') &&
+        (form1.controls.selected_student.dirty || form1.controls.selected_student.touched)
+      ">
+                                    اختر اسم الطالب
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group kt-form__group row">
+                        <b class="col-lg-2 col-form-label">تغيير الشعبة الي:</b>
+                        <div class="col-lg-6">
+                            <mat-form-field class="example-full-width">
+                                <mat-select [(ngModel)]="student_branch"
+                                            required formControlName="student_branch"
+                                            id="studentdropdown"
+                                            placeholder="أختر الشعبة">
+
+                                    <mat-option *ngFor="let branch of branch" [value]="branch">
+                                        {{ branch.def_name }}
+                                    </mat-option>
+                                </mat-select>
+
+                                <mat-error *ngIf="
+        form1.controls.student_branch.hasError('required') &&
+        (form1.controls.student_branch.dirty || form1.controls.student_branch.touched)
+      ">
+                                    اختر الشعبة
+                                </mat-error>
+
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="kt-portlet__foot kt-portlet__no-border">
+                    <div class="kt-form__actions kt-form__actions--solid">
+                        <div class="row">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-6">
+
+                                <button id="update_btn" (click)="update_branch()" mat-raised-button color="primary">تعديل</button>&nbsp;
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!--end::Form-->
+        </div>
+    </div>
+</div>
+<!--<kt-absence-list></kt-absence-list>-->
+<!--End Activity Data-->

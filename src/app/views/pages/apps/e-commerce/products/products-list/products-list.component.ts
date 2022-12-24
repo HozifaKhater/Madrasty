@@ -97,9 +97,11 @@ export class ProductsListComponent implements OnInit, OnDestroy {
 		const searchSubscription = fromEvent(this.searchInput.nativeElement, 'keyup').pipe(
 			debounceTime(150),
 			distinctUntilChanged(),
-			tap(() => {
+            tap(() => {
+                console.log("searchhhh", searchSubscription)
 				this.paginator.pageIndex = 0;
-				this.loadProductsList();
+                this.loadProductsList();
+                
 			})
 		)
 		.subscribe();
@@ -176,9 +178,10 @@ export class ProductsListComponent implements OnInit, OnDestroy {
 
 		filter.model = searchText;
 
-		filter.manufacture = searchText;
+		//filter.manufacture = searchText;
 		filter.color = searchText;
-		filter.VINCode = searchText;
+        filter.VINCode = searchText;
+        console.log("filter", filter)
 		return filter;
 	}
 

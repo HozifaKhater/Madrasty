@@ -31,20 +31,9 @@
                         <label class="col-lg-2 col-form-label">الصنف:</label>
                         <div class="col-lg-6">
                             <mat-form-field class="example-full-width">
-                                <input [(ngModel)]="type_name" formControlName="type_name" required pattern="^[أ-ي-a-zA-Z-_. ]{1,200}"  matInput placeholder="أسم النشاط">
+                                <input [(ngModel)]="type_name"  formControlName="type_name" matInput placeholder="أسم النشاط">
                                 <mat-hint align="start">من فضلك ادخل الصنف</mat-hint>
-                                <mat-error *ngIf="
-        form1.controls.type_name.hasError('required') &&
-        (form1.controls.type_name.dirty || form1.controls.type_name.touched)
-      ">
-                                    من فضلك ادخل الصنف
-                                </mat-error>
-                                <mat-error *ngIf="
-        form1.controls.type_name.hasError('pattern') &&
-        (form1.controls.type_name.dirty || form1.controls.type_name.touched)
-      ">
-                                    من فضلك ادخل الصنف
-                                </mat-error>
+                            
                             </mat-form-field>
                         </div>
                     </div>
@@ -55,14 +44,9 @@
                         <label class="col-lg-2 col-form-label">المبلغ:</label>
                         <div class="col-lg-6">
                             <mat-form-field class="example-full-width">
-                                <input [(ngModel)]="price" type="number" required max="999999999999" formControlName="price" matInput placeholder="المبلغ">
+                                <input [(ngModel)]="price" type="number"   formControlName="price" matInput placeholder="المبلغ">
                                 <mat-hint align="start">من فضلك ادخل المبلغ</mat-hint>
-                                <mat-error *ngIf="
-        form1.controls.price.hasError('required') &&
-        (form1.controls.price.dirty || form1.controls.price.touched)
-      ">
-                                    من فضلك ادخل الصنف
-                                </mat-error>
+                               
                             </mat-form-field>
                         </div>
                     </div>
@@ -72,15 +56,10 @@
                         <label class="col-lg-2 col-form-label">تاريخ :</label>
                         <div class="col-lg-6">
                             <mat-form-field class="example-full-width">
-                                <input [(ngModel)]="date" required formControlName="date" matInput [matDatepicker]="picker" placeholder="أختر التاريخ">
+                                <input [(ngModel)]="date"    formControlName="date" matInput [matDatepicker]="picker" placeholder="أختر التاريخ">
                                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                 <mat-datepicker #picker></mat-datepicker>
-                                <mat-error *ngIf="
-        form1.controls.date.hasError('required') &&
-        (form1.controls.date.dirty || form1.controls.date.touched)
-      ">
-                                    من فضلك ادخل تاريخ
-                                </mat-error>
+                               
                             </mat-form-field>
                         </div>
                     </div>
@@ -89,21 +68,10 @@
                         <label class="col-lg-2 col-form-label">ملاحظات:</label>
                         <div class="col-lg-6">
                             <mat-form-field class="example-full-width">
-                                <textarea pattern="^[أ-ي-a-zA-Z0-9-_.@_#!?^%$ ]{1,200}"
-                                          required [(ngModel)]="notes" formControlName="notes" matInput placeholder="أدخل ملاحظات"></textarea>
+                                <textarea 
+                                           [(ngModel)]="notes"  formControlName="notes" matInput placeholder="أدخل ملاحظات"></textarea>
                                 <mat-hint align="start">من فضلك أدخل ملاحظات</mat-hint>
-                                <mat-error *ngIf="
-        form1.controls.notes.hasError('required') &&
-        (form1.controls.notes.dirty || form1.controls.notes.touched)
-      ">
-                                    من فضلك ادخل ملاحظات
-                                </mat-error>
-                                <mat-error *ngIf="
-        form1.controls.notes.hasError('pattern') &&
-        (form1.controls.notes.dirty || form1.controls.notes.touched)
-      ">
-                                    من فضلك ادخل ملاحظات
-                                </mat-error>
+                             
                             </mat-form-field>
                         </div>
                     </div>
@@ -126,5 +94,5 @@
         </div>
     </div>
 </div>
-<kt-activities-list></kt-activities-list>
+<kt-financial_fund_expenses-list></kt-financial_fund_expenses-list>
 <!--End Activity Data-->

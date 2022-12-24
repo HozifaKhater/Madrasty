@@ -30,8 +30,8 @@ import { DepartmentMaster, Departments } from '../../../../../../DepartmentMaste
 // https://www.youtube.com/watch?v=NSt9CI3BXv4
 @Component({
 	// tslint:disable-next-line:component-selector
-	selector: 'kt-subjects-list',
-	templateUrl: './subjects-list.component.html',
+	selector: 'kt-holidays-list',
+    templateUrl: './holidays-list.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush
 	
 	/*,providers: [DepartmentDataService]*/

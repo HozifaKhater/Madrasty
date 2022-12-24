@@ -9,7 +9,7 @@ import { HttpClient } from "@angular/common/http";
     providedIn: 'root'
 })
 export class Training_coursesDataService {
-    readonly APIUrl = "https://localhost:44337/api";
+    readonly APIUrl = "https://madrastyapi.azurewebsites.net/api";
     private actionUrl: string;
     public trainig_id: number;
     public trainig_name: string;

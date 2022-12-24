@@ -139,6 +139,23 @@ import { statusListComponent } from './customers/status-list/status-list';
 import { student_parent_meetingListComponent } from './customers/student_parent_meeting-list/student_parent_meeting-list.component';
 import { DefinitionListComponent } from './customers/Definition-list/Definition-list';
 import { social_workerListComponent } from './customers/social_worker-list/social_worker-list';
+import { Excellent_studentsListComponent } from './customers/excellent_students-list/excellent_students-list';
+import { Tests_metricListComponent } from './customers/tests_metric-list/tests_metric-list';
+import { ChangebranchListComponent } from './customers/change_branch-list/change_branch-list';
+import { SuggesListComponent } from './customers/suggestions-list/suggestions-list';
+import { guideListComponent } from './customers/guide-list/guide-list';
+import { failureListComponent } from './customers/failure_cases-list/failure_cases-list ';
+import { DisonlevelListComponent } from './customers/disonlevel-list/disonlevel-list';
+import { levels_with_stisticslistComponent } from './customers/levels_with_stistics-list/levels_with_stistics.component';
+import { branch_statComponent } from './customers/branch_stat-list/branch_stat-list';
+import { basic_dataListComponent } from './customers/basic_data/basic_data-list';
+import { div_empListComponent } from './customers/div_emp_id-list/div_emp_id-list';
+import { training_empListComponent } from './customers/training_emp_id-list/training_emp_id-list';
+import { financial_fund_expensesListComponent } from './customers/financial_fund_expenses-list/financial_fund_expenses-list.component';
+import { HolidaysComponent } from './customers/holidays-list/holidays-list.component';
+import { instructionsListComponent } from './customers/instructions-list/instructions-list';
+import { new_workListComponent } from './customers/new_work-list/new_work-list';
+import { student_basic_dataListComponent } from './customers/student_basic_data-list/student_basic_data-list';
 
 // tslint:disable-next-line:class-name
 const routes: Routes = [
@@ -321,8 +338,10 @@ const routes: Routes = [
         GroupmeetingListComponent, ObservationListComponent, CorrMeetListComponent, MaintListComponent
         //, DivisionListComponent
         , statusListComponent, mentality_inquiriesListComponent, student_parent_meetingListComponent, DefinitionListComponent, social_workerListComponent
+        , Excellent_studentsListComponent,
+        Tests_metricListComponent, ChangebranchListComponent, SuggesListComponent, guideListComponent, failureListComponent, DisonlevelListComponent, levels_with_stisticslistComponent, branch_statComponent, basic_dataListComponent, div_empListComponent, training_empListComponent, financial_fund_expensesListComponent, HolidaysComponent, instructionsListComponent, new_workListComponent, student_basic_dataListComponent
     ],
-    exports: [CustomersListComponent, ActivityListComponent, master_jobsComponent, StudentComponent, SubjectComponent, Ta7deirComponent,
+    exports: [CustomersListComponent, ActivityListComponent, master_jobsComponent, StudentComponent, SubjectComponent, Ta7deirComponent, new_workListComponent, student_basic_dataListComponent,
         CorridorListComponent, EmployeesListComponent, BadStudentsCardsListComponent, GoodBadStudentsCardsListComponent, ProductsListComponent
         , CorridorSupervisionListComponent, EzonListComponent, EzonListEditStateComponent, Ta7deirEditStateComponent,
         TakeemMasterTeamsListComponent, TakeemMasterDetailsListComponent, TakeemMasterListComponent, EvaluationItemsListComponent, users_privComponent, DelaysListComponent, StudentPremListComponent
@@ -331,9 +350,11 @@ const routes: Routes = [
         classesListComponent,
         Mra7lListComponent, SchoolYearListComponent, visit_typesComponent, visitsComponent, AbsenceListComponent, Twze3StudentsListComponent, Add_libListComponent,
         Borrow_bookListComponent, ReturnbookListComponent, SeqstudentComponent, TripsComponent,  TeamsListComponent,
-        GroupmeetingListComponent, ObservationListComponent, CorrMeetListComponent, MaintListComponent
+        GroupmeetingListComponent, ObservationListComponent, CorrMeetListComponent, MaintListComponent, HolidaysComponent, instructionsListComponent
        // , DivisionListComponent
         , statusListComponent, mentality_inquiriesListComponent, student_parent_meetingListComponent, DefinitionListComponent, social_workerListComponent
+        , Excellent_studentsListComponent,
+        Tests_metricListComponent, ChangebranchListComponent, SuggesListComponent, guideListComponent, failureListComponent, DisonlevelListComponent, levels_with_stisticslistComponent, branch_statComponent, basic_dataListComponent, div_empListComponent, training_empListComponent, financial_fund_expensesListComponent
     ]
 })
 export class ECommerceModule { }

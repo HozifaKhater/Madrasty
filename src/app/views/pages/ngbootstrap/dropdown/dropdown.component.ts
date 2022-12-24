@@ -20,7 +20,10 @@ export class DropdownComponent implements OnInit {
 	type_name: string = "";
 	name: string = "";
 	goals: string = "";
-
+    selecteddepartment: any;
+    departments: any;
+    disabled_emp: any;
+    employeedepartment: any;
 	exampleDropdown;
 	exampleManualTriggers;
 	exampleButtonGroupsAndSplitButtons;

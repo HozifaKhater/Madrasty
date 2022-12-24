@@ -115,7 +115,7 @@ export class DatepickerComponent implements OnInit {
 	emp_name: string = "";
 	phone: string = "";
 	mob: string = "";
-
+    disabled_emp: any;
 	selectedjob: any;
 	departments: DepartmentMaster[];
 	jobs: MasterJob[];

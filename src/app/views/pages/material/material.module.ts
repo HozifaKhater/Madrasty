@@ -13,40 +13,40 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconRegistry } from '@angular/material/icon';
 import {
-	MatAutocompleteModule,
-	MatNativeDateModule,
-	MatFormFieldModule,
-	MatInputModule,
-	MatRadioModule,
-	MatButtonModule,
-	MatCardModule,
-	MatChipsModule,
-	MatSelectModule,
-	MatProgressBarModule,
-	MatProgressSpinnerModule,
-	MatIconModule,
-	MatSliderModule,
-	MatPaginatorModule,
-	MatSortModule,
-	MatSidenavModule,
-	MatSnackBarModule,
-	MatStepperModule,
-	MatToolbarModule,
-	MatDividerModule,
-	MatTabsModule,
-	MatTableModule,
-	MatTooltipModule,
-	MatListModule,
-	MatGridListModule,
-	MatButtonToggleModule,
-	MatBottomSheetModule,
-	MatExpansionModule,
-	MatMenuModule,
-	MatTreeModule,
-	MAT_BOTTOM_SHEET_DATA,
-	MatBottomSheetRef,
-	MAT_DATE_LOCALE,
-	MAT_DATE_FORMATS,
+    MatAutocompleteModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRadioModule,
+    MatButtonModule,
+    MatCardModule,
+    MatChipsModule,
+    MatSelectModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatIconModule,
+    MatSliderModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatSidenavModule,
+    MatSnackBarModule,
+    MatStepperModule,
+    MatToolbarModule,
+    MatDividerModule,
+    MatTabsModule,
+    MatTableModule,
+    MatTooltipModule,
+    MatListModule,
+    MatGridListModule,
+    MatButtonToggleModule,
+    MatBottomSheetModule,
+    MatExpansionModule,
+    MatMenuModule,
+    MatTreeModule,
+    MAT_BOTTOM_SHEET_DATA,
+    MatBottomSheetRef,
+    MAT_DATE_LOCALE,
+    MAT_DATE_FORMATS,
 
 } from '@angular/material';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -89,7 +89,7 @@ import { SnackbarComponent } from './popups-and-modals/snackbar/snackbar.compone
 import { MaterialTooltipComponent } from './popups-and-modals/material-tooltip/material-tooltip.component';
 import { BottomSheetComponent } from './popups-and-modals/bottom-sheet/bottom-sheet.component';
 import { BottomSheetExampleComponent } from './popups-and-modals/bottom-sheet/bottom-sheet-example/bottom-sheet-example.component';
-import { PizzaPartyComponent } from './popups-and-modals/snackbar/pizza-party.component';
+
 // Data table
 import { PaginatorComponent } from './data-table/paginator/paginator.component';
 import { SortHeaderComponent } from './data-table/sort-header/sort-header.component';
@@ -121,7 +121,7 @@ import { Student_premDataService } from '../../../Services/Student_premDataServi
 import { HolidaysDataService } from '../../../Services/HolidaysDataService';
 import { School_dataDataService } from '../../../Services/School_dataDataService';
 import { Logo_converterDataService } from '../../../Services/Logo_converterDataService';
-import { CalendarModule } from '../calendar/calendar.module'; 
+import { CalendarModule } from '../calendar/calendar.module';
 import { Calendargdwel_7ssModule } from '../calendar-gdwel_7ss/calendar-gdwel_7ss.module';
 import { NchraDataService } from '../../../Services/NchraDataService';
 import { LevelsDataService } from '../../../Services/LevelsDataService';
@@ -152,184 +152,234 @@ import { holidayComponent } from './popups-and-modals/holidays/holiday.component
 import { student_parent_meetingDataService } from '../../../Services/student_parent_meetingDataService ';
 import { student_parent_meetingComponent } from './formcontrols/student_parent_meeting/student_parent_meeting.component';
 import { DefinitionComponent } from './formcontrols/DefinitionPage/definition.component';
+import { ExcellentstudentsComponent } from './data-table/excellent-students/excellent-students.component';
+import { TestsmetricComponent } from './data-table/tests-metric/tests-metric.component';
+import { chnagebranchComponent } from './data-table/change-branch/change-branch.component';
+import { SuggestionsComponent } from './layout/suggestions/suggestions.component';
+import { FailurestudentsComponent } from './data-table/failure-cases/failure-cases.component';
+import { Failure_casesDataService } from '../../../Services/Failure_casesDataService';
+import { DisonLevelComponent } from './navigation/disonlevel/disonlevel.component';
+import { new_workComponent } from './formcontrols/new_work/new_work.component';
+import { VisitManagerComponent } from './popups-and-modals/visits_manager/visits.component';
+import { guideComponent } from './formcontrols/guide/guide.component';
+import { student_basic_dataComponent } from './data-table/student_basic_data/student_basic_data.component';
+import { levels_with_stisticslistComponent } from '../apps/e-commerce/customers/levels_with_stistics-list/levels_with_stistics.component';
+import { level_statisticsComponent } from './navigation/level_statistics/level_statistics.component';
+import { branchComponent } from './navigation/branch_stat/branch_stat.component';
+import { basic_dataComponent } from './formcontrols/basic_data/basic_data.component';
+import { basic_dataDataService } from '../../../Services/basic_dataDataService';
+import { TermsComponent } from './formcontrols/terms/terms.component';
+
+
+
+import { CalendartermsModule } from '../calendar-terms/calendar-terms.module';
+import { CalendartermsComponent } from '../calendar-terms/calendar-terms.component';
+import { class_instructionComponent } from './formcontrols/class_instruction/class_instruction.component';
+import { group_instructioncomponentComponent } from './formcontrols/group_instruction/group_instruction.component';
 /*import { MatTimepickerModule } from 'mat-timepicker';*/
 const routes: Routes = [
-	{
-		path: '',
-		component: MaterialComponent,
-		children: [
-			{
-				path: 'form-controls/autocomplete',
-				component: AutocompleteComponent
-			},
-			{
-				path: 'form-controls/checkbox',
-				component: CheckboxComponent
+    {
+        path: '',
+        component: MaterialComponent,
+        children: [
+            {
+                path: 'form-controls/autocomplete',
+                component: AutocompleteComponent
+            },
+            {
+                path: 'form-controls/checkbox',
+                component: CheckboxComponent
             },
             {
                 path: 'form-controls/DefinitionPage',
                 component: DefinitionComponent
             },
-			{
-				path: 'form-controls/datepicker',
-				component: DatepickerComponent
-			},
-			{
-				path: 'form-controls/formfield',
-				component: FormfieldComponent
-			},
-			{
-				path: 'form-controls/input',
-				component: InputComponent
+            {
+                path: 'form-controls/datepicker',
+                component: DatepickerComponent
+            },
+            {
+                path: 'form-controls/formfield',
+                component: FormfieldComponent
+            },
+            {
+                path: 'form-controls/input',
+                component: InputComponent
             },
             {
                 path: 'form-controls/mentality_inquiries',
                 component: mentality_inquiriesComponent
             },
-			{
-				path: 'form-controls/radiobutton',
-				component: RadiobuttonComponent
-			},
-			{
-				path: 'form-controls/select',
-				component: SelectComponent
-			},
-			{
-				path: 'form-controls/slider',
-				component: SliderComponent
-			},
-			{
-				path: 'form-controls/slidertoggle',
-				component: SlidertoggleComponent
+            {
+                path: 'form-controls/radiobutton',
+                component: RadiobuttonComponent
             },
-            
+            {
+                path: 'form-controls/select',
+                component: SelectComponent
+            },
+            {
+                path: 'form-controls/slider',
+                component: SliderComponent
+            },
+            {
+                path: 'form-controls/slidertoggle',
+                component: SlidertoggleComponent
+            },
+
             {
                 path: 'form-controls/student_parent_meeting',
                 component: student_parent_meetingComponent
             },
-			{
-				path: 'navigation/menu',
-				component: MenuComponent
-			},
-			{
-				path: 'navigation/sidenav',
-				component: SidenavComponent
-			},
-			{
-				path: 'navigation/toolbar',
-				component: ToolbarComponent
-			},
-			{
-				path: 'layout/card',
-				component: CardComponent
-			},
-			{
-				path: 'layout/divider',
-				component: DividerComponent
-			},
-			{
-				path: 'layout/expansion-panel',
-				component: ExpansionPanelComponent
-			},
-			{
-				path: 'layout/grid-list',
-				component: GridListComponent
-			},
-			{
-				path: 'layout/grid-list-entry',
-				component: GridListEntryComponent
-			},
-			{
-				path: 'layout/list',
-				component: ListComponent
-			},
-			{
-				path: 'layout/tabs',
-				component: MaterialTabsComponent
-			},
-			{
-				path: 'layout/stepper',
-				component: StepperComponent
-			},
-			{
-				path: 'layout/default-forms',
-				component: DefaultFormsComponent
-			},
-			{
-				path: 'layout/tree',
-				component: TreeComponent
-			},
-			{
-				path: 'buttons-and-indicators/button',
-				component: ButtonComponent
-			},
-			{
-				path: 'buttons-and-indicators/button-toggle',
-				component: ButtonToggleComponent
-			},
-			{
-				path: 'buttons-and-indicators/chips',
-				component: ChipsComponent
-			},
-			{
-				path: 'buttons-and-indicators/icon',
-				component: IconComponent
-			},
-			{
-				path: 'buttons-and-indicators/progress-bar',
-				component: ProgressBarComponent
-			},
-			{
-				path: 'buttons-and-indicators/progress-spinner',
-				component: ProgressSpinnerComponent
-			},
-			{
-				path: 'buttons-and-indicators/ripples',
-				component: RipplesComponent
-			},
-			{
-				path: 'popups-and-modals/bottom-sheet',
-				component: BottomSheetComponent
-			},
-			{
-				path: 'popups-and-modals/dialog',
-				component: DialogComponent
+            {
+                path: 'navigation/menu',
+                component: MenuComponent
+            },
+            {
+                path: 'navigation/sidenav',
+                component: SidenavComponent
+            },
+            {
+                path: 'navigation/toolbar',
+                component: ToolbarComponent
+            },
+            {
+                path: 'navigation/branch_stat',
+                component: branchComponent
+            },
+            {
+                path: 'navigation/disonlevel',
+                component: DisonLevelComponent
+            },
+            {
+                path: 'navigation/level_statistics',
+                component: level_statisticsComponent
+            },
+            {
+                path: 'layout/card',
+                component: CardComponent
+            },
+            {
+                path: 'layout/divider',
+                component: DividerComponent
+            },
+            {
+                path: 'layout/expansion-panel',
+                component: ExpansionPanelComponent
+            },
+            {
+                path: 'layout/grid-list',
+                component: GridListComponent
+            },
+            {
+                path: 'layout/grid-list-entry',
+                component: GridListEntryComponent
+            },
+            {
+                path: 'layout/list',
+                component: ListComponent
+            },
+            {
+                path: 'layout/tabs',
+                component: MaterialTabsComponent
+            },
+            {
+                path: 'layout/stepper',
+                component: StepperComponent
+            },
+            {
+                path: 'layout/default-forms',
+                component: DefaultFormsComponent
+            },
+            {
+                path: 'layout/tree',
+                component: TreeComponent
+            },
+            {
+                path: 'buttons-and-indicators/button',
+                component: ButtonComponent
+            },
+            {
+                path: 'buttons-and-indicators/button-toggle',
+                component: ButtonToggleComponent
+            },
+            {
+                path: 'buttons-and-indicators/chips',
+                component: ChipsComponent
+            },
+            {
+                path: 'buttons-and-indicators/icon',
+                component: IconComponent
+            },
+            {
+                path: 'buttons-and-indicators/progress-bar',
+                component: ProgressBarComponent
+            },
+            {
+                path: 'buttons-and-indicators/progress-spinner',
+                component: ProgressSpinnerComponent
+            },
+            {
+                path: 'buttons-and-indicators/ripples',
+                component: RipplesComponent
+            },
+            {
+                path: 'popups-and-modals/bottom-sheet',
+                component: BottomSheetComponent
+            },
+            {
+                path: 'popups-and-modals/dialog',
+                component: DialogComponent
             },
             {
                 path: 'popups-and-modals/holiday',
                 component: holidayComponent
             },
-			{
-				path: 'popups-and-modals/snackbar',
-				component: SnackbarComponent
+            {
+                path: 'popups-and-modals/snackbar',
+                component: SnackbarComponent
             },
             {
                 path: 'popups-and-modals/visits',
                 component: VisitComponent
             },
-			{
-				path: 'popups-and-modals/tooltip',
-				component: MaterialTooltipComponent
-			},
-			{
-				path: 'data'
-			},
-			{
-				path: 'data-table/paginator',
-				component: PaginatorComponent
-			},
-			{
-				path: 'data-table/sort-header',
-				component: SortHeaderComponent
-			},
-			{
-				path: 'data-table/table',
-				component: MaterialTableComponent
+            {
+                path: 'popups-and-modals/tooltip',
+                component: MaterialTooltipComponent
             },
-            
+            {
+                path: 'popups-and-modals/visits_manager',
+                component: VisitManagerComponent
+            },
+            {
+                path: 'data'
+            },
+            {
+                path: 'data-table/paginator',
+                component: PaginatorComponent
+            },
+            {
+                path: 'data-table/sort-header',
+                component: SortHeaderComponent
+            },
+            {
+                path: 'data-table/failure-cases',
+                component: FailurestudentsComponent
+            },
+            {
+                path: 'data-table/table',
+                component: MaterialTableComponent
+            },
+
             {
                 path: 'form-controls/status',
-                component:statusComponent
+                component: statusComponent
+            }
+            ,
+
+            {
+                path: 'form-controls/new_work',
+                component: new_workComponent
             }
             ,
 
@@ -343,88 +393,123 @@ const routes: Routes = [
                 path: 'form-controls/financial__fund_expenses',
                 component: financial__fund_expensesComponent
             }
-		]
-	},
+            ,
+            {
+                path: 'form-controls/guide',
+                component: guideComponent
+            },
+            {
+                path: 'form-controls/basic_data',
+                component: basic_dataComponent
+            }
+            ,
+            {
+                path: 'data-table/excellent-students',
+                component: ExcellentstudentsComponent
+            },
+            {
+                path: 'data-table/tests-metric',
+                component: TestsmetricComponent
+            },
+            {
+                path: 'data-table/student_basic_data',
+                component: student_basic_dataComponent
+            },
+            {
+                path: 'data-table/change-branch',
+                component: chnagebranchComponent
+            },
+            {
+                path: 'layout/suggestions',
+                component: SuggestionsComponent
+            },
+            {
+                path: 'formcontrols/terms',
+                component: TermsComponent
+            }
+        ]
+    },
 ];
 
 @NgModule({
-	imports: [
-		// material modules
-    /*		MatTimepickerModule,*/
+    imports: [
+        // material modules
+        /*		MatTimepickerModule,*/
         MatSelectFilterModule,
         Calendargdwel_7ssModule,
         CalendarModule,
-		HttpModule,
-		ECommerceModule,
-		CKEditorModule,
-		MatInputModule,
-		MatFormFieldModule,
-		MatDatepickerModule,
-		MatAutocompleteModule,
-		MatListModule,
-		MatSliderModule,
-		MatCardModule,
-		MatSelectModule,
-		MatButtonModule,
-		MatIconModule,
-		MatNativeDateModule,
-		MatSlideToggleModule,
-		MatCheckboxModule,
-		MatMenuModule,
-		MatTabsModule,
-		MatTooltipModule,
-		MatSidenavModule,
-		MatProgressBarModule,
-		MatProgressSpinnerModule,
-		MatSnackBarModule,
-		MatTableModule,
-		MatGridListModule,
-		MatToolbarModule,
-		MatBottomSheetModule,
-		MatExpansionModule,
-		MatDividerModule,
-		MatSortModule,
-		MatStepperModule,
-		MatChipsModule,
-		MatPaginatorModule,
-		MatDialogModule,
-		MatRippleModule,
-		CoreModule,
-		CommonModule,
-		MatRadioModule,
-		MatTreeModule,
-		MatButtonToggleModule,
-		PartialsModule,
-		MaterialPreviewModule,
-		FormsModule,
-		ReactiveFormsModule,
-		UserManagementModule,
-		RouterModule.forChild(routes),
-		 NgbModule
-	],
-	exports: [RouterModule,
-		SortHeaderComponent],
-	entryComponents: [
-		PizzaPartyComponent,
-		DialogComponent,
-		ModalComponent,
-		Modal2Component,
-		Modal3Component,
-		IconComponent,
-		TreeComponent,
-		BottomSheetExampleComponent
-	],
-	providers: [
-		MatIconRegistry,
-		{ provide: MatBottomSheetRef, useValue: {} },
-		{ provide: MAT_BOTTOM_SHEET_DATA, useValue: {} },
-		{ provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
-		{ provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } },
-		DepartmentDataService, SubjectDataService,
-		EmployeeDataService, ta7dier_masterDataService,
-		corridorsDataService, MasterJobsDataService,
-		StudentDataService, ActivityDataService,
-		Corridor_supervisionDataService, DatePipe,
+        HttpModule,
+        ECommerceModule,
+        CKEditorModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatDatepickerModule,
+        MatAutocompleteModule,
+        MatListModule,
+        MatSliderModule,
+        MatCardModule,
+        MatSelectModule,
+        MatButtonModule,
+        MatIconModule,
+        MatNativeDateModule,
+        MatSlideToggleModule,
+        MatCheckboxModule,
+        MatMenuModule,
+        MatTabsModule,
+        MatTooltipModule,
+        MatSidenavModule,
+        MatProgressBarModule,
+        MatProgressSpinnerModule,
+        MatSnackBarModule,
+        MatTableModule,
+        MatGridListModule,
+        MatToolbarModule,
+        MatBottomSheetModule,
+        MatExpansionModule,
+        MatDividerModule,
+        MatSortModule,
+        MatStepperModule,
+        MatChipsModule,
+        MatPaginatorModule,
+        MatDialogModule,
+        MatRippleModule,
+        CoreModule,
+        CommonModule,
+        MatRadioModule,
+        MatTreeModule,
+        MatButtonToggleModule,
+        PartialsModule,
+        MaterialPreviewModule,
+        FormsModule,
+        ReactiveFormsModule,
+        UserManagementModule,
+        RouterModule.forChild(routes),
+        NgbModule,
+        CalendartermsModule
+    ],
+    exports: [RouterModule,
+        SortHeaderComponent],
+    entryComponents: [
+   
+        DialogComponent,
+        ModalComponent,
+        Modal2Component,
+        Modal3Component,
+        IconComponent,
+        TreeComponent,
+        BottomSheetExampleComponent
+    ],
+    providers: [
+        MatIconRegistry,
+        { provide: MatBottomSheetRef, useValue: {} },
+        { provide: MAT_BOTTOM_SHEET_DATA, useValue: {} },
+        { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
+        { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } },
+        DepartmentDataService, SubjectDataService,
+        EmployeeDataService, ta7dier_masterDataService,
+        corridorsDataService, MasterJobsDataService,
+        StudentDataService, ActivityDataService,
+        Corridor_supervisionDataService, DatePipe,
         Evaluation_itemsDataService, Takeem_masterDataService, user_privDataService
         , DelaysDataService, Student_premDataService, HolidaysDataService,
         School_dataDataService,
@@ -435,64 +520,82 @@ const routes: Routes = [
         divisionsDataService,
         gdwel_7ssDataService, AbsenceDataService, Twze3_studentsDataService
         , financial__fund_expensesDataService, student_mattersDataService, statusDataService, mentality_inquiriesDataService
-        , student_parent_meetingDataService
+        , student_parent_meetingDataService, Failure_casesDataService,basic_dataDataService
     ],
     declarations: [
+        class_instructionComponent,
+        group_instructioncomponentComponent,
+   
+       
         DefinitionComponent,
         holidayComponent,
         financial__fund_expensesComponent,
         student_mattersComponent,
         mentality_inquiriesComponent,
         statusComponent,
-		EditorComponent,
-		MaterialComponent,
-		AutocompleteComponent,
-		CheckboxComponent,
-		DatepickerComponent,
-		FormfieldComponent,
-		InputComponent,
-		RadiobuttonComponent,
-		SelectComponent,
-		SliderComponent,
-		SlidertoggleComponent,
-		MenuComponent,
-		SidenavComponent,
-		ToolbarComponent,
-		CardComponent,
-		DividerComponent,
-		ExpansionPanelComponent,
-		GridListComponent,
-		GridListEntryComponent,
-		ListComponent,
-		MaterialTabsComponent,
-		StepperComponent,
-		ButtonComponent,
-		ButtonToggleComponent,
-		ChipsComponent,
-		IconComponent,
-		ProgressBarComponent,
-		ProgressSpinnerComponent,
-		DialogComponent,
-		ModalComponent,
-		Modal2Component,
-		Modal3Component,
-		PizzaPartyComponent,
-		SnackbarComponent,
-		MaterialTooltipComponent,
-		PaginatorComponent,
-		SortHeaderComponent,
-		MaterialTableComponent,
-		DefaultFormsComponent,
-		TreeComponent,
-		BottomSheetComponent,
-		BottomSheetExampleComponent,
+        EditorComponent,
+        MaterialComponent,
+        AutocompleteComponent,
+        CheckboxComponent,
+        DatepickerComponent,
+        FormfieldComponent,
+        InputComponent,
+        RadiobuttonComponent,
+        SelectComponent,
+        SliderComponent,
+        SlidertoggleComponent,
+        MenuComponent,
+        SidenavComponent,
+        ToolbarComponent,
+        CardComponent,
+        DividerComponent,
+        ExpansionPanelComponent,
+        GridListComponent,
+        GridListEntryComponent,
+        ListComponent,
+        MaterialTabsComponent,
+        StepperComponent,
+        ButtonComponent,
+        ButtonToggleComponent,
+        ChipsComponent,
+        IconComponent,
+        ProgressBarComponent,
+        ProgressSpinnerComponent,
+        DialogComponent,
+        ModalComponent,
+        Modal2Component,
+        Modal3Component,
+       
+        SnackbarComponent,
+        MaterialTooltipComponent,
+        PaginatorComponent,
+        SortHeaderComponent,
+        MaterialTableComponent,
+        DefaultFormsComponent,
+        TreeComponent,
+        BottomSheetComponent,
+        BottomSheetExampleComponent,
         RipplesComponent,
         VisitComponent,
-        student_parent_meetingComponent
-     
-	]
+        student_parent_meetingComponent,
+        ExcellentstudentsComponent,
+        TestsmetricComponent,
+        chnagebranchComponent,
+        SuggestionsComponent,
+        FailurestudentsComponent,
+        DisonLevelComponent,
+        new_workComponent,
+        VisitManagerComponent,
+        guideComponent,
+        student_basic_dataComponent,
+        level_statisticsComponent,
+        branchComponent,
+        basic_dataComponent,
+        TermsComponent
+
+    ]
 })
 export class MaterialModule {
-	public Editor = ClassicEditor;
+    public Editor = ClassicEditor;
 }
 

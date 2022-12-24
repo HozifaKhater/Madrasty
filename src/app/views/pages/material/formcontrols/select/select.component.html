@@ -15,7 +15,7 @@
                 </div>
             </div>
             <!--begin::Form-->
-            <form class="kt-form kt-form--label-align-right">
+            <form class="kt-form kt-form--label-align-right" [formGroup]="form1">
                 <div class="kt-portlet__body">
                     <div class="kt-form__section kt-form__section--first">
                       
@@ -23,8 +23,15 @@
                             <label class="col-lg-2 col-form-label">الرقم المدني:</label>
                             <div class="col-lg-6">
                                 <mat-form-field class="example-full-width">
-                                    <input [(ngModel)]="student_civilian_id" [ngModelOptions]="{standalone: true}" matInput placeholder="الرقم المدني">
-                                    <mat-hint align="start">من فضلك أدخل الرقم المدني</mat-hint>
+                                    <input [(ngModel)]="student_civilian_id" required max="99999999999" formControlName="student_civilian_id" matInput placeholder="الرقم المدني">
+
+                                    <mat-error *ngIf="
+        form1.controls.student_civilian_id.hasError('required') &&
+        (form1.controls.student_civilian_id.dirty || form1.controls.student_civilian_id.touched)
+      ">
+                                        ادخل الرقم المدني
+                                    </mat-error>
+
                                 </mat-form-field>
                             </div>
                         </div>
@@ -33,11 +40,19 @@
                             <label class="col-lg-2 col-form-label">الجنسية:</label>
                             <div class="col-lg-6">
                                 <mat-form-field class="example-full-width">
-                                    <mat-select placeholder="أختر الجنسيه">
-                                        <mat-option *ngFor="let nationality of nationalities" [value]="nationality.value">
-                                            {{ nationality.viewValue }}
+                                    <mat-select placeholder="الجنسيه"
+                                                [(ngModel)]="selectednat"
+                                                required formControlName="selectednat">
+                                        <mat-option *ngFor="let nat of nat" [value]="nat">
+                                            {{ nat.def_name }}
                                         </mat-option>
                                     </mat-select>
+                                    <mat-error *ngIf="
+        form1.controls.selectednat.hasError('required') &&
+        (form1.controls.selectednat.dirty || form1.controls.selectednat.touched)
+      ">
+                                        اختر الجنسيه
+                                    </mat-error>
                                 </mat-form-field>
                             </div>
                         </div>
@@ -46,21 +61,34 @@
                             <label class="col-lg-2 col-form-label">الجنس:</label>
                             <div class="col-lg-6">
                                 <mat-form-field class="example-full-width">
-                                    <mat-select placeholder="أختر الجنس">
-                                        <mat-option *ngFor="let sex of sexx" [value]="sex.value">
-                                            {{ sex.viewValue }}
+                                    <mat-select placeholder="الجنس"
+                                                [(ngModel)]="selectedsex"
+                                                required formControlName="selectedsex">
+                                        <mat-option *ngFor="let sex of sex" [value]="sex">
+                                            {{ sex.def_name }}
                                         </mat-option>
                                     </mat-select>
+                                    <mat-error *ngIf="
+        form1.controls.selectedsex.hasError('required') &&
+        (form1.controls.selectedsex.dirty || form1.controls.selectedsex.touched)
+      ">
+                                        اختر الجنس
+                                    </mat-error>
                                 </mat-form-field>
                             </div>
                         </div>
 
                         <div class="form-group kt-form__group row">
-                            <label class="col-lg-2 col-form-label">أسم اللطالب:</label>
+                            <label class="col-lg-2 col-form-label">أسم الطالب:</label>
                             <div class="col-lg-6">
                                 <mat-form-field class="example-full-width">
-                                    <input [(ngModel)]="student_name" [ngModelOptions]="{standalone: true}" matInput placeholder="أدخل اسم الطالب">
-                                    <mat-hint align="start">من فضلك أدخل اسم الطالب</mat-hint>
+                                    <input [(ngModel)]="student_name" formControlName="student_name" matInput placeholder="أدخل اسم الطالب">
+                                    <mat-error *ngIf="
+        form1.controls.student_name.hasError('required') &&
+        (form1.controls.student_name.dirty || form1.controls.student_name.touched)
+      ">
+                                        ادخل الطالب
+                                    </mat-error>
                                 </mat-form-field>
                             </div>
                         </div>
@@ -70,9 +98,15 @@
                             <label class="col-lg-2 col-form-label">تاريخ الميلاد:</label>
                             <div class="col-lg-6">
                                 <mat-form-field class="example-full-width">
-                                    <input [(ngModel)]="student_dob" (ngModelChange)="updateCalcs($event)" [ngModelOptions]="{standalone: true}" matInput [matDatepicker]="picker" placeholder="أختر التاريخ">
-                                    <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
-                                    <mat-datepicker #picker></mat-datepicker>
+                                    <input [(ngModel)]="student_dob" (ngModelChange)="updateCalcs($event)" formControlName="student_dob" matInput [matDatepicker]="picker" placeholder="أختر التاريخ">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker disabled="false"></mat-datepicker>
+                                    <mat-error *ngIf="
+        form1.controls.student_dob.hasError('required') &&
+        (form1.controls.student_dob.dirty || form1.controls.student_dob.touched)
+      ">
+                                        ادخل الطالب
+                                    </mat-error>
                                 </mat-form-field>
                             </div>
                         </div>
@@ -104,11 +138,21 @@
                             <label class="col-lg-2 col-form-label">سبب القبول:</label>
                             <div class="col-lg-6">
                                 <mat-form-field class="example-full-width">
-                                    <mat-select placeholder="أختر سبب القبول">
-                                        <mat-option *ngFor="let reason of reasons" [value]="reason.value">
-                                            {{ reason.viewValue }}
-                                        </mat-option>
-                                    </mat-select>
+                                  
+                                        <mat-select placeholder="سبب القبول"
+                                                    [(ngModel)]="selectedreason"
+                                                    required formControlName="selectedreason">
+                                            <mat-option *ngFor="let reasons of reasons" [value]="reasons">
+                                                {{ reasons.def_name }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="
+        form1.controls.selectedreason.hasError('required') &&
+        (form1.controls.selectedreason.dirty || form1.controls.selectedreason.touched)
+      ">
+                                            اختر الجنس
+                                        </mat-error>
+                                   
                                 </mat-form-field>
                             </div>
                         </div>
@@ -117,11 +161,19 @@
                             <label class="col-lg-2 col-form-label">الديانة:</label>
                             <div class="col-lg-6">
                                 <mat-form-field class="example-full-width">
-                                    <mat-select placeholder="أختر الديانة">
-                                        <mat-option *ngFor="let rel of rels" [value]="rel.value">
-                                            {{ rel.viewValue }}
+                                    <mat-select placeholder="الديانة"
+                                                [(ngModel)]="selectedrel"
+                                                required formControlName="selectedrel">
+                                        <mat-option *ngFor="let religion of religion" [value]="religion">
+                                            {{ religion.def_name }}
                                         </mat-option>
                                     </mat-select>
+                                    <mat-error *ngIf="
+        form1.controls.selectedrel.hasError('required') &&
+        (form1.controls.selectedrel.dirty || form1.controls.selectedrel.touched)
+      ">
+                                        اختر الديانة
+                                    </mat-error>
                                 </mat-form-field>
                             </div>
                         </div>
@@ -130,11 +182,19 @@
                             <label class="col-lg-2 col-form-label">المنطقة:</label>
                             <div class="col-lg-6">
                                 <mat-form-field class="example-full-width">
-                                    <mat-select placeholder="أختر المنطقة">
-                                        <mat-option *ngFor="let region of regions" [value]="region.value">
-                                            {{ region.viewValue }}
+                                    <mat-select placeholder="النطقه"
+                                                [(ngModel)]="selectedregion"
+                                                required formControlName="selectedregion">
+                                        <mat-option *ngFor="let region of region" [value]="region">
+                                            {{ region.def_name }}
                                         </mat-option>
                                     </mat-select>
+                                    <mat-error *ngIf="
+        form1.controls.selectedregion.hasError('required') &&
+        (form1.controls.selectedregion.dirty || form1.controls.selectedregion.touched)
+      ">
+                                        اختر الديانة
+                                    </mat-error>
                                 </mat-form-field>
                             </div>
                         </div>
@@ -143,11 +203,19 @@
                             <label class="col-lg-2 col-form-label">المدرسة:</label>
                             <div class="col-lg-6">
                                 <mat-form-field class="example-full-width">
-                                    <mat-select placeholder="أختر المدرسة">
-                                        <mat-option *ngFor="let school of schools" [value]="school.value">
-                                            {{ school.viewValue }}
+                                    <mat-select placeholder="المدرسه"
+                                                [(ngModel)]="selectedschool"
+                                                required formControlName="selectedschool">
+                                        <mat-option *ngFor="let school of school" [value]="school">
+                                            {{ school.def_name }}
                                         </mat-option>
                                     </mat-select>
+                                    <mat-error *ngIf="
+        form1.controls.selectedschool.hasError('required') &&
+        (form1.controls.selectedschool.dirty || form1.controls.selectedschool.touched)
+      ">
+                                        اختر المدرسه
+                                    </mat-error>
                                 </mat-form-field>
                             </div>
                         </div>
@@ -156,11 +224,19 @@
                             <label class="col-lg-2 col-form-label">المرحلة:</label>
                             <div class="col-lg-6">
                                 <mat-form-field class="example-full-width">
-                                    <mat-select placeholder="أختر المرحلة">
-                                        <mat-option *ngFor="let stage of stages" [value]="stage.value">
-                                            {{ stage.viewValue }}
+                                    <mat-select placeholder="المرحلة"
+                                                [(ngModel)]="selectedmra7l"
+                                                required formControlName="selectedmra7l">
+                                        <mat-option *ngFor="let mra7l of mra7l" [value]="mra7l">
+                                            {{ mra7l.mr7la_name }}
                                         </mat-option>
                                     </mat-select>
+                                    <mat-error *ngIf="
+        form1.controls.selectedmra7l.hasError('required') &&
+        (form1.controls.selectedmra7l.dirty || form1.controls.selectedmra7l.touched)
+      ">
+                                        اختر المرحلة
+                                    </mat-error>
                                 </mat-form-field>
                             </div>
                         </div>
@@ -170,11 +246,19 @@
                             <label class="col-lg-2 col-form-label">الصف:</label>
                             <div class="col-lg-6">
                                 <mat-form-field class="example-full-width">
-                                    <mat-select placeholder="أختر الصف">
-                                        <mat-option *ngFor="let level of levels" [value]="level.value">
-                                            {{ level.viewValue }}
+                                    <mat-select placeholder="الصف"
+                                                [(ngModel)]="selectedlevels"
+                                                required formControlName="selectedlevels">
+                                        <mat-option *ngFor="let levels of levels" [value]="levels">
+                                            {{ levels.lev_name }}
                                         </mat-option>
                                     </mat-select>
+                                    <mat-error *ngIf="
+        form1.controls.selectedlevels.hasError('required') &&
+        (form1.controls.selectedlevels.dirty || form1.controls.selectedlevels.touched)
+      ">
+                                        اختر الصف
+                                    </mat-error>
                                 </mat-form-field>
                             </div>
                         </div>
@@ -184,11 +268,20 @@
                             <label class="col-lg-2 col-form-label">الشعبة:</label>
                             <div class="col-lg-6">
                                 <mat-form-field class="example-full-width">
-                                    <mat-select placeholder="أختر الشعبة ">
-                                        <mat-option *ngFor="let major of majors" [value]="major.value">
-                                            {{ major.viewValue }}
+                                    <mat-select placeholder="الصف"
+                                                [(ngModel)]="selectedbranch"
+                                                required formControlName="selectedbranch">
+                                        <mat-option *ngFor="let branch of branch" [value]="branch">
+                                            {{ branch.def_name }}
                                         </mat-option>
+
                                     </mat-select>
+                                    <mat-error *ngIf="
+        form1.controls.selectedbranch.hasError('required') &&
+        (form1.controls.selectedbranch.dirty || form1.controls.selectedbranch.touched)
+      ">
+                                        اختر الشعبة
+                                    </mat-error>
                                 </mat-form-field>
                             </div>
                         </div>
@@ -208,11 +301,19 @@
                             <label class="col-lg-2 col-form-label">الحالة الدراسية:</label>
                             <div class="col-lg-6">
                                 <mat-form-field class="example-full-width">
-                                    <mat-select placeholder="أختر الحالة الدراسية">
-                                        <mat-option *ngFor="let state of stats" [value]="state.value">
-                                            {{ state.viewValue }}
+                                    <mat-select placeholder="الحالة الدراسية"
+                                                [(ngModel)]="selectedstudy_status"
+                                                required formControlName="selectedstudy_status">
+                                        <mat-option *ngFor="let study_status of study_status" [value]="study_status">
+                                            {{ study_status.def_name }}
                                         </mat-option>
                                     </mat-select>
+                                    <mat-error *ngIf="
+        form1.controls.selectedstudy_status.hasError('required') &&
+        (form1.controls.selectedstudy_status.dirty || form1.controls.selectedstudy_status.touched)
+      ">
+                                        اختر الحالة الدراسية
+                                    </mat-error>
                                 </mat-form-field>
                             </div>
                         </div>
@@ -231,11 +332,19 @@
                             <label class="col-lg-2 col-form-label">حالة الطالب:</label>
                             <div class="col-lg-6">
                                 <mat-form-field class="example-full-width">
-                                    <mat-select placeholder="أختر حالة الطالب">
-                                        <mat-option *ngFor="let status of statuss" [value]="status.value">
-                                            {{ status.viewValue }}
+                                    <mat-select placeholder="الحالة الدراسية"
+                                                [(ngModel)]="selectedstudy_status"
+                                                required formControlName="selectedstudy_status">
+                                        <mat-option *ngFor="let study_status of study_status" [value]="study_status">
+                                            {{ study_status.def_name }}
                                         </mat-option>
                                     </mat-select>
+                                    <mat-error *ngIf="
+        form1.controls.selectedstudy_status.hasError('required') &&
+        (form1.controls.selectedstudy_status.dirty || form1.controls.selectedstudy_status.touched)
+      ">
+                                        اختر الحالة الدراسية
+                                    </mat-error>
                                 </mat-form-field>
                             </div>
                         </div>
@@ -248,9 +357,9 @@
                         <div class="row">
                           
                             <div class="col-lg-6">
-                                <button id="save_btn" (click)="add_student()" mat-raised-button color="accent">حفظ</button>&nbsp;
-                                <button id="update_btn" (click)="update_student()" mat-raised-button color="primary">تعديل</button>&nbsp;
-                                <button id="cancel_btn" (click)="cancel_student()" mat-raised-button color="primary">الغاء</button>&nbsp;
+                                <button id="save_btn" type="button" (click)="add_student()" mat-raised-button color="accent">حفظ</button>&nbsp;
+                                <button id="update_btn" type="button" (click)="update_student()" mat-raised-button color="primary">تعديل</button>&nbsp;
+                                <button id="cancel_btn" type="button" (click)="cancel_student()" mat-raised-button color="primary">الغاء</button>&nbsp;
                                 <button mat-raised-button type="reset">حذف</button>
                             </div>
 

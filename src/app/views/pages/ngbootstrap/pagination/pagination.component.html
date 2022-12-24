@@ -1,135 +1,173 @@
 ﻿
-<div class="row">
-	<div class="col-lg-12">
-		<div class="kt-portlet">
-			<div class="kt-portlet__head">
-				<div class="kt-portlet__head-caption">
-					<div class="kt-portlet__head-title">
-						<span class="kt-portlet__head-icon kt-hide">
-							<i class="la la-gear"></i>
-						</span>
-						<h3 class="kt-portlet__head-text">
-							جدول توزيع الملاحظين
-						</h3>
+	<div class="row">
+		<div class="col-lg-6">
+			<div class="kt-portlet">
+				<div class="kt-portlet__head">
+					<div class="kt-portlet__head-caption">
+						<div class="kt-portlet__head-title">
+
+							<h3 class="kt-portlet__head-text">
+								<i class="fas fa-tasks" style="margin:5px;"></i>
+								جدول توزيع الملاحظين
+							</h3>
+						</div>
 					</div>
 				</div>
+				<!--begin::Form-->
+				<form class="kt-form kt-form--label-align-right kt-form--group-seperator-dashed">
+					<div class="kt-portlet__body">
+						<div class="kt-form__section kt-form__section--first">
+							<div class="form-group kt-form__group row">
+								<label class="col-lg-2 col-form-label">
+									الفترة
+									<span class="text-danger">*</span>
+								</label>
+								<div class="col-lg-6 example-container">
+									<mat-form-field class="example-full-width">
+										<mat-select [(ngModel)]="selecteddepartment"
+													[ngModelOptions]="{standalone: true}"
+													id="departmentsdropdown"
+													placeholder="أختر الفترة">
+
+											<mat-option *ngFor="let department of Departments" [value]="department">
+												{{ department.dep_name }}
+											</mat-option>
+										</mat-select>
+									</mat-form-field>
+								</div>
+							</div>
+
+							<div class="form-group kt-form__group row">
+								<label class="col-lg-2 col-form-label">
+									الصف
+									<span class="text-danger">*</span>
+								</label>
+								<div class="col-lg-6 example-container">
+									<mat-form-field class="example-full-width">
+										<mat-select [(ngModel)]="selectedlevel"
+													[ngModelOptions]="{standalone: true}"
+													id="levelsdropdown"
+													placeholder="أختر الصف">
+
+											<mat-option *ngFor="let level of Levels" [value]="level">
+												{{ level.lev_name }}
+											</mat-option>
+										</mat-select>
+									</mat-form-field>
+								</div>
+							</div>
+
+
+							<div class="form-group kt-form__group row">
+								<label class="col-lg-2 col-form-label">
+									الفصل
+									<span class="text-danger">*</span>
+								</label>
+								<div class="col-lg-6 example-container">
+									<mat-form-field class="example-full-width">
+										<mat-select [(ngModel)]="selectedclass"
+													[ngModelOptions]="{standalone: true}"
+													id="classdropdown"
+													placeholder="أختر الفصل">
+
+											<mat-option *ngFor="let class of classes" [value]="class">
+												{{ class.class_name }}
+											</mat-option>
+										</mat-select>
+									</mat-form-field>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+				</form>
 			</div>
-			<!--begin::Form-->
-			<form class="kt-form kt-form--label-align-right kt-form--group-seperator-dashed">
-				<div class="kt-portlet__body">
+		</div>
 
-					<div class="form-group kt-form__group row">
-						<b class="col-lg-2 col-form-label">الفترة:</b>
-						<div class="col-lg-6">
-							<mat-form-field class="example-full-width">
-								<mat-select [(ngModel)]="selecteddepartment"
-											[ngModelOptions]="{standalone: true}"
-											id="departmentsdropdown"
-											placeholder="أختر الفترة">
+		<div class="col-lg-6">
+			<div class="kt-portlet">
+				<div class="kt-portlet__head">
+					<div class="kt-portlet__head-caption">
+						<div class="kt-portlet__head-title">
 
-									<mat-option *ngFor="let department of Departments" [value]="department">
-										{{ department.dep_name }}
-									</mat-option>
-								</mat-select>
-							</mat-form-field>
+							<h3 class="kt-portlet__head-text">
+								استكمال جدول توزيع الملاحظين
+							</h3>
 						</div>
 					</div>
-
-					<div class="form-group kt-form__group row">
-						<b class="col-lg-2 col-form-label">الصف:</b>
-						<div class="col-lg-6">
-							<mat-form-field class="example-full-width">
-								<mat-select [(ngModel)]="selectedlevel"
-											[ngModelOptions]="{standalone: true}"
-											id="levelsdropdown"
-											placeholder="أختر الصف">
-
-									<mat-option *ngFor="let level of Levels" [value]="level">
-										{{ level.lev_name }}
-									</mat-option>
-								</mat-select>
-							</mat-form-field>
-						</div>
-					</div>
-
-
-					<div class="form-group kt-form__group row">
-						<b class="col-lg-2 col-form-label">الفصل:</b>
-						<div class="col-lg-6">
-							<mat-form-field class="example-full-width">
-								<mat-select [(ngModel)]="selectedclass"
-											[ngModelOptions]="{standalone: true}"
-											id="classdropdown"
-											placeholder="أختر الفصل">
-
-									<mat-option *ngFor="let class of classes" [value]="class">
-										{{ class.class_name }}
-									</mat-option>
-								</mat-select>
-							</mat-form-field>
-						</div>
-					</div>
-
-
-					<div class="form-group kt-form__group row">
-						<b class="col-lg-2 col-form-label">المعلم:</b>
-						<div class="col-lg-6">
-							<mat-form-field class="example-full-width">
-								<mat-select required name="emp"
-											#refCountry="ngModel"
-											[disabled]="disabled_emp"
-											[(ngModel)]="employeedepartment"
-											id="empsdropdown"
-											placeholder="أختر المعلم">
-
-									<mat-option *ngFor="let emp of Employees" [value]="emp">
-										{{ emp.emp_name }}
-									</mat-option>
-								</mat-select>
-							</mat-form-field>
-						</div>
-					</div>
-
-					<div class="form-group kt-form__group row">
-						<b class="col-lg-2 col-form-label">مكان الملاحظة:</b>
-						<div class="col-lg-6">
-							<mat-form-field class="example-full-width">
-								<input [(ngModel)]="observ_loc" [ngModelOptions]="{standalone: true}" type="text" matInput placeholder="مكان الزيارة">
-
-							</mat-form-field>
-						</div>
-					</div>
-
-					<div class="form-group kt-form__group row">
-						<b class="col-lg-2 col-form-label">التاريخ:</b>
-						<div class="col-lg-6">
-							<mat-form-field class="example-full-width">
-								<input [(ngModel)]="observe_date" [ngModelOptions]="{standalone: true}" matInput [matDatepicker]="dp3" placeholder="التاريخ" disabled>
-								<mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
-								<mat-datepicker #dp3 disabled="false"></mat-datepicker>
-							</mat-form-field>
-						</div>
-					</div>
-
-				
 				</div>
-				<div class="kt-portlet__foot kt-portlet__no-border">
-					<div class="kt-form__actions kt-form__actions--solid">
-						<div class="row">
-							<div class="col-lg-2"></div>
-							<div class="col-lg-6">
-								<button id="save_btn" (click)="add_observ()" mat-raised-button color="primary">اضافة</button>&nbsp;
-								<button id="update_btn" (click)="update_observ()" mat-raised-button color="primary">تعديل</button>&nbsp;
-								<button id="cancel_btn" (click)="cancel_observ()" mat-raised-button color="primary">الغاء</button>&nbsp;
 
+				<form class="kt-form">
+					<div class="kt-portlet__body">
+						<div class="kt-form__section kt-form__section--first">
+
+							<div class="form-group kt-form__group row">
+								<label class="col-lg-2 col-form-label">
+									المعلم
+									<span class="text-danger">*</span>
+								</label>
+								<div class="col-lg-6 example-container">
+									<mat-form-field class="example-full-width">
+										<mat-select required name="emp"
+													#refCountry="ngModel"
+													[disabled]="disabled_emp"
+													[(ngModel)]="employeedepartment"
+													id="empsdropdown"
+													placeholder="أختر المعلم">
+
+											<mat-option *ngFor="let emp of Employees" [value]="emp">
+												{{ emp.emp_name }}
+											</mat-option>
+										</mat-select>
+									</mat-form-field>
+								</div>
+							</div>
+
+							<div class="form-group kt-form__group row">
+								<label class="col-lg-2 col-form-label">مكان الملاحظة:</label>
+								<div class="col-lg-6 example-container">
+									<mat-form-field class="example-full-width">
+										<input [(ngModel)]="observ_loc" [ngModelOptions]="{standalone: true}" type="text" matInput placeholder="مكان الزيارة">
+
+									</mat-form-field>
+								</div>
+							</div>
+
+							<div class="form-group kt-form__group row">
+								<label class="col-lg-2 col-form-label">
+									التاريخ
+									<span class="text-danger">*</span>
+								</label>
+								<div class="col-lg-6 example-container">
+									<mat-form-field class="example-full-width">
+										<input [(ngModel)]="observe_date" [ngModelOptions]="{standalone: true}" matInput [matDatepicker]="dp3" placeholder="التاريخ" disabled>
+										<mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+										<mat-datepicker #dp3 disabled="false"></mat-datepicker>
+									</mat-form-field>
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+					<div class="kt-portlet__foot">
+						<div class="kt-form__actions kt-form__actions">
+							<div class="row">
+
+								<div class="col-lg-6">
+									<button id="save_btn" (click)="add_observ()" mat-raised-button color="accent">اضافة</button>&nbsp;
+									<button id="update_btn" (click)="update_observ()" mat-raised-button color="accent">تعديل</button>&nbsp;
+									<button id="cancel_btn" (click)="cancel_observ()" mat-raised-button color="accent">الغاء</button>&nbsp;
+
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			</form>
-			<!--end::Form-->
+				</form>
+				<!--end::Form-->
+			</div>
 		</div>
 	</div>
-</div>
 <kt-observation-list></kt-observation-list>
 <!--End Activity Data-->

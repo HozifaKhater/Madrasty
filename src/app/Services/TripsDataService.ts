@@ -10,7 +10,7 @@ import { HttpClient } from "@angular/common/http";
 })
 export class TripsDataService
 {
-    readonly APIUrl = "https://localhost:44337/api";
+    readonly APIUrl = "https://madrastyapi.azurewebsites.net/api";
     private actionUrl: string;
   public trip_id: number;
     public dep_id: string;

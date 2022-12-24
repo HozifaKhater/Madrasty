@@ -24,7 +24,7 @@
                             <label class="col-lg-2 col-form-label">مسلسل:</label>
                             <div class="col-lg-6">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="" [(ngModel)]="def_id" name="def_id" disabled="disabled">
+                                    <input matInput placeholder="" [(ngModel)]="def_id" formControlName="def_id" name="def_id" disabled>
                                 </mat-form-field>
                             </div>
                         </div>
@@ -34,8 +34,8 @@
                             <div class="col-lg-6">
                                 <mat-form-field class="example-full-width">
 
-                                    <input [(ngModel)]="def_name" name="def_name" formControlName="def_name_f" pattern="^[أ-ي-a-zA-Z-_. ]{0,200}"
-                                           required (childClick)="onChildButtonClick($event)" placeholder="اسم القسم" matInput>
+                                    <input [(ngModel)]="def_name" name="def_name" formControlName="def_name_f" pattern="^[أ-ي-a-zA-Z-0-9-_. ]{0,200}"
+                                           required placeholder="اسم التعريف" matInput>
 
                                     <mat-error *ngIf="form1.controls.def_name_f.hasError('required') &&
                                                (form1.controls.def_name_f.dirty || form1.controls.def_name_f.touched)">

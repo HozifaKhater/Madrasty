@@ -33,7 +33,9 @@ export class PaginationComponent implements OnInit {
 	selectedlevel: any;
 	classes: Classes[];
 	selectedclass: any;
-
+    selecteddepartment: any;
+    Departments: any;
+    disabled_emp: any;
 	page = 4;
 	page2 = 1;
 	page3 = 4;

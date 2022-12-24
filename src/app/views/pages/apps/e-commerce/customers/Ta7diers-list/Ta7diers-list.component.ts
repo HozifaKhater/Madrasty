@@ -90,14 +90,14 @@ export class Ta7deirComponent implements OnInit, OnDestroy {
 		private ta7dier_masterDataService: ta7dier_masterDataService,
 			private DepartmentService: DepartmentDataService
 	) {
-		this.get_ta7diers(DepartmentService, ta7dier_masterDataService);
+        this.dataSource = new MatTableDataSource([]);
 
 	}
-	get_ta7diers(DepartmentService: DepartmentDataService, ta7dier_masterDataService: ta7dier_masterDataService) {
+	get_ta7diers() {
 	
 		this.ta7dier_masterDataService.GetAllTa7dier_master().subscribe(data => this.ELEMENT_DATA = data,
 			error => console.log(error),
-			() => this.dataSource = new MatTableDataSource(this.ELEMENT_DATA)
+			() => this.dataSource.data = this.ELEMENT_DATA
 		); }
 	/**
 	 * @ Lifecycle sequences => https://angular.io/guide/lifecycle-hooks
@@ -106,15 +106,17 @@ export class Ta7deirComponent implements OnInit, OnDestroy {
 	/**
 	 * On init
 	 */
+    ngAfterViewInit() {
+        this.dataSource.paginator = this.paginator;
+    }
 	ngOnInit() {
 
-		this.ta7dier_masterDataService.bindClickedEvent
-			.subscribe((data: string) => {
-				this.ta7dier_masterDataService.GetAllTa7dier_master_with_subject_id(this.ta7dier_masterDataService.subject_id).subscribe(data => this.ELEMENT_DATA = data,
-					error => console.log(error),
-					() => this.dataSource = new MatTableDataSource(this.ELEMENT_DATA)
-				);
-			});
+        this.ta7dier_masterDataService.bClickedEvent
+            .subscribe((data: string) => {
+                this.get_ta7diers();
+
+            });
+        this.get_ta7diers()
 		let model: any = [{ 'id': 1, 'assetID': 2, 'severity': 3, 'riskIndex': 4, 'riskValue': 5, 'ticketOpened': true, 'lastModifiedDate': "2018 - 12 - 10", 'eventType': 'Add' }];  //get the model from the form
 		//this.dataSource.push(model);  //add the new model object to the dataSource
 		//this.dataSource = [...this.dataSource];  //refresh the dataSource
@@ -180,7 +182,10 @@ export class Ta7deirComponent implements OnInit, OnDestroy {
             this.paginator.pageIndex,
             this.paginator.pageSize
            
-		);
+        );
+        this.dataSource.sort = this.sort;
+        const searchText: string = this.searchInput.nativeElement.value;
+        this.dataSource.filter = searchText;
 		// Call request from server
 		this.store.dispatch(new CustomersPageRequested({ page: queryParams }));
 		this.selection.clear();
@@ -358,11 +363,11 @@ export class Ta7deirComponent implements OnInit, OnDestroy {
 	
 		console.log('CUSTOMER ID', ta7dier.ta7dier_id);
 		this.ta7dier_masterDataService.deleteTa7dier_master(Number(ta7dier.ta7dier_id)).subscribe(res => {
-			this.get_ta7diers(DepartmentService, ta7dier_masterDataService);
+			this.get_ta7diers();
 			alert(res.toString());
 		
 		})
-		this.get_ta7diers(DepartmentService, ta7dier_masterDataService);
+		this.get_ta7diers();
 	}
 	
 	/**

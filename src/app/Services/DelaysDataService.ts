@@ -9,7 +9,7 @@ import { HttpClient } from "@angular/common/http";
     providedIn: 'root'
 })
 export class DelaysDataService {
-    readonly APIUrl = "https://localhost:44337/api";
+    readonly APIUrl = "https://madrastyapi.azurewebsites.net/api";
     private actionUrl: string;
     public delay_id: number;
     public delay_date: string;

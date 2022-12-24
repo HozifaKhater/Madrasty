@@ -1,0 +1,133 @@
+﻿<!--Activity Data-->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="kt-portlet">
+            <div class="kt-portlet__head">
+                <div class="kt-portlet__head-caption">
+                    <div class="kt-portlet__head-title">
+                        <span class="kt-portlet__head-icon kt-hide">
+                            <i class="la la-gear"></i>
+                        </span>
+                        <h3 class="kt-portlet__head-text">
+                            بيانات النشاط
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <!--begin::Form-->
+            <form class="kt-form kt-form--label-align-right kt-form--group-seperator-dashed" [formGroup]="form1">
+                <div class="kt-portlet__body">
+                    <div class="form-group kt-form__group row">
+                        <label class="col-lg-2 col-form-label">مسلسل:</label>
+                        <div class="col-lg-6">
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="ادخل المسلسل الخاص بك" disabled>
+
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+
+
+
+
+                    <div class="form-group kt-form__group row">
+                        <label class="col-lg-2 col-form-label">عدد افراد المجموعه:</label>
+                        <div class="col-lg-6">
+                            <mat-form-field class="example-full-width">
+                                <input [(ngModel)]="group_number" type="number" required max="999999999999" formControlName="group_number" matInput placeholder="المبلغ">
+                               
+                                <mat-error *ngIf="
+        form1.controls.group_number.hasError('required') &&
+        (form1.controls.group_number.dirty || form1.controls.group_number.touched)
+      ">
+                                    من فضلك ادخل الصنف
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="form-group kt-form__group row">
+                        <label class="col-lg-2 col-form-label">عدد الجلسات:</label>
+                        <div class="col-lg-6">
+                            <mat-form-field class="example-full-width">
+                                <input [(ngModel)]="sessions_number" type="number" required max="999999999999" formControlName="sessions_number" matInput placeholder="المبلغ">
+                               
+                                <mat-error *ngIf="
+        form1.controls.sessions_number.hasError('required') &&
+        (form1.controls.sessions_number.dirty || form1.controls.sessions_number.touched)
+      ">
+                                    من فضلك ادخل الصنف
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group kt-form__group row">
+                        <label class="col-lg-2 col-form-label">ملاحظات:</label>
+                        <div class="col-lg-6">
+                            <mat-form-field class="example-full-width">
+                                <textarea pattern="^[أ-ي-a-zA-Z0-9-_.@_#!?^%$ ]{1,200}"
+                                          required [(ngModel)]="notes" formControlName="notes" matInput placeholder="أدخل ملاحظات"></textarea>
+                                <mat-hint align="start">من فضلك أدخل ملاحظات</mat-hint>
+                                <mat-error *ngIf="
+        form1.controls.notes.hasError('required') &&
+        (form1.controls.notes.dirty || form1.controls.notes.touched)
+      ">
+                                    من فضلك ادخل ملاحظات
+                                </mat-error>
+                                <mat-error *ngIf="
+        form1.controls.notes.hasError('pattern') &&
+        (form1.controls.notes.dirty || form1.controls.notes.touched)
+      ">
+                                    من فضلك ادخل ملاحظات
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="form-group kt-form__group row">
+                        <label class="col-lg-2 col-form-label">موضوع الجلسه:</label>
+                        <div class="col-lg-6">
+                            <mat-form-field class="example-full-width">
+                                <textarea pattern="^[أ-ي-a-zA-Z0-9-_.@_#!?^%$ ]{1,200}"
+                                          required [(ngModel)]="notes" formControlName="notes" matInput placeholder="أدخل ملاحظات"></textarea>
+                               
+                                <mat-error *ngIf="
+        form1.controls.topic.hasError('required') &&
+        (form1.controls.topic.dirty || form1.controls.topic.touched)
+      ">
+                                    من فضلك ادخل ملاحظات
+                                </mat-error>
+                                <mat-error *ngIf="
+        form1.controls.topic.hasError('pattern') &&
+        (form1.controls.topic.dirty || form1.controls.topic.touched)
+      ">
+                                    من فضلك ادخل ملاحظات
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="kt-portlet__foot kt-portlet__no-border">
+                    <div class="kt-form__actions kt-form__actions--solid">
+                        <div class="row">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-6">
+                                <button id="save_btn" type="button"  (click)="add_activity()" mat-raised-button color="primary">حفظ</button>&nbsp;
+                                <button id="update_btn" type="button" (click)="update_department()" mat-raised-button color="primary">تعديل</button>&nbsp;
+                                <button id="cancel_btn" type="button" (click)="cancel_department()" mat-raised-button color="primary">الغاء</button>&nbsp;
+                                <button mat-raised-button type="reset">حذف</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!--end::Form-->
+        </div>
+    </div>
+</div>
+<kt-activities-list></kt-activities-list>
+<!--End Activity Data-->

@@ -9,7 +9,7 @@ import { HttpClient } from "@angular/common/http";
     providedIn: 'root'
 })
 export class EmployeeDataService {
-	readonly APIUrl = "https://localhost:44337/api";
+	readonly APIUrl = "https://madrastyapi.azurewebsites.net/api";
     private actionUrl: string;
 	emp_id: number;
 	emp_civilian_id: string = "";

@@ -9,7 +9,7 @@ import { HttpClient } from "@angular/common/http";
     providedIn: 'root'
 })
 export class ta7dier_masterDataService {
-    readonly APIUrl = "https://localhost:44337/api";
+    readonly APIUrl = "https://madrastyapi.azurewebsites.net/api";
     private actionUrl: string;
     ta7dier_id: number;
     emp_id: string;
@@ -67,10 +67,10 @@ export class ta7dier_masterDataService {
         this.aClickedEvent.emit(msg);
     }
 
-    @Output() bindClickedEvent = new EventEmitter<string>();
+    @Output() bClickedEvent = new EventEmitter<string>();
     /*   @Output() deparmentClickedEvent = new EventEmitter<string>();*/
-    BindClicked(msg: string) {
-        console.log("das3laedit")
-        this.bindClickedEvent.emit(msg);
+    BClicked(msg: string) {
+        console.log("das")
+        this.bClickedEvent.emit(msg);
     }
 }

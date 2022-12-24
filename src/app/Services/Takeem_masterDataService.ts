@@ -21,7 +21,7 @@ export class Takeem_masterDataService {
 
 
 
-    readonly APIUrl = "https://localhost:44337/api";
+    readonly APIUrl = "https://madrastyapi.azurewebsites.net/api";
     private actionUrl: string;
     constructor(private http: HttpClient) { }
 

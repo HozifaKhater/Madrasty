@@ -90,18 +90,15 @@ export class SubjectComponent implements OnInit, OnDestroy {
 		private SubjectService: SubjectDataService,
 			private DepartmentService: DepartmentDataService
 	) {
-		this.get_subjects(DepartmentService, SubjectService);
+        this.dataSource = new MatTableDataSource([]);
 
 	}
-	get_subjects(DepartmentService: DepartmentDataService, SubjectService: SubjectDataService) {
-		this.DepartmentService.GetAlldepartment().subscribe(data => this.departments = data,
-			error => console.log(error),
-            () => console.log("ok"));
+	get_subjects() {
+		
        // this.dataSource = new MatTableDataSource([])
 		    this.SubjectService.GetAllSubject().subscribe(data => this.ELEMENT_DATA = data,
 		    	error => console.log(error),
-		    	() => this.dataSource = new MatTableDataSource(this.ELEMENT_DATA)
-            );
+                () => this.dataSource.data = this.ELEMENT_DATA);
     }
 	/**
 	 * @ Lifecycle sequences => https://angular.io/guide/lifecycle-hooks
@@ -110,8 +107,19 @@ export class SubjectComponent implements OnInit, OnDestroy {
 	/**
 	 * On init
 	 */
+    ngAfterViewInit() {
+        this.dataSource.paginator = this.paginator;
+    }
 	ngOnInit() {
-       
+        this.get_subjects();
+        this.SubjectService.bClickedEvent
+            .subscribe((data: string) => {
+
+                this.get_subjects()
+
+                console.log("edited2")
+
+            });
 		let model: any = [{ 'id': 1, 'assetID': 2, 'severity': 3, 'riskIndex': 4, 'riskValue': 5, 'ticketOpened': true, 'lastModifiedDate': "2018 - 12 - 10", 'eventType': 'Add' }];  //get the model from the form
 		//this.dataSource.push(model);  //add the new model object to the dataSource
 		//this.dataSource = [...this.dataSource];  //refresh the dataSource
@@ -177,7 +185,10 @@ export class SubjectComponent implements OnInit, OnDestroy {
             this.paginator.pageIndex,
             this.paginator.pageSize
            
-		);
+        );
+        this.dataSource.sort = this.sort;
+        const searchText: string = this.searchInput.nativeElement.value;
+        this.dataSource.filter = searchText;
 		// Call request from server
 		this.store.dispatch(new CustomersPageRequested({ page: queryParams }));
 		this.selection.clear();
@@ -338,11 +349,11 @@ export class SubjectComponent implements OnInit, OnDestroy {
 	
 		console.log('CUSTOMER ID', Subjects.subject_id);
 		this.SubjectService.deleteSubject(Number(Subjects.subject_id)).subscribe(res => {
-			this.get_subjects(DepartmentService, SubjectService);;
+			this.get_subjects();;
 			alert(res.toString());
 		
 		})
-		this.get_subjects(DepartmentService, SubjectService);
+		this.get_subjects();
 	}
 	
 	/**

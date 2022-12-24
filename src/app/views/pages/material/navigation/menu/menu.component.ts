@@ -21,7 +21,8 @@ export class MenuComponent implements OnInit {
 	buttons_takem: any
 	selectedobject: any;
 	selectedsubject: any;
-	evaluation_id: number;
+    evaluation_id: number;
+    field: any;
 	evaluation_object: string = "";
 	evaluation_object_name: string = "";
 	evaluation_subject: string = "";

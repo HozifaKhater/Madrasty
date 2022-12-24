@@ -4,6 +4,7 @@ import { DepartmentMaster, Departments } from '../../../../../DepartmentMaster.M
 import { DepartmentDataService } from '../../../../../Services/DepartmentDataService';
 import { ActivityMaster, activity } from '../../../../../ActivityMaster.Model';
 import { Router } from '@angular/router';
+import { FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'kt-student_matters',
@@ -35,8 +36,22 @@ export class student_mattersComponent implements OnInit {
 	activity_date: string = "";
 	activity_school_term: string = "";
 	activity_notes: string = "";
-	dep_id: string = "";
-
+    dep_id: string = "";
+    id: string = "";
+    level_id: string = "";
+    level_name: string = "";
+    class_id: string = "";
+    class_name: string = "";
+    note_date: string = "";
+    topic: string = "";
+    ntoes: string = "";
+    level: any;
+    class: any;
+    student: any;
+    displayFn() { }
+    filteredOptions: any;
+    notes: any;
+    form1: FormGroup;
 	selecteddepartment: any;
 	exampleBasicRadios;
 	exampleRadiosWithNgModel;

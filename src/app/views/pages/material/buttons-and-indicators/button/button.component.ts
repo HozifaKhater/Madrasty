@@ -31,7 +31,7 @@ export class ButtonComponent implements OnInit {
 	exampleMiniFav;
 	bind_ta7diers(event) {
 		this.ta7dier_masterDataService.subject_id = event.source.value.subject_id;
-		this.ta7dier_masterDataService.BindClicked(event.source.value.subject_id);
+		this.ta7dier_masterDataService.BClicked(event.source.value.subject_id);
 	}
 	subjects: Subjects[];
 	constructor(private SubjectDataService: SubjectDataService, private ta7dier_masterDataService: ta7dier_masterDataService) {

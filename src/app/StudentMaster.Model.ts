@@ -2,6 +2,14 @@
     public ID: number;
     public Name: string;
 }
+export class branch_stat {
+    public hady_34r: string;
+    public sany_34r: string;
+    public sho3ba: string;
+    public student_count: string;
+
+}
+
 
 export class Student {
     public student_id: number;
@@ -36,4 +44,5 @@ export class Student {
     public student_failure_years: string;
     public student_class_id: any
     public student_class_name: string
+    public student_branch: string;
 }

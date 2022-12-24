@@ -5,10 +5,9 @@
 			<div class="kt-portlet__head">
 				<div class="kt-portlet__head-caption">
 					<div class="kt-portlet__head-title">
-						<span class="kt-portlet__head-icon kt-hide">
-							<i class="la la-gear"></i>
-						</span>
+
 						<h3 class="kt-portlet__head-text">
+							<i class="fas fa-tasks" style="margin:5px;"></i>
 							اجتماع مشرفي الأجنحة
 						</h3>
 					</div>
@@ -17,58 +16,65 @@
 			<!--begin::Form-->
 			<form class="kt-form kt-form--label-align-right kt-form--group-seperator-dashed">
 				<div class="kt-portlet__body">
-
-					<div class="form-group kt-form__group row">
-						<b class="col-lg-2 col-form-label">التاريخ:</b>
-						<div class="col-lg-6">
-							<mat-form-field class="example-full-width">
-								<input [(ngModel)]="corr_meet_date" [ngModelOptions]="{standalone: true}" matInput [matDatepicker]="dp3" placeholder="التاريخ" disabled>
-								<mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
-								<mat-datepicker #dp3 disabled="false"></mat-datepicker>
-							</mat-form-field>
-						</div>
-					</div>
-
-					<div class="form-group kt-form__group row">
-						<b class="col-lg-2 col-form-label">الزمان:</b>
-						<div class="col-lg-6">
-							<mat-form-field class="example-full-width">
-								<input [(ngModel)]="corr_meet_time" [ngModelOptions]="{standalone: true}" type="time" matInput placeholder="الزمان">
-
-							</mat-form-field>
-						</div>
-					</div>
-
-					<div class="form-group kt-form__group row">
-						<b class="col-lg-2 col-form-label">المكان:</b>
-						<div class="col-lg-6">
-							<mat-form-field class="example-full-width">
-								<input [(ngModel)]="corr_meet_loc" [ngModelOptions]="{standalone: true}" type="text" matInput placeholder="المكان">
-
-							</mat-form-field>
-						</div>
-					</div>
-
-
-
-
-				</div>
-				<div class="kt-portlet__foot kt-portlet__no-border">
-					<div class="kt-form__actions kt-form__actions--solid">
-						<div class="row">
-							<div class="col-lg-2"></div>
-							<div class="col-lg-6">
-								<button id="save_btn" (click)="add_meet()" mat-raised-button color="primary">اضافة</button>&nbsp;
-								<button id="update_btn" (click)="update_meet()" mat-raised-button color="primary">تعديل</button>&nbsp;
-								<button id="cancel_btn" (click)="cancel_meet()" mat-raised-button color="primary">الغاء</button>&nbsp;
-
+					<div class="kt-form__section kt-form__section--first">
+						<div class="form-group kt-form__group row">
+							<label class="col-lg-2 col-form-label">
+								التاريخ
+								<span class="text-danger">*</span>
+							</label>
+							<div class="col-lg-6 example-container">
+								<mat-form-field class="example-full-width">
+									<input [(ngModel)]="corr_meet_date" [ngModelOptions]="{standalone: true}" matInput [matDatepicker]="dp3" placeholder="التاريخ" disabled>
+									<mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+									<mat-datepicker #dp3 disabled="false"></mat-datepicker>
+								</mat-form-field>
 							</div>
 						</div>
+
+						<div class="form-group kt-form__group row">
+							<label class="col-lg-2 col-form-label">
+								الزمان
+								<span class="text-danger">*</span>
+							</label>
+							<div class="col-lg-6 example-container">
+								<mat-form-field class="example-full-width">
+									<input [(ngModel)]="corr_meet_time" [ngModelOptions]="{standalone: true}" type="time" matInput placeholder="الزمان">
+
+								</mat-form-field>
+							</div>
+						</div>
+
+						<div class="form-group kt-form__group row">
+							<label class="col-lg-2 col-form-label">
+								المكان
+								<span class="text-danger">*</span>
+							</label>
+							<div class="col-lg-6 example-container">
+								<mat-form-field class="example-full-width">
+									<input [(ngModel)]="corr_meet_loc" [ngModelOptions]="{standalone: true}" type="text" matInput placeholder="المكان">
+
+								</mat-form-field>
+							</div>
+						</div>
+
 					</div>
 				</div>
-			</form>
-			<!--end::Form-->
+		<div class="kt-portlet__foot">
+			<div class="kt-form__actions kt-form__actions">
+				<div class="row">
+
+					<div class="col-lg-6">
+						<button id="save_btn" (click)="add_meet()" mat-raised-button color="accent">اضافة</button>&nbsp;
+						<button id="update_btn" (click)="update_meet()" mat-raised-button color="accent">تعديل</button>&nbsp;
+						<button id="cancel_btn" (click)="cancel_meet()" mat-raised-button color="accent">الغاء</button>&nbsp;
+
+					</div>
+				</div>
+			</div>
 		</div>
+		</form>
+		<!--end::Form-->
+	</div>
 	</div>
 </div>
 <kt-corr-meet-list></kt-corr-meet-list>

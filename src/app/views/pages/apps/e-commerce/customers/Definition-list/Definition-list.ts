@@ -53,27 +53,33 @@ export class DefinitionListComponent implements OnInit, OnDestroy {
 		private translate: TranslateService,
 		private store: Store<AppState>,
 		private DefinitionService: DefinitionDataService
-	) {
-		this.get_definitions(DefinitionService);
+    ) {
+        this.dataSource = new MatTableDataSource([]);
+		
 	}
 
-	get_definitions(DefinitionService: DefinitionDataService) {
-		this.DefinitionService.GetDefinitions().subscribe(data => this.allDefinitions = data,
-			error => console.log(error),
-			() => console.log("ok"));
+	get_definitions() {
+		
 
 		this.DefinitionService.GetDefinitions().subscribe(data => this.ELEMENT_DATA = data,
 			error => console.log(error),
-			() => this.dataSource = new MatTableDataSource(this.ELEMENT_DATA)
+            () => this.dataSource.data = this.ELEMENT_DATA
 		);
 
 		console.log('data ', this.dataSource);
-	}
-
+    }
+    customersResult: Definition[] = [];
+    isAllSelected(): boolean {
+        const numSelected = this.selection.selected.length;
+        const numRows = this.customersResult.length;
+        return numSelected === numRows;
+    }
 	definition_info: any[];
-
+    ngAfterViewInit() {
+        this.dataSource.paginator = this.paginator;
+    }
 	editDefinition(definition: Definition) {
-
+        this.DefinitionService.def_id = definition.def_id;
 		this.DefinitionService.GetDefinitionWithId(definition.def_id).subscribe(data => this.definition_info = data,
 			error => console.log("error in edit definition"),
 			() => {
@@ -81,7 +87,7 @@ export class DefinitionListComponent implements OnInit, OnDestroy {
 
 					console.log('testdepname', item);
 
-					this.DefinitionService.def_id = Number(item.def_id);
+					
 
 					this.DefinitionService.def_name = item.def_name;
 
@@ -103,15 +109,22 @@ export class DefinitionListComponent implements OnInit, OnDestroy {
 		console.log('Definition ID', definition.def_id);
 
 		this.DefinitionService.deleteDefinition(Number(definition.def_id)).subscribe(res => {
-			this.get_definitions(DefinitionService);;
+			this.get_definitions();;
 			alert(res.toString());
 
 		})
 	}
 
 	ngOnInit() {
+        this.DefinitionService.bClickedEvent
+            .subscribe((data: string) => {
 
+                this.get_definitions()
 
+                console.log("edited2")
+
+            });
+        this.get_definitions();
 		// If the user changes the sort order, reset back to the first page.
 		const sortSubscription = this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
 		this.subscriptions.push(sortSubscription);
@@ -124,9 +137,21 @@ export class DefinitionListComponent implements OnInit, OnDestroy {
             tap(() => this.loadCustomersList())
 		)
 			.subscribe();
-		this.subscriptions.push(paginatorSubscriptions);
+        this.subscriptions.push(paginatorSubscriptions);
 
-		
+        const searchSubscription = fromEvent(this.searchInput.nativeElement, 'keyup').pipe(
+            // tslint:disable-next-line:max-line-length
+            debounceTime(50), // The user can type quite quickly in the input box, and that could trigger a lot of server requests. With this operator, we are limiting the amount of server requests emitted to a maximum of one every 150ms
+            distinctUntilChanged(), // This operator will eliminate duplicate values
+            tap(() => {
+                console.log("searchhhh", searchSubscription)
+                this.paginator.pageIndex = 0;
+                this.loadCustomersList();
+            })
+        )
+            .subscribe();
+        this.subscriptions.push(searchSubscription);
+
 			
 		// Init DataSource
 
@@ -150,7 +175,10 @@ export class DefinitionListComponent implements OnInit, OnDestroy {
 		);
 		// Call request from server
         this.store.dispatch(new CustomersPageRequested({ page: queryParams }));
-		this.selection.clear();
+        this.selection.clear();
+        const searchText: string = this.searchInput.nativeElement.value;
+        this.dataSource.filter = searchText;
+        this.dataSource.sort=this.sort
 		console.log("yyyy", this.ELEMENT_DATA);
 	}
 
@@ -174,7 +202,7 @@ export class DefinitionListComponent implements OnInit, OnDestroy {
 		if (!searchText) {
 			return filter;
 		}
-
+        this.dataSource.filter = searchText;
 		filter.firstName = searchText;
 		filter.email = searchText;
 		filter.ipAddress = searchText;

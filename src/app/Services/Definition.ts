@@ -8,7 +8,7 @@ import { HttpClient } from "@angular/common/http";
 })
 
 export class DefinitionDataService{
-    readonly APIUrl = "https://localhost:44337/api";
+    readonly APIUrl = "https://madrastyapi.azurewebsites.net/api";
     private actionUrl: string;
     public def_id: number;
     public def_name: string;
@@ -48,7 +48,12 @@ export class DefinitionDataService{
         console.log(DefinitionDataService);
     }
 
-    
+    @Output() bClickedEvent = new EventEmitter<string>();
+
+    BClicked(msg: string) {
+        this.bClickedEvent.emit(msg);
+        console.log(DefinitionDataService);
+    }
 
 }
 

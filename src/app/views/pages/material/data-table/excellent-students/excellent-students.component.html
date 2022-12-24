@@ -1,0 +1,225 @@
+﻿
+<div class="row">
+    <div class="col-lg-12">
+        <div class="kt-portlet">
+            <div class="kt-portlet__head">
+                <div class="kt-portlet__head-caption">
+                    <div class="kt-portlet__head-title">
+                        <span class="kt-portlet__head-icon kt-hide">
+                            <i class="la la-gear"></i>
+                        </span>
+                        <h3 class="kt-portlet__head-text">
+                            الطلاب الفائقون دراسيا
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <!--begin::Form-->
+            <form class="kt-form kt-form--label-align-right kt-form--group-seperator-dashed" [formGroup]="form1">
+                <div class="kt-portlet__body">
+                    <div class="form-group kt-form__group row">
+                        <b class="col-lg-2 col-form-label">الصف:</b>
+                        <div class="col-lg-6">
+                            <mat-form-field class="example-full-width">
+                                <mat-select [(ngModel)]="selectedlevel"
+                                            required formControlName="selectedlevel"
+                                    
+                                            id="levelsdropdown"
+                                            placeholder="أختر الصف">
+
+                                    <mat-option *ngFor="let level of Levels" [value]="level">
+                                        {{ level.lev_name }}
+                                    </mat-option>
+                                </mat-select>
+
+                                <mat-error *ngIf="
+        form1.controls.selectedlevel.hasError('required') &&
+        (form1.controls.selectedlevel.dirty || form1.controls.selectedlevel.touched)
+      ">
+                                    اختر الصف
+                                </mat-error>
+
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="form-group kt-form__group row">
+                        <b class="col-lg-2 col-form-label">الفصل:</b>
+                        <div class="col-lg-6">
+                            <mat-form-field class="example-full-width">
+                                <mat-select [(ngModel)]="selectedclass"
+                                            required formControlName="selectedclass"
+                                        
+                                            id="classdropdown"
+                                            placeholder="أختر الفصل">
+
+                                    <mat-option *ngFor="let class of classes" [value]="class">
+                                        {{ class.class_name }}
+                                    </mat-option>
+                                </mat-select>
+
+                                <mat-error *ngIf="
+        form1.controls.selectedclass.hasError('required') &&
+        (form1.controls.selectedclass.dirty || form1.controls.selectedclass.touched)
+      ">
+                                    اختر الفصل
+                                </mat-error>
+
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <!--<div class="form-group kt-form__group row">
+                        <b class="col-lg-2 col-form-label">اسم الطالب:</b>
+                        <div class="col-lg-6">
+                            <mat-form-field class="example-full-width">
+                                <mat-select 
+                                       
+                                            [(ngModel)]="selectedstudent"
+                                           required  formControlName="selectedstudent"
+                                            id="studentdropdown"
+                                            placeholder="أختر اسم الطالب"
+                                         >
+
+                                    <mat-option *ngFor="let student of students" [value]="student">
+                                        {{ student.student_name }}
+                                    </mat-option>
+                                </mat-select>
+
+                                <mat-error *ngIf="
+        form1.controls.selectedstudent.hasError('required') &&
+        (form1.controls.selectedstudent.dirty || form1.controls.selectedstudent.touched)
+      ">
+                                    اختر اسم الطالب
+                                </mat-error>
+
+                            </mat-form-field>
+                        </div>
+                    </div>-->
+                    <div class="form-group kt-form__group row">
+                        <b class="col-lg-2 col-form-label">الجنسيه:</b>
+                        <div class="col-lg-6">
+                            <mat-form-field class="example-full-width">
+                                <mat-select placeholder="الجنسيه"
+                                            [(ngModel)]="selectedjob"
+                                            required formControlName="selectedjob">
+                                    <mat-option *ngFor="let nat of nat" [value]="nat">
+                                        {{ nat.def_name }}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="
+        form1.controls.selectedjob.hasError('required') &&
+        (form1.controls.selectedjob.dirty || form1.controls.selectedjob.touched)
+      ">
+                                    اختر الجنسيه
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="form-group kt-form__group row">
+                        <b class="col-lg-2 col-form-label">رقم الهاتف:</b>
+                        <div class="col-lg-6">
+                            <mat-form-field class="example-full-width">
+                                <input [(ngModel)]="exc_stu_mob" required formControlName="exc_stu_mob" matInput placeholder="الهاتف" type="number">
+
+                                <mat-error *ngIf="
+        form1.controls.exc_stu_mob.hasError('required') &&
+        (form1.controls.exc_stu_mob.dirty || form1.controls.exc_stu_mob.touched)
+      ">
+                                    ادخل رقم الهاتف
+                                </mat-error>
+
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="form-group kt-form__group row">
+                        <b class="col-lg-2 col-form-label">تاريخ الميلاد:</b>
+                        <div class="col-lg-6">
+                            <mat-form-field class="example-full-width">
+                                <input [(ngModel)]="exc_stu_birth" required formControlName="exc_stu_birth" matInput [matDatepicker]="dp3" placeholder="التاريخ" disabled>
+                                <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+                                <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+
+                                <mat-error *ngIf="
+        form1.controls.exc_stu_birth.hasError('required') &&
+        (form1.controls.exc_stu_birth.dirty || form1.controls.exc_stu_birth.touched)
+      ">
+                                    ادخل تاريخ الميلاد
+                                </mat-error>
+
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="form-group kt-form__group row">
+                        <b class="col-lg-2 col-form-label">ملاحظات علي جوانب التفوق لدي الطالب:</b>
+                        <div class="col-lg-6">
+                            <mat-form-field class="example-full-width">
+                                <textarea [(ngModel)]="exc_stu_notes" formControlName="exc_stu_notes" pattern="^[أ-ي-a-zA-Z0-9-_.@_#!?^%$ ]{0,200}"
+                                          required matInput placeholder="ملاحظات" type="email"></textarea>
+
+                                <mat-error *ngIf="
+        form1.controls.exc_stu_notes.hasError('required') &&
+        (form1.controls.exc_stu_notes.dirty || form1.controls.exc_stu_notes.touched)
+      ">
+                                    ادخل الملاحظات
+                                </mat-error>
+                                <mat-error *ngIf="
+        form1.controls.exc_stu_notes.hasError('pattern') &&
+        (form1.controls.exc_stu_notes.dirty || form1.controls.exc_stu_notes.touched)
+      ">
+                                    ادخل الملاحظات
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="form-group kt-form__group row">
+                        <b class="col-lg-2 col-form-label">الجهود المهنية المبذولة ونتائجها:</b>
+                        <div class="col-lg-6">
+                            <mat-form-field class="example-full-width">
+                                <textarea [(ngModel)]="exc_stu_eff" formControlName="exc_stu_eff" pattern="^[أ-ي-a-zA-Z0-9-_.@_#!?^%$ ]{0,200}"
+                                          required matInput placeholder="الجهود المهنية" type="email"></textarea>
+
+                                <mat-error *ngIf="
+        form1.controls.exc_stu_eff.hasError('required') &&
+        (form1.controls.exc_stu_eff.dirty || form1.controls.exc_stu_eff.touched)
+      ">
+                                    ادخل الجهود المهنية
+                                </mat-error>
+                                <mat-error *ngIf="
+        form1.controls.exc_stu_eff.hasError('pattern') &&
+        (form1.controls.exc_stu_eff.dirty || form1.controls.exc_stu_eff.touched)
+      ">
+                                    ادخل الجهود المهنية
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+                    <div class="kt-portlet__foot kt-portlet__no-border">
+                        <div class="kt-form__actions kt-form__actions--solid">
+                            <div class="row">
+                                <div class="col-lg-2"></div>
+                                <div class="col-lg-6">
+                                    <button id="save_btn" type="button" (click)="add_excstu()" mat-raised-button color="primary">اضافة</button>&nbsp;
+                                    <button id="update_btn" (click)="update_excstu()" mat-raised-button color="primary">تعديل</button>&nbsp;
+                                    <button id="cancel_btn" (click)="cancel_excstu()" mat-raised-button color="primary">الغاء</button>&nbsp;
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+</form>
+            <!--end::Form-->
+        </div>
+    </div>
+</div>
+<kt-excellent_students-list></kt-excellent_students-list>
+<!--End Activity Data-->

@@ -6,7 +6,7 @@ import { map, startWith } from 'rxjs/operators';
 import { MatChipInputEvent } from '@angular/material';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { MatSnackBar } from '@angular/material';
-import { PizzaPartyComponent } from '../../popups-and-modals/snackbar/pizza-party.component';
+
 import { corridorsDataService } from '../../../../../Services/CorridorsDataService';
 
 @Component({

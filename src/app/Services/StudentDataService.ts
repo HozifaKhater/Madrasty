@@ -42,8 +42,9 @@ export class StudentDataService
     public student_failure_years: string;
     public student_class_id: string;
     public student_class_name: string;
+    public student_branch: string;
 
-    readonly APIUrl = "https://localhost:44337/api";
+    readonly APIUrl = "https://madrastyapi.azurewebsites.net/api";
     private actionUrl: string;  
     constructor(private http: HttpClient){}
   
@@ -53,6 +54,9 @@ export class StudentDataService
     //    return this.http1.get(this.actionUrl).map((response: Response) => <any>response.json());
      
     //}
+    get_branch_stistics(): Observable<any[]> {
+        return this.http.get<any>(this.APIUrl + '/student/get_branch_stistics');
+    }
     GetAlldepartment(): Observable<any[]> {
         return this.http.get<any>(this.APIUrl + '/student');
     }
@@ -64,6 +68,9 @@ export class StudentDataService
     }
     updatestudents(val: any) {
         return this.http.put(this.APIUrl + '/student', val);
+    }
+    update_student_branch(val: any) {
+        return this.http.put(this.APIUrl + '/student/update', val);
     }
     GetAllstudents_with_id(val: any): Observable<any[]> {
         return this.http.get<any>(this.APIUrl + '/student/id?id=' + val);
@@ -83,5 +90,10 @@ export class StudentDataService
     /*   @Output() deparmentClickedEvent = new EventEmitter<string>();*/
     AClicked(msg: string) {
         this.aClickedEvent.emit(msg);
+    }
+    @Output() bClickedEvent = new EventEmitter<string>();
+    BClicked(msg: string) {
+        this.bClickedEvent.emit(msg);
+        console.log(msg);
     }
 }  

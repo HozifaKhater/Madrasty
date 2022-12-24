@@ -88,14 +88,14 @@ export class EmployeesListComponent implements OnInit, OnDestroy {
         private EmployeeDataService: EmployeeDataService,
         private changeDetectorRefs: ChangeDetectorRef
 	) {
-		this.get_emps(EmployeeDataService);
+        this.dataSource = new MatTableDataSource([]);
 
 	}
-	get_emps(EmployeeDataService: EmployeeDataService) {
+	get_emps() {
 		
 		this.EmployeeDataService.GetAllEmployee().subscribe(data => this.ELEMENT_DATA = data,
 			error => console.log(error),
-			() => this.dataSource = new MatTableDataSource(this.ELEMENT_DATA)
+			() => this.dataSource.data = this.ELEMENT_DATA
         );
     }
 	/**
@@ -105,19 +105,16 @@ export class EmployeesListComponent implements OnInit, OnDestroy {
 	/**
 	 * On init
 	 */
+    ngAfterViewInit() {
+        this.dataSource.paginator = this.paginator;
+    }
     ngAfterContentInit() {
         this.EmployeeDataService.bClickedEvent
-        .subscribe((data: string) => {
-         
+            .subscribe((data: string) => {
+                this.get_emps();
 
-            this.EmployeeDataService.GetAllEmployee().subscribe(data => this.ELEMENT_DATA = data,
-                error => console.log(error),
-                () => {
-                    this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-                    console.log("intablelist")
-                    this.selection.clear();}
-            );
-        });
+            });
+        this.get_emps()
     }
 
 	ngOnInit() {
@@ -187,7 +184,10 @@ export class EmployeesListComponent implements OnInit, OnDestroy {
             this.paginator.pageIndex,
             this.paginator.pageSize
            
-		);
+        );
+        this.dataSource.sort = this.sort;
+        const searchText: string = this.searchInput.nativeElement.value;
+        this.dataSource.filter = searchText;
 		// Call request from server
 		this.store.dispatch(new CustomersPageRequested({ page: queryParams }));
 		this.selection.clear();
@@ -330,7 +330,7 @@ export class EmployeesListComponent implements OnInit, OnDestroy {
 			error => console.log("errorrrrrrrrrrr", error),
 			() => {
 				for (let item of this.departments_info) {
-					console.log(item.dep_id)
+                    console.log("this.departments_info",this.departments_info)
 					
 					console.log('testempname', item.emp_name);
 					this.EmployeeDataService.emp_civilian_id = item.emp_civilian_id;
@@ -391,7 +391,7 @@ export class EmployeesListComponent implements OnInit, OnDestroy {
 	
 		console.log('CUSTOMER ID', customer.dep_id);
 		this.EmployeeDataService.deleteEmployee(Number(customer.dep_id)).subscribe(res => {
-			this.get_emps(EmployeeDataService);;
+			this.get_emps();;
 			alert(res.toString());
 		
 		})

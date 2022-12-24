@@ -1,0 +1,138 @@
+﻿<!--Departments Data-->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="kt-portlet">
+            <div class="kt-portlet__head">
+                <div class="kt-portlet__head-caption">
+                    <div class="kt-portlet__head-title">
+                        <span class="kt-portlet__head-icon kt-hide">
+                            <i class="la la-gear"></i>
+                        </span>
+                        <h3 class="kt-portlet__head-text">
+                            مقترحات
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <!--begin::Form-->
+            <form class="kt-form kt-form--label-align-right" [formGroup]="form1">
+                <div class="kt-portlet__body">
+
+                    <ckeditor [editor]="Editor" [data]="data" [(ngModel)]="sugg_body" required formControlName="sugg_body" (change)="onChange($event)">
+                        <mat-error *ngIf="
+        form1.controls.sugg_body.hasError('required') &&
+        (form1.controls.sugg_body.dirty || form1.controls.sugg_body.touched)
+      ">
+                            ادخل موضوع الاقتراح
+                        </mat-error>
+                    </ckeditor>
+                    <!--<app-editor></app-editor>-->
+
+
+                    <div class="form-group kt-form__group row">
+                        <b class="col-lg-2 col-form-label">نوع الاقتراح:</b>
+                        <div class="col-lg-6">
+                            <mat-form-field class="example-full-width">
+                                <mat-select [(ngModel)]="sugg_type"
+                                            required formControlName="sugg_type"
+                                            id="studentdropdown"
+                                            placeholder="أختر النوع">
+
+                                    <mat-option *ngFor="let sugg of sugg" [value]="sugg">
+                                        {{ sugg.def_name }}
+                                    </mat-option>
+                                </mat-select>
+
+                                <mat-error *ngIf="
+        form1.controls.sugg_type.hasError('required') &&
+        (form1.controls.sugg_type.dirty || form1.controls.sugg_type.touched)
+      ">
+                                    اختر النوع
+                                </mat-error>
+
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+
+                    <div class="kt-form__section kt-form__section--first">
+
+                        <div class="form-group kt-form__group row">
+                            <b class="col-lg-2 col-form-label">العنوان:</b>
+                            <div class="col-lg-6">
+                                <mat-form-field class="example-full-width">
+                                    <input [(ngModel)]="sugg_title" required formControlName="sugg_title" matInput placeholder="أدخل العنوان " type="text">
+
+                                    <mat-error *ngIf="
+        form1.controls.sugg_title.hasError('required') &&
+        (form1.controls.sugg_title.dirty || form1.controls.sugg_title.touched)
+      ">
+                                        ادخل العنوان المكون من حروف فقط
+                                    </mat-error>
+                                    <mat-error *ngIf="
+        form1.controls.sugg_title.hasError('pattern') &&
+        (form1.controls.sugg_title.dirty || form1.controls.sugg_title.touched)
+      ">
+                                        ادخل العنوان المكون من حروف فقط
+                                    </mat-error>
+
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="form-group kt-form__group row">
+                            <b class="col-lg-2 col-form-label">الملف:</b>
+                            <div class="col-lg-6">
+                                <mat-form-field class="example-full-width">
+                                    <input [(ngModel)]="sugg_file" required formControlName="sugg_file" matInput placeholder="أدخل الملف" type="email">
+
+                                    <mat-error *ngIf="
+        form1.controls.sugg_file.hasError('required') &&
+        (form1.controls.sugg_file.dirty || form1.controls.sugg_file.touched)
+      ">
+                                        ادخل الملف المكون من حروف فقط
+                                    </mat-error>
+                                    <mat-error *ngIf="
+        form1.controls.sugg_file.hasError('pattern') &&
+        (form1.controls.sugg_file.dirty || form1.controls.sugg_file.touched)
+      ">
+                                        ادخل الملف المكون من حروف فقط
+                                    </mat-error>
+
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="form-group kt-form__group row">
+                            <b class="col-lg-2 col-form-label">الملف:</b>
+                            <div class="col-lg-2">
+
+                                <input type="file">
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                    <div class="kt-portlet__foot">
+                        <div class="kt-form__actions kt-form__actions">
+                            <div class="row">
+
+                                <div class="col-lg-6">
+                                    <button id="save_btn" type="button" (click)="add_sugg()" mat-raised-button color="primary">اضافة</button>&nbsp;
+                                    <button id="update_btn" (click)="udpate_sugg()" mat-raised-button color="primary">تعديل</button>&nbsp;
+                                    <button id="cancel_btn" (click)="cancel_sugg()" mat-raised-button color="primary">الغاء</button>&nbsp;
+                                    <button mat-raised-button type="reset">تراجع</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+</form>
+            <!--end::Form-->
+        </div>
+    </div>
+</div>
+<kt-sugges-list></kt-sugges-list>
+<!--End Departments Data-->

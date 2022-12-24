@@ -9,7 +9,7 @@ import { HttpClient } from "@angular/common/http";
     providedIn: 'root'
 })
 export class VisitsDataService {
-    readonly APIUrl = "https://localhost:44337/api";
+    readonly APIUrl = "https://madrastyapi.azurewebsites.net/api";
     private actionUrl: string;
     public visit_id: number;
     public visit_type_name: string;
@@ -26,7 +26,7 @@ export class VisitsDataService {
     public dep_name: string;
     public dep_id: string;
     public vnote: string;
-
+    public student_attendance_precent: string;
 
     constructor(private http: HttpClient) { }
 
@@ -45,6 +45,10 @@ export class VisitsDataService {
     addvisits(val: any) {
         console.log("ttt")
         return this.http.post(this.APIUrl + '/visits', val);
+    }
+    addstudent_attendance_precent(val: any) {
+        console.log("ttt")
+        return this.http.post(this.APIUrl + '/visits/student_attendance_precent', val);
     }
     updatevisits(val: any) {
         return this.http.put(this.APIUrl + '/visits', val);

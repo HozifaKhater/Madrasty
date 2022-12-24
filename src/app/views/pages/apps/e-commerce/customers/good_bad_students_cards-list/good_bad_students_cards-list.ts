@@ -87,14 +87,14 @@ export class GoodBadStudentsCardsListComponent implements OnInit, OnDestroy {
 		private store: Store<AppState>,
 		private Good_bad_students_cardDataService: Good_bad_students_cardDataService
 	) {
-		this.get_goodbadstudents(Good_bad_students_cardDataService);
+        this.dataSource = new MatTableDataSource([]);
 
 	}
-	get_goodbadstudents(DepartmentService: Good_bad_students_cardDataService) {
+	get_goodbadstudents() {
 
 		this.Good_bad_students_cardDataService.GetAllGood_bad_students_card().subscribe(data => this.ELEMENT_DATA = data,
 			error => console.log(error),
-			() => this.dataSource = new MatTableDataSource(this.ELEMENT_DATA)
+			() => this.dataSource.data = this.ELEMENT_DATA
 		); }
 	/**
 	 * @ Lifecycle sequences => https://angular.io/guide/lifecycle-hooks
@@ -103,8 +103,16 @@ export class GoodBadStudentsCardsListComponent implements OnInit, OnDestroy {
 	/**
 	 * On init
 	 */
+    ngAfterViewInit() {
+        this.dataSource.paginator = this.paginator;
+    }
 	ngOnInit() {
-       
+        this.Good_bad_students_cardDataService.bClickedEvent
+            .subscribe((data: string) => {
+                this.get_goodbadstudents();
+
+            });
+        this.get_goodbadstudents();
 		let model: any = [{ 'id': 1, 'assetID': 2, 'severity': 3, 'riskIndex': 4, 'riskValue': 5, 'ticketOpened': true, 'lastModifiedDate': "2018 - 12 - 10", 'eventType': 'Add' }];  //get the model from the form
 		//this.dataSource.push(model);  //add the new model object to the dataSource
 		//this.dataSource = [...this.dataSource];  //refresh the dataSource
@@ -170,7 +178,10 @@ export class GoodBadStudentsCardsListComponent implements OnInit, OnDestroy {
             this.paginator.pageIndex,
             this.paginator.pageSize
            
-		);
+        );
+        this.dataSource.sort = this.sort;
+        const searchText: string = this.searchInput.nativeElement.value;
+        this.dataSource.filter = searchText;
 		// Call request from server
 		this.store.dispatch(new CustomersPageRequested({ page: queryParams }));
 		this.selection.clear();
@@ -347,7 +358,7 @@ export class GoodBadStudentsCardsListComponent implements OnInit, OnDestroy {
 	
 		console.log('CUSTOMER ID', customer.student_card_id);
 		this.Good_bad_students_cardDataService.deleteGood_bad_students_card(Number(customer.student_card_id)).subscribe(res => {
-			this.get_goodbadstudents(Good_bad_students_cardDataService);;
+			this.get_goodbadstudents();;
 			alert(res.toString());
 		
 		})

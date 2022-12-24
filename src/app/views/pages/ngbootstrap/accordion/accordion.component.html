@@ -1,152 +1,183 @@
 ﻿
-<div class="row">
-    <div class="col-lg-12">
-        <div class="kt-portlet">
-            <div class="kt-portlet__head">
-                <div class="kt-portlet__head-caption">
-                    <div class="kt-portlet__head-title">
-                        <span class="kt-portlet__head-icon kt-hide">
-                            <i class="la la-gear"></i>
-                        </span>
-                        <h3 class="kt-portlet__head-text">
-                            بيانات المكتبة
-                        </h3>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="kt-portlet">
+                <div class="kt-portlet__head">
+                    <div class="kt-portlet__head-caption">
+                        <div class="kt-portlet__head-title">
+                      
+                            <h3 class="kt-portlet__head-text">
+                                <i class="fas fa-tasks" style="margin:5px;"></i>
+                                بيانات المكتبة
+                            </h3>
+                        </div>
                     </div>
                 </div>
+                <!--begin::Form-->
+                <form class="kt-form kt-form--label-align-right kt-form--group-seperator-dashed">
+                    <div class="kt-portlet__body">
+                        <div class="kt-form__section kt-form__section--first">
+
+                            <div class="form-group kt-form__group row">
+                                <label class="col-lg-3 col-form-label">رقم السجل
+                                <span class="text-danger">*</span>
+                                </label>
+                                <div class="col-lg-6 example-container">
+                                    <mat-form-field class="example-full-width">
+                                        <input [(ngModel)]="lib_rec_no" [ngModelOptions]="{standalone: true}" type="number" matInput placeholder="رقم السجل">
+
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group kt-form__group row">
+                                <div class="col-lg-3 col-form-label">
+
+                                    <mat-checkbox [(ngModel)]="lib_book" [ngModelOptions]="{standalone: true}" id="department" name="employee" (change)="side_jobclass_chck_change($event);handleChange($event);" value="department">
+                                        كتاب
+                                    </mat-checkbox>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group kt-form__group row">
+                                <label class="col-lg-3 col-form-label">التصنيف:</label>
+                                <div class="col-lg-6 example-container">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-select [(ngModel)]="selecteddepartment"
+                                                    [ngModelOptions]="{standalone: true}"
+                                                    id="departmentsdropdown"
+                                                    [disabled]="disabled"
+                                                    placeholder="أختر التصنيف">
+
+                                            <mat-option *ngFor="let department of Departments" [value]="department.value">
+                                                {{ department.viewValue }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="form-group kt-form__group row">
+                                <div class="col-lg-3 col-form-label">
+
+                                    <mat-checkbox id="employee" [(ngModel)]="lib_ref" [ngModelOptions]="{standalone: true}" (change)="side_jobwork_chck_change($event);handleChange($event);" name="employee" value="employee">
+                                        مرجع
+                                    </mat-checkbox>
+                                </div>
+                            </div>
+
+                            <div class="form-group kt-form__group row">
+                                <label class="col-lg-3 col-form-label">التصنيف:</label>
+                                <div class="col-lg-6 example-container">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-select required name="emp"
+                                                    #refCountry="ngModel"
+                                                    [disabled]="disabled_emp"
+                                                    [(ngModel)]="employeedepartment"
+                                                    id="empsdropdown"
+                                                    placeholder="أختر التصنيف">
+
+                                            <mat-option *ngFor="let emp of Employees" [value]="emp.value">
+                                                {{ emp.viewValue }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
             </div>
-            <!--begin::Form-->
-            <form class="kt-form kt-form--label-align-right kt-form--group-seperator-dashed">
-                <div class="kt-portlet__body">
+        </div>
 
-                    <div class="form-group kt-form__group row">
-                        <b class="col-lg-2 col-form-label">رقم السجل:</b>
-                        <div class="col-lg-6">
-                            <mat-form-field class="example-full-width">
-                                <input [(ngModel)]="lib_rec_no" [ngModelOptions]="{standalone: true}" type="number" matInput placeholder="رقم السجل">
-
-                            </mat-form-field>
+        <div class="col-lg-6">
+            <div class="kt-portlet">
+                <div class="kt-portlet__head">
+                    <div class="kt-portlet__head-caption">
+                        <div class="kt-portlet__head-title">
+                           
+                            <h3 class="kt-portlet__head-text">
+                                استكمال بيانات المكتبة
+                            </h3>
                         </div>
                     </div>
-
-
-                    <div class="form-group kt-form__group row">
-                        <div class="col-lg-2">
-
-                            <mat-checkbox [(ngModel)]="lib_book" [ngModelOptions]="{standalone: true}" id="department" name="employee" (change)="side_jobclass_chck_change($event);handleChange($event);" value="department">
-                                <!--<b for="department" style="margin:5px;">-->كتاب<!--</b>-->
-                            </mat-checkbox>
-                        </div>
-                    </div>
-
-
-                    <div class="form-group kt-form__group row">
-                        <b class="col-lg-2 col-form-label">التصنيف:</b>
-                        <div class="col-lg-6">
-                            <mat-form-field class="example-full-width">
-                                <mat-select [(ngModel)]="selecteddepartment"
-                                            [ngModelOptions]="{standalone: true}"
-                                            id="departmentsdropdown"
-                                            [disabled]="disabled"
-                                            placeholder="أختر التصنيف">
-
-                                    <mat-option *ngFor="let department of Departments" [value]="department.value">
-                                        {{ department.viewValue }}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
-                    </div>
-
-                    <div class="form-group kt-form__group row">
-                        <div class="col-lg-2">
-
-                            <mat-checkbox id="employee" [(ngModel)]="lib_ref" [ngModelOptions]="{standalone: true}" (change)="side_jobwork_chck_change($event);handleChange($event);" name="employee" value="employee">
-                                <!--<b for="employee" style="margin:5px;">-->مرجع<!--</b>-->
-                            </mat-checkbox>
-                        </div>
-                    </div>
-
-                    <div class="form-group kt-form__group row">
-                        <b class="col-lg-2 col-form-label">التصنيف:</b>
-                        <div class="col-lg-6">
-                            <mat-form-field class="example-full-width">
-                                <mat-select required name="emp"
-                                            #refCountry="ngModel"
-                                            [disabled]="disabled_emp"
-                                            [(ngModel)]="employeedepartment"
-                                            id="empsdropdown"
-                                            placeholder="أختر التصنيف">
-
-                                    <mat-option *ngFor="let emp of Employees" [value]="emp.value">
-                                        {{ emp.viewValue }}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
-                    </div>
-
-                    <div class="form-group kt-form__group row">
-                        <b class="col-lg-2 col-form-label">اسم الكتاب:</b>
-                        <div class="col-lg-6">
-                            <mat-form-field class="example-full-width">
-                                <input [(ngModel)]="lib_book_name" [ngModelOptions]="{standalone: true}" type="text" matInput placeholder="اسم الكتاب">
-
-                            </mat-form-field>
-                        </div>
-                    </div>
-
-                    <div class="form-group kt-form__group row">
-                        <b class="col-lg-2 col-form-label">اسم المؤلف:</b>
-                        <div class="col-lg-6">
-                            <mat-form-field class="example-full-width">
-                                <input [(ngModel)]="lib_author_name" [ngModelOptions]="{standalone: true}" type="text" matInput placeholder="اسم المؤلف">
-
-                            </mat-form-field>
-                        </div>
-                    </div>
-
-                    <div class="form-group kt-form__group row">
-                        <b class="col-lg-2 col-form-label"> التاريخ الاصدار:</b>
-                        <div class="col-lg-6">
-                            <mat-form-field class="example-full-width">
-                                <input [(ngModel)]="lib_date" [ngModelOptions]="{standalone: true}" matInput [matDatepicker]="dp3" placeholder="التاريخ الاصدار" disabled>
-                                <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
-                                <mat-datepicker #dp3 disabled="false"></mat-datepicker>
-                            </mat-form-field>
-                        </div>
-                    </div>
-
-                    <div class="form-group kt-form__group row">
-                        <b class="col-lg-2 col-form-label">عدد الصفحات:</b>
-                        <div class="col-lg-6">
-                            <mat-form-field class="example-full-width">
-                                <input [(ngModel)]="lib_page_no" [ngModelOptions]="{standalone: true}" type="number" matInput placeholder="عدد الصفحات">
-
-                            </mat-form-field>
-                        </div>
-                    </div>
-
-
-
-
                 </div>
-                <div class="kt-portlet__foot kt-portlet__no-border">
-                    <div class="kt-form__actions kt-form__actions--solid">
-                        <div class="row">
-                            <div class="col-lg-2"></div>
-                            <div class="col-lg-6">
-                                <button id="save_btn" (click)="add_lib()" mat-raised-button color="primary">اضافة</button>&nbsp;
-                                <button id="update_btn" (click)="update_lib()" mat-raised-button color="primary">تعديل</button>&nbsp;
-                                <button id="cancel_btn" (click)="cancel_lib()" mat-raised-button color="primary">الغاء</button>&nbsp;
 
+                <form class="kt-form">
+                    <div class="kt-portlet__body">
+                        <div class="kt-form__section kt-form__section--first">
+
+                            <div class="form-group kt-form__group row">
+                                <label class="col-lg-3 col-form-label">
+                                    اسم الكتاب
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="col-lg-6 example-container">
+                                    <mat-form-field class="example-full-width">
+                                        <input [(ngModel)]="lib_book_name" [ngModelOptions]="{standalone: true}" type="text" matInput placeholder="اسم الكتاب">
+
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="form-group kt-form__group row">
+                                <label class="col-lg-3 col-form-label">
+                                    اسم المؤلف
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="col-lg-6 example-container">
+                                    <mat-form-field class="example-full-width">
+                                        <input [(ngModel)]="lib_author_name" [ngModelOptions]="{standalone: true}" type="text" matInput placeholder="اسم المؤلف">
+
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="form-group kt-form__group row">
+                                <label class="col-lg-3 col-form-label"> التاريخ الاصدار:</label>
+                                <div class="col-lg-6 example-container">
+                                    <mat-form-field class="example-full-width">
+                                        <input [(ngModel)]="lib_date" [ngModelOptions]="{standalone: true}" matInput [matDatepicker]="dp3" placeholder="التاريخ الاصدار" disabled>
+                                        <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+                                        <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="form-group kt-form__group row">
+                                <label class="col-lg-3 col-form-label">عدد الصفحات:</label>
+                                <div class="col-lg-6 example-container">
+                                    <mat-form-field class="example-full-width">
+                                        <input [(ngModel)]="lib_page_no" [ngModelOptions]="{standalone: true}" type="number" matInput placeholder="عدد الصفحات">
+
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                    <div class="kt-portlet__foot">
+                        <div class="kt-form__actions kt-form__actions">
+                            <div class="row">
+
+                                <div class="col-lg-6">
+                                    <button id="save_btn" (click)="add_lib()" mat-raised-button color="accent">اضافة</button>&nbsp;
+                                    <button id="update_btn" (click)="update_lib()" mat-raised-button color="accent">تعديل</button>&nbsp;
+                                    <button id="cancel_btn" (click)="cancel_lib()" mat-raised-button color="accent">الغاء</button>&nbsp;
+
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </form>
-            <!--end::Form-->
+                </form>
+
+            </div>
         </div>
     </div>
-</div>
 <kt-add_lib-list></kt-add_lib-list>
 <!--End Activity Data-->

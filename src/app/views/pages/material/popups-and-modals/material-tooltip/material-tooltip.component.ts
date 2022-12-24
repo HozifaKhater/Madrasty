@@ -42,7 +42,10 @@ export class MaterialTooltipComponent implements OnInit {
     is_vpic: any;
     vpic_label: any;
     test1: any;
-
+    visit_types_name: any;
+    onChildButtonClick() { }
+    is_phone_chck_change: any
+    is_vpic_chck_change: any;
     constructor(private Visit_typesDataService: Visit_typesDataService) {
         this.visit_date = "تاريخ الزياره"
 
@@ -59,6 +62,7 @@ export class MaterialTooltipComponent implements OnInit {
         this.vpic_label="vPic"
       //  this.test1="بررر"
     }
+    dep_check: any;
     is_visit_date_change(event)
     {
         console.log(event)

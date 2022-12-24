@@ -53,7 +53,8 @@ export class ModalComponent implements OnInit {
 	meeting_loc: string = "";
 	impor_recomm: string = "";
 	bus_table: string = "";
-
+    selecteddepartment: any;
+    Departments: any;
 	exampleModalWithDefaultOptions;
 	exampleComponentsAsContent;
 	exampleModalWithCustomClass;

@@ -18,7 +18,7 @@ export class AuthService {
     constructor(private http: HttpClient) {}
     // Authentication/Authorization
     login(username: string, password: string): Observable<User> {
-        return this.http.post<User>("https://localhost:44337/api/login", { username, password });
+        return this.http.post<User>("https://madrastyapi.azurewebsites.net/api/login", { username, password });
     }
 
     getUserByToken(): Observable<User> {

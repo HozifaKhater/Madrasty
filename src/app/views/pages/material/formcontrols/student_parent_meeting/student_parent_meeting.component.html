@@ -35,7 +35,7 @@
                             <b class="col-lg-3 col-form-label">تاريخ :</b>
                             <div class="col-lg-6 example-container">
                                 <mat-form-field class="example-full-width">
-                                    <input [(ngModel)]="date" required (ngModelChange)="updateCalcs($event)" formControlName="date" matInput [matDatepicker]="dp3" placeholder="تاريخ " disabled>
+                                    <input [(ngModel)]="date" required  formControlName="date" matInput [matDatepicker]="dp3" placeholder="تاريخ " disabled>
                                     <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
                                     <mat-datepicker #dp3 disabled="false"></mat-datepicker>
                                     <mat-error *ngIf="
@@ -59,7 +59,7 @@
                                            placeholder="الصف"
                                            (ngModelChange)="change_level($event)"
                                            [matAutocomplete]="auto"
-                                           forceSelection="lev_name"
+                                          
                                            formControlName="selected_level">
                                     <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
                                         <mat-option *ngFor="let level of filteredlevel  | async" [value]="level">
@@ -163,9 +163,9 @@
                                 <div class="row">
                                     <div class="col-lg-2"></div>
                                     <div class="col-lg-6">
-                                        <button id="save_btn" type="button" (click)="add_activity()" mat-raised-button color="primary">حفظ</button>&nbsp;
-                                        <button id="update_btn" type="button" (click)="update_department()" mat-raised-button color="primary">تعديل</button>&nbsp;
-                                        <button id="cancel_btn" type="button" (click)="cancel_department()" mat-raised-button color="primary">الغاء</button>&nbsp;
+                                        <button id="save_btn" type="button" (click)="add_employee()" mat-raised-button color="primary">حفظ</button>&nbsp;
+                                        <button id="update_btn" type="button" (click)="update_employee()" mat-raised-button color="primary">تعديل</button>&nbsp;
+                                        <button id="cancel_btn" type="button" (click)="cancel_employee()" mat-raised-button color="primary">الغاء</button>&nbsp;
                                         <button mat-raised-button type="reset">حذف</button>
                                     </div>
                                 </div>

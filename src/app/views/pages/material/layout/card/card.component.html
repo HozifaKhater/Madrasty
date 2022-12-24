@@ -16,7 +16,7 @@
                 </div>
             </div>
             <!--begin::Form-->
-            <form class="kt-form kt-form--label-align-right">
+            <form class="kt-form kt-form--label-align-right" [formGroup]="form1">
                 <div class="kt-portlet__body">
                     <div class="kt-form__section kt-form__section--first">
 
@@ -24,7 +24,7 @@
                             <b class="col-lg-2 col-form-label">المادة:</b>
                             <div class="col-lg-6">
                                 <mat-form-field class="example-full-width">
-                                    <mat-select placeholder="المادة"  name="subjects"   [(ngModel)]="selectedsubject">
+                                    <mat-select placeholder="المادة"  name="subjects" formControlName="selectedsubject"  [(ngModel)]="selectedsubject">
                                         <mat-option *ngFor="let subjects of subjects" [value]="subjects"  (onSelectionChange)="bind_ta7diers($event)">
                                             {{ subjects.subject_name }}
                                         </mat-option>
@@ -36,7 +36,7 @@
                             <b class="col-lg-2 col-form-label">التاريخ:</b>
                             <div class="col-lg-6">
                                 <mat-form-field class="example-full-width">
-                                    <input [(ngModel)]="ta7dier_date" [ngModelOptions]="{standalone: true}" matInput [matDatepicker]="picker" placeholder="أختر التاريخ">
+                                    <input [(ngModel)]="ta7dier_date" formControlName="ta7dier_date" matInput [matDatepicker]="picker" placeholder="أختر التاريخ">
                                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                     <mat-datepicker #picker></mat-datepicker>
                                 </mat-form-field>
@@ -47,8 +47,8 @@
                             <b class="col-lg-2 col-form-label">الأسبوع:</b>
                             <div class="col-lg-6">
                                 <mat-form-field class="example-full-width">
-                                    <mat-select placeholder="الأسبوع">
-                                        <mat-option *ngFor="let weeks of weeks" [value]="weeks.value">
+                                    <mat-select placeholder="الأسبوع"  [(ngModel)]="selectedweek" formControlName="selectedweek" >
+                                        <mat-option *ngFor="let weeks of weeks" [value]="weeks">
                                             {{ weeks.viewValue }}
                                         </mat-option>
                                     </mat-select>
@@ -60,8 +60,8 @@
                             <b class="col-lg-2 col-form-label">اليوم:</b>
                             <div class="col-lg-6">
                                 <mat-form-field class="example-full-width">
-                                    <mat-select placeholder="اليوم">
-                                        <mat-option *ngFor="let days of days" [value]="days.value">
+                                    <mat-select placeholder="اليوم" [(ngModel)]="selectedday" formControlName="selectedday">
+                                        <mat-option *ngFor="let days of days" [value]="days">
                                             {{ days.viewValue }}
                                         </mat-option>
                                     </mat-select>
@@ -73,9 +73,9 @@
                             <b class="col-lg-2 col-form-label">الصف:</b>
                             <div class="col-lg-6">
                                 <mat-form-field class="example-full-width">
-                                    <mat-select placeholder="الصف">
-                                        <mat-option *ngFor="let class of class" [value]="class.value">
-                                            {{ class.viewValue }}
+                                    <mat-select placeholder="الصف" [(ngModel)]="selectedlevel" formControlName="selectedlevel">
+                                        <mat-option *ngFor="let levels of levels" [value]="levels">
+                                            {{ levels.lev_name }}
                                         </mat-option>
                                     </mat-select>
                                 </mat-form-field>
@@ -86,7 +86,7 @@
                             <b class="col-lg-2 col-form-label">عنوان الدرس:</b>
                             <div class="col-lg-6">
                                 <mat-form-field class="example-full-width">
-                                    <input  [(ngModel)]="ta7dier_name" matInput placeholder="أدخل عنوان الدرس" type="email">
+                                    <input  [(ngModel)]="ta7dier_name" formControlName="ta7dier_name" matInput placeholder="أدخل عنوان الدرس" type="email">
                                     <mat-hint align="start">من فضلك أدخل عنوان الدرس</mat-hint>
                                 </mat-form-field>
                             </div>
@@ -120,10 +120,10 @@
                             <div class="row">
 
                                 <div class="col-lg-6">
-                                    <button id="save_btn" (click)="add_ta7dier_master()" mat-raised-button color="primary">اضافة</button>&nbsp;
-                                    <button id="update_btn" (click)="udpate_ta7dier_master()" mat-raised-button color="primary">تعديل</button>&nbsp;
-                                    <button id="cancel_btn" (click)="cancel_ta7dier_master()" mat-raised-button color="primary">الغاء</button>&nbsp;
-                                    <button mat-raised-button type="reset">تراجع</button>
+                                    <button id="save_btn" type="button" (click)="add_ta7dier_master()" mat-raised-button color="primary">اضافة</button>&nbsp;
+                                    <button id="update_btn" type="button" (click)="udpate_ta7dier_master()" mat-raised-button color="primary">تعديل</button>&nbsp;
+                                    <button id="cancel_btn" type="button" (click)="cancel_ta7dier_master()" mat-raised-button color="primary">الغاء</button>&nbsp;
+                                   
                                 </div>
                             </div>
                         </div>

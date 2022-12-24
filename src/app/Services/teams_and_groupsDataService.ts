@@ -10,7 +10,7 @@ import { HttpClient } from "@angular/common/http";
 })
 export class teams_and_groupsDataService
 {
-    readonly APIUrl = "https://localhost:44337/api";
+    readonly APIUrl = "https://madrastyapi.azurewebsites.net/api";
     private actionUrl: string;
     public id: number;
     public type_id: string;

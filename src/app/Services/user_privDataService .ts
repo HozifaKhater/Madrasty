@@ -10,7 +10,7 @@ import { HttpClient } from "@angular/common/http";
 })
 export class user_privDataService
 {
-    readonly APIUrl = "https://localhost:44337/api";
+    readonly APIUrl = "https://madrastyapi.azurewebsites.net/api";
     private actionUrl: string;
     user_id: number;
     emp_id: string;

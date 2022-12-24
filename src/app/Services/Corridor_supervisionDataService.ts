@@ -25,7 +25,7 @@ export class Corridor_supervisionDataService {
 
 
 
-    readonly APIUrl = "https://localhost:44337/api";
+    readonly APIUrl = "https://madrastyapi.azurewebsites.net/api";
     private actionUrl: string;
     constructor(private http: HttpClient) { }
 

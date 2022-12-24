@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 <!--begin::Form-->
-                <form class="kt-form">
+                <form class="kt-form" [formGroup]="form1">
                     <div class="kt-portlet__body">
                         <div class="kt-form__section kt-form__section--first">
                             <div class="form-group kt-form__group row">
@@ -26,7 +26,7 @@
                                 <b class="col-lg-3 col-form-label">مسلسل:</b>
                                 <div class="col-lg-6 example-container">
                                     <mat-form-field class="example-full-width">
-                                        <input [(ngModel)]="job_id" [ngModelOptions]="{standalone: true}" matInput placeholder="" disabled="disabled">
+                                        <input [(ngModel)]="job_id" formControlName="job_id"  matInput placeholder="" >
 
                                     </mat-form-field>
                                 </div>
@@ -60,14 +60,9 @@
                                 <div class="col-lg-6 example-container">
                                     <mat-form-field class="example-full-width">
                                         <textarea [(ngModel)]="job_desc" formControlName="job_desc" pattern="^[أ-ي-a-zA-Z0-9-_.@_#!?^%$ ]{1,200}"
-                                                  required matInput placeholder="أدخل الوصف" type="email"></textarea>
+                                                   matInput placeholder="أدخل الوصف" type="email"></textarea>
                                         <mat-hint align="start">من فضلك ادخل الوصف</mat-hint>
-                                        <mat-error *ngIf="
-        form1.controls.job_desc.hasError('required') &&
-        (form1.controls.job_desc.dirty || form1.controls.job_desc.touched)
-      ">
-                                            ادخل وصف الوظيفه المكون من حروف فقط
-                                        </mat-error>
+                             
                                         <mat-error *ngIf="
         form1.controls.job_desc.hasError('pattern') &&
         (form1.controls.job_desc.dirty || form1.controls.job_desc.touched)
@@ -99,7 +94,7 @@
                     </div>
                 </div>
               
-                <form class="kt-form">
+                <form class="kt-form" [formGroup]="form1">
                     <div class="kt-portlet__body">
                         <div class="kt-form__section kt-form__section--first">
 
@@ -149,8 +144,8 @@
 
                                 <div class="col-lg-6">
                                     <button id="save_btn" type="button" (click)="add_jobs()" mat-raised-button color="accent">حفظ</button>&nbsp;
-                                    <button id="update_btn" (click)="update_jobs()" mat-raised-button color="accent">تعديل</button>&nbsp;
-                                    <button id="cancel_btn" (click)="cancel_jobs()" mat-raised-button color="accent">الغاء</button>&nbsp;
+                                    <button id="update_btn" type="button" (click)="update_jobs()" mat-raised-button color="accent">تعديل</button>&nbsp;
+                                    <button id="cancel_btn" type="button" (click)="cancel_jobs()" mat-raised-button color="accent">الغاء</button>&nbsp;
                                     <button mat-raised-button type="reset">حذف</button>
                                 </div>
                             </div>

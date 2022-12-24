@@ -5,10 +5,9 @@
             <div class="kt-portlet__head">
                 <div class="kt-portlet__head-caption">
                     <div class="kt-portlet__head-title">
-                        <span class="kt-portlet__head-icon kt-hide">
-                            <i class="la la-gear"></i>
-                        </span>
+                  
                         <h3 class="kt-portlet__head-text">
+                            <i class="fas fa-tasks" style="margin:5px;"></i>
                             تشكيل شعبة تحسين الأداء
                         </h3>
                     </div>
@@ -20,13 +19,16 @@
 
 
                     <div class="form-group kt-form__group row">
-                        <b class="col-lg-2 col-form-label">القسم:</b>
+                        <label class="col-lg-2 col-form-label">
+                            القسم
+                            <span class="text-danger">*</span>
+                        </label>
                         <div class="col-lg-6">
                             <mat-form-field class="example-full-width">
                                 <mat-select required name="department"
                                             #refCountry="ngModel"
                                             [(ngModel)]="selecteddepartment"
-                                            (change)="selected()"
+                                          
                                             placeholder="Please select Value">
                                     <mat-option *ngFor="let department of departments" [value]="department">
                                         {{ department.dep_name }}
@@ -37,14 +39,17 @@
                     </div>
 
                     <div class="form-group kt-form__group row">
-                        <b class="col-lg-2 col-form-label">الوظيفة:</b>
+                        <label class="col-lg-2 col-form-label">
+                            الوظيفة
+                            <span class="text-danger">*</span>
+                        </label>
                         <div class="col-lg-6">
                             <mat-form-field class="example-full-width">
                                 <mat-select required name="job"
                                             #refCountry="ngModel"
                                             placeholder="الوظيفة"
                                             [(ngModel)]="selectedjob"
-                                            (change)="selected()">
+                                           >
                                     <mat-option *ngFor="let job of jobs" [value]="job">
                                         {{ job.job_name }}
                                     </mat-option>
@@ -55,7 +60,10 @@
 
 
                     <div class="form-group kt-form__group row">
-                        <b class="col-lg-2 col-form-label">اسم الموظف:</b>
+                        <label class="col-lg-2 col-form-label">
+                            اسم الموظف
+                            <span class="text-danger">*</span>
+                        </label>
                         <div class="col-lg-6">
                             <mat-form-field class="example-full-width">
                                 <mat-select required name="emp"
@@ -73,21 +81,24 @@
                     </div>
 
                     <div class="form-group kt-form__group row">
-                        <b class="col-lg-2 col-form-label">هاتف نقال:</b>
+                        <label class="col-lg-2 col-form-label">
+                            هاتف نقال
+                            <span class="text-danger">*</span>
+                        </label>
                         <div class="col-lg-6">
                             <mat-form-field class="example-full-width">
                                 <input [(ngModel)]="mob" [ngModelOptions]="{standalone: true}" matInput placeholder="نقال" type="number">
-                                <mat-hint align="start">من فضلك أدخل النقال</mat-hint>
+                              
                             </mat-form-field>
                         </div>
                     </div>
 
                     <div class="form-group kt-form__group row">
-                        <b class="col-lg-2 col-form-label">هاتف المنزل:</b>
+                        <label class="col-lg-2 col-form-label">هاتف المنزل:</label>
                         <div class="col-lg-6">
                             <mat-form-field class="example-full-width">
                                 <input [(ngModel)]="phone" [ngModelOptions]="{standalone: true}" matInput placeholder="الهاتف" type="number">
-                                <mat-hint align="start">من فضلك أدخل رقم الهاتف</mat-hint>
+                           
                             </mat-form-field>
                         </div>
                     </div>
@@ -98,21 +109,21 @@
 
 
                 </div>
-                <div class="kt-portlet__foot kt-portlet__no-border">
-                    <div class="kt-form__actions kt-form__actions--solid">
+                <div class="kt-portlet__foot">
+                    <div class="kt-form__actions kt-form__actions">
                         <div class="row">
 
                             <div class="col-lg-6">
-                                <button id="save_btn" (click)="add_div()" mat-raised-button color="primary">حفظ</button>&nbsp;
-                                <button id="update_btn" (click)="update_div()" mat-raised-button color="primary">تعديل</button>&nbsp;
-                                <button id="cancel_btn" (click)="cancel_div()" mat-raised-button color="primary">الغاء</button>&nbsp;
+                                <button id="save_btn" (click)="add_div()" mat-raised-button color="accent">حفظ</button>&nbsp;
+                                <button id="update_btn" (click)="update_div()" mat-raised-button color="accent">تعديل</button>&nbsp;
+                                <button id="cancel_btn" (click)="cancel_div()" mat-raised-button color="accent">الغاء</button>&nbsp;
                                 <button mat-raised-button type="reset">حذف</button>
                             </div>
 
 
                         </div>
-                  </div>
-               </div>
+                    </div>
+                </div>
             </form>
             <!--end::Form-->
         </div>

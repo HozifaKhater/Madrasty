@@ -27,7 +27,7 @@ export class AlertComponent implements OnInit {
 	borr_date: string = "";
 	lib_book_name: string = "";
 	borr_name: string = "";
-
+    disabled_emp: any;
 	Employees: Employee[];
 	employeedepartment: any;
 

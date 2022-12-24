@@ -9,7 +9,7 @@ import { HttpClient } from "@angular/common/http";
     providedIn: 'root'
 })
 export class School_year_dataDataService {
-    readonly APIUrl = "https://localhost:44337/api";
+    readonly APIUrl = "https://madrastyapi.azurewebsites.net/api";
     private actionUrl: string;
     public year_data_id: number;
     public year_date_from: string;
@@ -27,6 +27,9 @@ export class School_year_dataDataService {
     //}
     GetAllSchool_year_data(): Observable<any[]> {
         return this.http.get<any>(this.APIUrl + '/school_year_data');
+    }
+    get_school_year_data_for_dropdown(): Observable<any[]> {
+        return this.http.get<any>(this.APIUrl + '/school_year_data/year_data_dropdown');
     }
     GetAllSchool_year_data_with_id(val: any): Observable<any[]> {
         return this.http.get<any>(this.APIUrl + '/school_year_data/id?id=' + val);

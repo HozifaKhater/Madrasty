@@ -33,7 +33,10 @@ export class CollapseComponent implements OnInit {
 	trip_duration: string = "";
 	trip_goals: string = "";
 	trip_notes: string = "";
-
+    disabled_emp: any;
+    nchra_topic: any;
+    handleChange: any;
+    
 	Employees: Employee[];
 	employeedepartment: any;
 	Departments: Departments[];

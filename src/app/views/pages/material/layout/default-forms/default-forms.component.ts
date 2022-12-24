@@ -5,7 +5,7 @@ import { map, startWith } from 'rxjs/operators';
 import { MatChipInputEvent } from '@angular/material';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { MatSnackBar } from '@angular/material';
-import { PizzaPartyComponent } from '../../popups-and-modals/snackbar/pizza-party.component';
+
 
 
 export class State {
@@ -128,10 +128,6 @@ export class DefaultFormsComponent implements OnInit {
 		}
 	}
 
-	openSnackBar() {
-		this.snackBar.openFromComponent(PizzaPartyComponent, {
-			duration: 500,
-		});
-	}
+
 }
 

@@ -31,7 +31,7 @@ export class DepartmentDataService
     set dep_id1(val: any) {
         this.dep_id = val;
     }
-    readonly APIUrl = "https://localhost:44337/api";
+    readonly APIUrl = "https://madrastyapi.azurewebsites.net/api";
     private actionUrl: string;  
     constructor(private http: HttpClient){}
   
@@ -76,6 +76,10 @@ export class DepartmentDataService
     AClicked(msg: string) {
         this.aClickedEvent.emit(msg);
     }
-
+    @Output() bClickedEvent = new EventEmitter<string>();
+    /*   @Output() deparmentClickedEvent = new EventEmitter<string>();*/
+    BClicked(msg: string) {
+        this.bClickedEvent.emit(msg);
+    }
   
 }  

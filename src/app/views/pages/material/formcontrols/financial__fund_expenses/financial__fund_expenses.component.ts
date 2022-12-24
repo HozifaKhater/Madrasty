@@ -4,7 +4,9 @@ import { DepartmentMaster, Departments } from '../../../../../DepartmentMaster.M
 import { DepartmentDataService } from '../../../../../Services/DepartmentDataService';
 import { ActivityMaster, activity } from '../../../../../ActivityMaster.Model';
 import { Router } from '@angular/router';
-
+import { financial__fund_expenses,financial__fund_expensesMaster } from '../../../../../financial__fund_expenses.Model';
+import { financial__fund_expensesDataService } from '../../../../../Services/financial__fund_expensesDataService';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
     selector: 'kt-financial__fund_expenses',
     templateUrl: './financial__fund_expenses.component.html',
@@ -23,8 +25,7 @@ import { Router } from '@angular/router';
 	.example-selected-value {
 		margin: 15px 0;
 	}
-	`],
-	providers: [ActivityDataService]
+	`]
 })
 export class financial__fund_expensesComponent implements OnInit {
 	@Input() activity_data: any;
@@ -93,13 +94,26 @@ export class financial__fund_expensesComponent implements OnInit {
 	changeLablesPositions() {
 		this.labelPosition = this.labelPosition === 'before' ? 'after' : 'before';
 	}
-
-    constructor(private DepartmentService: DepartmentDataService, private ActivityService: ActivityDataService, private router: Router) {
+    form1: FormGroup;
+    constructor(public _fb: FormBuilder,private financial__fund_expensesDataService: financial__fund_expensesDataService,private DepartmentService: DepartmentDataService, private ActivityService: ActivityDataService, private router: Router) {
         //this.router.navigate(['/error/403']);
         this.DepartmentService.GetAlldepartment().subscribe(data => this.departments = data,
 			error => console.log(error),
-			() => console.log("ok"));
-	}
+            () => console.log("ok"));
+        this.form1 = this._fb.group({
+            id: ['', [Validators.required]],
+            type_name: ['', [Validators.required]],
+            date: ['', [Validators.required]],
+            price: ['', [Validators.required]],
+            notes: ['', [Validators.required]],
+
+        })
+    }
+    public id: number;
+    public type_name: string="";
+    public date: string = "";
+    public price: string = "";
+    public notes: string;
 	add_activity() {
 		//var test1
 		//test1 = this.departments[this.selecteddepartment]
@@ -107,17 +121,21 @@ export class financial__fund_expensesComponent implements OnInit {
 		//schoolterm = this.activities[this.activity_school_term]
 		var val = {
 
-			activity_name: this.activity_name,
-			activity_dep: String(this.selecteddepartment.dep_id),
-			activity_school_year: this.activity_school_year,
-			activity_level: String(2),
-			activity_date: String(this.activity_date),
-			activity_school_term: String(3),
-			activity_notes: String(this.activity_notes),
+           
+            
+            type_name: this.type_name,
+            date: this.date,
+            price: this.price,
+            notes: this.notes,
+
+
+
 		};
 		console.log("asd", val)
-		this.ActivityService.addActivity(val).subscribe(res => {
-			alert("Saved Successfuly");
+        this.financial__fund_expensesDataService.addfinancial__fund_expenses(val).subscribe(res => {
+            alert("Saved Successfuly");
+            this.financial__fund_expensesDataService.BClicked("");
+            this.form1.reset();
 		})
 		console.log(val)
 	}
@@ -125,21 +143,21 @@ export class financial__fund_expensesComponent implements OnInit {
 	update_department() {
 	
 		var val = {
-            activity_id: this.ActivityService.activity_id,
-            activity_name: this.activity_name,
-            activity_dep: String(this.selecteddepartment.dep_id),
-            activity_school_year: this.activity_school_year,
-            activity_level: String(2),
-            activity_date: String(this.activity_date),
-            activity_school_term: String(3),
-            activity_notes: String(this.activity_notes),
+            id: this.id,
+            type_name: this.type_name,
+            date: this.date,
+            price: this.price,
+            notes: this.notes,
+
 		};
 
 		console.log("val", val);
 
 
-		this.ActivityService.updateActivity(val).subscribe(res => {
-			alert(res.toString());
+		this.financial__fund_expensesDataService.updatefinancial__fund_expenses(val).subscribe(res => {
+            alert(res.toString());
+            this.financial__fund_expensesDataService.BClicked("");
+            this.form1.reset();
 			(<HTMLInputElement>document.getElementById("save_btn")).disabled = false;
 			(<HTMLInputElement>document.getElementById("save_btn")).hidden = false;
 			(<HTMLInputElement>document.getElementById("update_btn")).hidden = true;
@@ -147,7 +165,8 @@ export class financial__fund_expensesComponent implements OnInit {
 		})
 
 	}
-	cancel_department() {
+    cancel_department() {
+        this.form1.reset();
 		(<HTMLInputElement>document.getElementById("save_btn")).disabled = false;
 		(<HTMLInputElement>document.getElementById("save_btn")).hidden = false;
 		(<HTMLInputElement>document.getElementById("update_btn")).hidden = true;
@@ -158,13 +177,9 @@ export class financial__fund_expensesComponent implements OnInit {
 		(<HTMLInputElement>document.getElementById("cancel_btn")).hidden = true;
 		/*		(<HTMLInputElement>document.getElementById("departmentsdropdown") as ).setv*/
 
-		this.ActivityService.aClickedEvent
+		this.financial__fund_expensesDataService.aClickedEvent
 			.subscribe((data: string) => {
-				console.log("activitydep", this.departments,this.ActivityService.activity_dep, this.departments.findIndex(x => x.dep_id === this.ActivityService.activity_dep) );
-				var selected_value =String(this.ActivityService.activity_dep);
-				this.selecteddepartment = this.departments[this.departments.findIndex(function (el) {
-					return el.dep_id == selected_value;
-				})];//x => x.dep_id === this.ActivityService.activity_dep)];
+				
 				
 
 
@@ -175,31 +190,19 @@ export class financial__fund_expensesComponent implements OnInit {
 				/*this.employeedepartment.emp_id = 1;*/
 				/*this.selecteddepartment.dep_id = Number(this.DepartmentService.dep_id);*/
 
-				console.log("department", this.selecteddepartment);
-				this.activity_id = this.ActivityService.dep_id;
-				this.activity_name = this.ActivityService.activity_name;
-				this.activity_dep = this.ActivityService.activity_dep;
-				this.activity_school_year = this.ActivityService.activity_school_year;
-				this.activity_level = this.ActivityService.activity_level;
-				this.activity_date = this.ActivityService.activity_date;
-				this.activity_school_term = this.ActivityService.activity_school_term;
-				this.activity_notes = this.ActivityService.activity_notes;
-				//console.log("notyeredited", this.Employees, this.DepartmentService.dep_supervisor_id, "index", this.Employees.findIndex(x => x.emp_id === this.DepartmentService.dep_supervisor_id), this.DepartmentService.dep_supervisor_id)
-			/*	this.employeedepartment = this.Employees[this.Employees.findIndex(x => x.emp_id === this.DepartmentService.dep_supervisor_id)];//Number(this.DepartmentService.dep_supervisor_id)*/
-				console.log(this.departments)
+			
+                this.id = this.financial__fund_expensesDataService.id;
+                this.type_name = this.financial__fund_expensesDataService.type_name;
+                this.date = this.financial__fund_expensesDataService.date;
+                this.price = this.financial__fund_expensesDataService.price;
+                this.notes = this.financial__fund_expensesDataService.notes;
+
+				
 				/*	document.getElementById("save_btn").innerHTML="asdasd"*/
 				console.log("edited")
 
 			});
-		this.dep_id = this.dep_id;
-		this.activity_name = this.activity_name;
-		this.activity_dep = this.activity_dep;
-		this.activity_school_year = this.activity_school_year;
-		this.activity_level = this.activity_level;
-		this.activity_date = this.activity_date;
-		this.activity_school_term = this.activity_school_term;
-		this.activity_notes = this.activity_notes;
-		console.log(this.activity_name, this.dep_id);
+	
 	}
 
 	changeState() {

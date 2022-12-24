@@ -12,7 +12,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, NgForm, Validators } fr
 
 export class DefinitionComponent implements OnInit {
 
-    def_id: string = "";
+    def_id: number;
     def_name: string = "";
     s_code: string = "";
     s_code_arabic: string = "";
@@ -27,7 +27,8 @@ export class DefinitionComponent implements OnInit {
     constructor(public _fb: FormBuilder, private DefinitionService: DefinitionDataService) {
         this.form1 = this._fb.group({
             def_name_f: ['', [Validators.required]],
-            s_code_arabic: ['', [Validators.required]]
+            s_code_arabic: ['', [Validators.required]],
+            def_id: [{ value: '', disabled: true }]
         });
 
         this.DefinitionService.GetSCodes().subscribe(data => this.scodes = data,
@@ -53,11 +54,13 @@ export class DefinitionComponent implements OnInit {
                 def_name: this.def_name,
                 s_code: this.scodes.find(e => e.s_code_arabic == this.selected).s_code,
                 s_code_arabic: this.selected,
-                def_id: Number(chck)
+               
             };
-
+            console.log("newDefinition", newDefinition)
             this.DefinitionService.addDefinition(newDefinition).subscribe(res => {
                 alert(res.toString());
+               
+                this.DefinitionService.BClicked("test");
             })
 
             this.form1.reset();
@@ -80,12 +83,15 @@ export class DefinitionComponent implements OnInit {
             s_code: this.scodes.find(e => e.s_code_arabic == this.selected).s_code,
             s_code_arabic: this.selected,
             def_id: Number(chck)
+
         };
 
         console.log("updatedDefinition", updatedDefinition);
 
         this.DefinitionService.updateDefinition(updatedDefinition).subscribe(res => {
             alert(res.toString());
+            this.DefinitionService.BClicked("test");
+            this.form1.reset();
             (<HTMLInputElement>document.getElementById("save_btn")).disabled = false;
             (<HTMLInputElement>document.getElementById("save_btn")).hidden = false;
             (<HTMLInputElement>document.getElementById("update_btn")).hidden = true;
@@ -135,7 +141,7 @@ export class DefinitionComponent implements OnInit {
                 (<HTMLInputElement>document.getElementById("update_btn")).hidden = false;
                 (<HTMLInputElement>document.getElementById("cancel_btn")).hidden = false;
 
-                this.def_id = this.DefinitionService.def_id.toString();
+                this.def_id = this.DefinitionService.def_id;
                 this.def_name = this.DefinitionService.def_name;
                 this.s_code = this.DefinitionService.s_code;
                 this.s_code_arabic = this.DefinitionService.s_code_arabic;

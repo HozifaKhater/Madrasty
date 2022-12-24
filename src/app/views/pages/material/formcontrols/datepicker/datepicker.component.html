@@ -24,7 +24,7 @@
                             <div class="col-lg-6">
                                 <mat-form-field class="example-full-width">
                                     <input 
-                                           matInput placeholder="" [(ngModel)]="subject_id" name="subject_id" readonly="readonly">
+                                           matInput placeholder="" [(ngModel)]="subject_id"  formControlName="subject_id" name="subject_id" readonly="readonly">
                                   
                                 </mat-form-field>
                                
@@ -34,7 +34,7 @@
                             <label class="col-lg-2 col-form-label">أسم المادة:</label>
                             <div class="col-lg-6">
                                 <mat-form-field class="example-full-width">
-                                    <input [(ngModel)]="subject_name"  formControlName="subject_name"  pattern="^[أ-ي-a-zA-Z-_. ]{1,200}"
+                                    <input [(ngModel)]="subject_name"  formControlName="subject_name"  pattern="^[أ-ي-a-zA-Z-0-9-_. ]{1,200}"
                                            required  matInput placeholder="أدخل اسم الماده" type="email">
                                     <mat-hint align="start">من فضلك ادخل اسم الماده</mat-hint>
                                     <mat-error *ngIf="
@@ -57,14 +57,9 @@
                             <div class="col-lg-6">
                                 <mat-form-field class="example-full-width">
                                     <textarea pattern="^[أ-ي-a-zA-Z0-9-_.@_#!?^%$ ]{1,200}"
-                                              required [(ngModel)]="subject_desc" formControlName="subject_desc"  matInput placeholder="أدخل الوصف" type="email"></textarea>
+                                               [(ngModel)]="subject_desc" formControlName="subject_desc"  matInput placeholder="أدخل الوصف" type="email"></textarea>
                                     <mat-hint align="start">من فضلك ادخل الوصف</mat-hint>
-                                    <mat-error *ngIf="
-        form1.controls.subject_desc.hasError('required') &&
-        (form1.controls.subject_desc.dirty || form1.controls.subject_desc.touched)
-      ">
-                                        ادخل وصف الماده 
-                                    </mat-error>
+                                   
                                     <mat-error *ngIf="
         form1.controls.subject_desc.hasError('pattern') &&
         (form1.controls.subject_desc.dirty || form1.controls.subject_desc.touched)
@@ -84,8 +79,8 @@
                           
                             <div class="col-lg-6">
                                 <button id="save_btn" (click)="add_subject()" type="button" mat-raised-button color="primary">حفظ</button>&nbsp;
-                                <button id="update_btn" (click)="update_subject()" mat-raised-button color="primary">تعديل</button>&nbsp;
-                                <button id="cancel_btn" (click)="cancel_subject()" mat-raised-button color="primary">الغاء</button>&nbsp;
+                                <button id="update_btn" (click)="update_subject()" type="button" mat-raised-button color="primary">تعديل</button>&nbsp;
+                                <button id="cancel_btn" (click)="cancel_subject()" type="button" mat-raised-button color="primary">الغاء</button>&nbsp;
                                 <button mat-raised-button type="reset">حذف</button>
                             </div>
                         </div>

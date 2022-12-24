@@ -1,4 +1,4 @@
-﻿<!--Departments Data-->
+﻿    <!--Departments Data-->
 
 <div class="row">
     <div class="col-lg-12">
@@ -27,10 +27,10 @@
                                     <mat-select required 
                                                   formControlName="selectedsubject"
                                                
-                                                [(ngModel)]="selecteddepartment"
+                                                [(ngModel)]="selectedsubject"
                                                 placeholder="أختر المادة"
                                                 id="departmentsdropdown"
-                                                [disabled]="butDisabled">
+                                               >
                                         <mat-option *ngFor="let subject of subjects" [value]="subject">
                                             {{ subject.subject_name }}
                                         </mat-option>
@@ -54,7 +54,7 @@
                                                 required
                                                  [(ngModel)]="selected_levels"
                                                   formControlName="selected_levels"
-                                                (ngModelChange)="level_change($event)">
+                                                (ngModelChange)="level_change()">
                                         <mat-option *ngFor="let level of level" [value]="level">
                                             {{ level.lev_name }}
                                         </mat-option>
@@ -77,8 +77,8 @@
                                                 [(ngModel)]="selected_class"
                                                 formControlName="selected_class"
                                                 placeholder="أختر الفصل"
-                                                [disabled]="butDisabled"
-                                                (ngModelChange)="class_change($event)">
+                                             
+                                                (ngModelChange)="class_change()">
                                         <mat-option *ngFor="let class of class" [value]="class">
                                             {{ class.class_name }}
                                         </mat-option>

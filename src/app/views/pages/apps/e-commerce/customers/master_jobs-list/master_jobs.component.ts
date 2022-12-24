@@ -85,14 +85,16 @@ export class master_jobsComponent implements OnInit, OnDestroy {
 		private store: Store<AppState>,
 		private MasterJobsDataService: MasterJobsDataService
 
-	) {
+    ) {
+        this.dataSource = new MatTableDataSource([]);
         
-        this.MasterJobsDataService.GetAllActivity().subscribe(data => this.ELEMENT_DATA = data,
-                error => console.log(error),
-                () => this.dataSource = new MatTableDataSource(this.ELEMENT_DATA));
+      
 
 	}
-
+    get_data() {
+        this.MasterJobsDataService.GetAllActivity().subscribe(data => this.ELEMENT_DATA = data,
+            error => console.log(error),
+            () => this.dataSource.data =this.ELEMENT_DATA);}
 	/**
 	 * @ Lifecycle sequences => https://angular.io/guide/lifecycle-hooks
 	 */
@@ -100,8 +102,17 @@ export class master_jobsComponent implements OnInit, OnDestroy {
 	/**
 	 * On init
 	 */
-	ngOnInit() {
-       
+    ngAfterViewInit() {
+        this.dataSource.paginator = this.paginator;
+    }
+    ngOnInit() {
+        this.MasterJobsDataService.bClickedEvent
+            .subscribe((data: string) => {
+                this.get_data();
+
+            });
+        this.get_data()
+
 		let model: any = [{ 'id': 1, 'assetID': 2, 'severity': 3, 'riskIndex': 4, 'riskValue': 5, 'ticketOpened': true, 'lastModifiedDate': "2018 - 12 - 10", 'eventType': 'Add' }];  //get the model from the form
 		//this.dataSource.push(model);  //add the new model object to the dataSource
 		//this.dataSource = [...this.dataSource];  //refresh the dataSource
@@ -169,6 +180,9 @@ export class master_jobsComponent implements OnInit, OnDestroy {
            
 		);
 		// Call request from server
+        this.dataSource.sort = this.sort;
+        const searchText: string = this.searchInput.nativeElement.value;
+        this.dataSource.filter = searchText;
 		this.store.dispatch(new CustomersPageRequested({ page: queryParams }));
 		this.selection.clear();
         console.log("yyyy",this.ELEMENT_DATA);

@@ -27,7 +27,8 @@ export class AccordionComponent implements OnInit {
 	lib_page_no: number;
 	lib_rec_no: number;
 	lib_classification: string = "";
-
+    selecteddepartment: any;
+    employeedepartment: any;
 	exampleAccordion: any;
 	exampleOneOpenPanelAtAHome: any;
 	exampleTogglePanels: any;

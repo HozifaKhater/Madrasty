@@ -64,8 +64,9 @@ export class DatepickerComponent implements OnInit {
     form1: FormGroup;
     constructor(private SubjectService: SubjectDataService, public _fb: FormBuilder) {
         this.form1 = this._fb.group({
+            subject_id: [''],
             subject_name: ['', [Validators.required]],
-            subject_desc: ['', [Validators.required]]
+            subject_desc: ['', [Validators.pattern]]
           
         });}
 	add_subject() {
@@ -86,31 +87,38 @@ export class DatepickerComponent implements OnInit {
             console.log("asd", val)
             this.SubjectService.addSubject(val).subscribe(res => {
                 alert(res.toString());
+                this.SubjectService.BClicked("")
             })
             console.log(val)
             this.form1.reset();
         }
 	}
 	butDisabled: boolean;
-	update_subject() {
-		/*console.log("emp", emp, this.employeedepartment );*/
-		var val = {
-			subject_id: this.SubjectService.subject_id,
-			subject_name: this.subject_name,
-			subject_desc: this.subject_desc,
-		};
+    update_subject() {
+        if (this.form1.invalid) {
+            console.log('Form invalid...');
+            this.form1.markAllAsTouched();
+        } else {
+            /*console.log("emp", emp, this.employeedepartment );*/
+            var val = {
+                subject_id: this.SubjectService.subject_id,
+                subject_name: this.subject_name,
+                subject_desc: this.subject_desc,
+            };
 
-		console.log("val", val);
+            console.log("val", val);
 
 
-		this.SubjectService.updateSubject(val).subscribe(res => {
-			alert(res.toString());
-			(<HTMLInputElement>document.getElementById("save_btn")).disabled = false;
-			(<HTMLInputElement>document.getElementById("save_btn")).hidden = false;
-			(<HTMLInputElement>document.getElementById("update_btn")).hidden = true;
-			(<HTMLInputElement>document.getElementById("cancel_btn")).hidden = true;
-		})
-
+            this.SubjectService.updateSubject(val).subscribe(res => {
+                alert(res.toString());
+                this.SubjectService.BClicked("");
+                this.form1.reset();
+                (<HTMLInputElement>document.getElementById("save_btn")).disabled = false;
+                (<HTMLInputElement>document.getElementById("save_btn")).hidden = false;
+                (<HTMLInputElement>document.getElementById("update_btn")).hidden = true;
+                (<HTMLInputElement>document.getElementById("cancel_btn")).hidden = true;
+            })
+        }
 	}
     cancel_subject() {
         this.form1.reset();

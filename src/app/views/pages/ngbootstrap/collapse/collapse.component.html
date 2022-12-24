@@ -1,248 +1,288 @@
 ﻿
-<div class="row">
-	<div class="col-lg-12">
-		<div class="kt-portlet">
-			<div class="kt-portlet__head">
-				<div class="kt-portlet__head-caption">
-					<div class="kt-portlet__head-title">
-						<span class="kt-portlet__head-icon kt-hide">
-							<i class="la la-gear"></i>
-						</span>
-						<h3 class="kt-portlet__head-text">
-							رحله جديده
-						</h3>
+	<div class="row">
+		<div class="col-lg-6">
+			<div class="kt-portlet">
+				<div class="kt-portlet__head">
+					<div class="kt-portlet__head-caption">
+						<div class="kt-portlet__head-title">
+
+							<h3 class="kt-portlet__head-text">
+								<i class="fas fa-tasks" style="margin:5px;"></i>
+								رحله جديده
+							</h3>
+						</div>
 					</div>
 				</div>
+				<!--begin::Form-->
+				<form class="kt-form kt-form--label-align-right kt-form--group-seperator-dashed">
+					<div class="kt-portlet__body">
+						<div class="kt-form__section kt-form__section--first">
+							<div class="form-group kt-form__group row">
+								<label class="col-lg-3 col-form-label">
+									القسم المسؤول
+									<span class="text-danger">*</span>
+								</label>
+								<div class="col-lg-6 example-container">
+									<mat-form-field class="example-full-width">
+										<mat-select [(ngModel)]="selecteddepartment"
+													[ngModelOptions]="{standalone: true}"
+													id="departmentsdropdown"
+													placeholder="أختر القسم">
+
+											<mat-option *ngFor="let department of Departments" [value]="department">
+												{{ department.dep_name }}
+											</mat-option>
+										</mat-select>
+									</mat-form-field>
+								</div>
+							</div>
+
+							<div class="form-group kt-form__group row">
+								<div class="col-lg-3">
+
+									<input type="radio" id="department" name="employee"  value="department" checked>
+									<b for="department" style="margin:5px;">مبرمجة</b>
+
+								</div>
+								<div class="col-lg-3">
+
+									<input type="radio" id="department" name="employee" value="department">
+									<b for="department" style="margin:5px;">غير مبرمجة</b>
+
+								</div>
+							</div>
+
+							<div class="form-group kt-form__group row">
+								<label class="col-lg-3 col-form-label">
+									المشرف الأول
+									<span class="text-danger">*</span>
+								</label>
+								<div class="col-lg-6 example-container">
+									<mat-form-field class="example-full-width">
+										<mat-select required name="emp"
+													#refCountry="ngModel"
+													[disabled]="disabled_emp"
+													[(ngModel)]="employeedepartment"
+													id="empsdropdown"
+													placeholder="أختر المشرف">
+
+											<mat-option *ngFor="let emp of Employees" [value]="emp">
+												{{ emp.emp_name }}
+											</mat-option>
+										</mat-select>
+									</mat-form-field>
+								</div>
+							</div>
+
+							<div class="form-group kt-form__group row">
+								<label class="col-lg-3 col-form-label">
+									مكان الزيارة
+									<span class="text-danger">*</span>
+								</label>
+								<div class="col-lg-6 example-container">
+									<mat-form-field class="example-full-width">
+										<input [(ngModel)]="trip_loc" [ngModelOptions]="{standalone: true}" type="text" matInput placeholder="مكان الزيارة">
+
+									</mat-form-field>
+								</div>
+							</div>
+
+							<div class="form-group kt-form__group row">
+								<label class="col-lg-3 col-form-label">
+									عدد الطلاب
+									<span class="text-danger">*</span>
+								</label>
+								<div class="col-lg-6 example-container">
+									<mat-form-field class="example-full-width">
+										<input [(ngModel)]="nchra_topic" [ngModelOptions]="{standalone: true}" type="number" matInput placeholder="عدد الطلاب">
+
+									</mat-form-field>
+								</div>
+							</div>
+
+							<div class="form-group kt-form__group row">
+								<label class="col-lg-3 col-form-label">
+									الفصل
+									<span class="text-danger">*</span>
+								</label>
+								<div class="col-lg-6 example-container">
+									<mat-form-field class="example-full-width">
+										<mat-select [(ngModel)]="selectedclass"
+													[ngModelOptions]="{standalone: true}"
+													id="classdropdown"
+													placeholder="أختر الفصل">
+
+											<mat-option *ngFor="let class of classes" [value]="class">
+												{{ class.class_name }}
+											</mat-option>
+										</mat-select>
+									</mat-form-field>
+								</div>
+							</div>
+
+							<div class="form-group kt-form__group row">
+								<label class="col-lg-3 col-form-label">
+									الصف
+									<span class="text-danger">*</span>
+								</label>
+								<div class="col-lg-6 example-container">
+									<mat-form-field class="example-full-width">
+										<mat-select [(ngModel)]="selectedlevel"
+													[ngModelOptions]="{standalone: true}"
+													id="levelsdropdown"
+													placeholder="أختر الصف">
+
+											<mat-option *ngFor="let level of Levels" [value]="level">
+												{{ level.lev_name }}
+											</mat-option>
+										</mat-select>
+									</mat-form-field>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+				</form>
 			</div>
-			<!--begin::Form-->
-			<form class="kt-form kt-form--label-align-right kt-form--group-seperator-dashed">
-				<div class="kt-portlet__body">
+		</div>
 
-					<div class="form-group kt-form__group row">
-						<b class="col-lg-2 col-form-label">القسم المسؤول:</b>
-						<div class="col-lg-6">
-							<mat-form-field class="example-full-width">
-								<mat-select [(ngModel)]="selecteddepartment"
-											[ngModelOptions]="{standalone: true}"
-											id="departmentsdropdown"
-											placeholder="أختر القسم">
-
-									<mat-option *ngFor="let department of Departments" [value]="department">
-										{{ department.dep_name }}
-									</mat-option>
-								</mat-select>
-							</mat-form-field>
+		<div class="col-lg-6">
+			<div class="kt-portlet">
+				<div class="kt-portlet__head">
+					<div class="kt-portlet__head-caption">
+						<div class="kt-portlet__head-title">
+						
+							<h3 class="kt-portlet__head-text">
+								استكمال رحله جديده
+							</h3>
 						</div>
 					</div>
-
-					<div class="form-group kt-form__group row">
-						<div class="col-lg-2">
-
-							<input type="radio" id="department" name="employee" (change)="handleChange($event)" value="department" checked>
-							<b for="department" style="margin:5px;">مبرمجة</b>
-
-						</div>
-						<div class="col-lg-2">
-
-							<input type="radio" id="department" name="employee" (change)="handleChange($event)" value="department">
-							<b for="department" style="margin:5px;">غير مبرمجة</b>
-
-						</div>
-					</div>
-
-					<div class="form-group kt-form__group row">
-						<b class="col-lg-2 col-form-label">المشرف الأول:</b>
-						<div class="col-lg-6">
-							<mat-form-field class="example-full-width">
-								<mat-select  required name="emp"
-                                                #refCountry="ngModel"
-                                          [disabled]="disabled_emp"
-                                                [(ngModel)]="employeedepartment"
-                                                id="empsdropdown"
-											placeholder="أختر المشرف">
-
-									<mat-option *ngFor="let emp of Employees" [value]="emp">
-										{{ emp.emp_name }}
-									</mat-option>
-								</mat-select>
-							</mat-form-field>
-						</div>
-					</div>
-
-					<div class="form-group kt-form__group row">
-						<b class="col-lg-2 col-form-label">مكان الزيارة:</b>
-						<div class="col-lg-6">
-							<mat-form-field class="example-full-width">
-								<input [(ngModel)]="trip_loc" [ngModelOptions]="{standalone: true}" type="text" matInput placeholder="مكان الزيارة">
-
-							</mat-form-field>
-						</div>
-					</div>
-
-					<div class="form-group kt-form__group row">
-						<b class="col-lg-2 col-form-label">عدد الطلاب:</b>
-						<div class="col-lg-6">
-							<mat-form-field class="example-full-width">
-								<input [(ngModel)]="nchra_topic" [ngModelOptions]="{standalone: true}" type="number" matInput placeholder="عدد الطلاب">
-
-							</mat-form-field>
-						</div>
-					</div>
-
-					<div class="form-group kt-form__group row">
-						<b class="col-lg-2 col-form-label">الفصل:</b>
-						<div class="col-lg-6">
-							<mat-form-field class="example-full-width">
-								<mat-select [(ngModel)]="selectedclass"
-                                            [ngModelOptions]="{standalone: true}"
-                                            id="classdropdown"
-                                            placeholder="أختر الفصل">
-
-									<mat-option *ngFor="let class of classes" [value]="class">
-										{{ class.class_name }}
-									</mat-option>
-								</mat-select>
-							</mat-form-field>
-						</div>
-					</div>
-
-					<div class="form-group kt-form__group row">
-						<b class="col-lg-2 col-form-label">الصف:</b>
-						<div class="col-lg-6">
-							<mat-form-field class="example-full-width">
-								<mat-select [(ngModel)]="selectedlevel"
-                                            [ngModelOptions]="{standalone: true}"
-                                            id="levelsdropdown"
-                                            placeholder="أختر الصف">
-
-									<mat-option *ngFor="let level of Levels" [value]="level">
-										{{ level.lev_name }}
-									</mat-option>
-								</mat-select>
-							</mat-form-field>
-						</div>
-					</div>
-
-					<div class="form-group kt-form__group row">
-						<b class="col-lg-2 col-form-label">الطلاب:</b>
-						<div class="col-lg-6">
-							<mat-form-field class="example-full-width">
-								<mat-select required name="student"
-                                            #refCountry="ngModel"
-                                            [(ngModel)]="selectedstudent"
-                                            id="studentdropdown"
-											placeholder="أختر الطلاب" multiple>
-
-									<mat-option *ngFor="let student of students" [value]="student">
-										{{ student.student_name }}
-									</mat-option>
-								</mat-select>
-							</mat-form-field>
-						</div>
-					</div>
-
-
-					<div class="form-group kt-form__group row">
-						<b class="col-lg-2 col-form-label">التاريخ الزيارة:</b>
-						<div class="col-lg-6">
-							<mat-form-field class="example-full-width">
-								<input [(ngModel)]="trip_date" [ngModelOptions]="{standalone: true}" matInput [matDatepicker]="dp3" placeholder="التاريخ" disabled>
-								<mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
-								<mat-datepicker #dp3 disabled="false"></mat-datepicker>
-							</mat-form-field>
-						</div>
-					</div>
-
-					<div class="form-group kt-form__group row">
-						<b class="col-lg-2 col-form-label">وقت الزيارة:</b>
-						<div class="col-lg-6">
-							<mat-form-field class="example-full-width">
-								<input [(ngModel)]="trip_time" [ngModelOptions]="{standalone: true}" type="time" matInput placeholder="وقت الزيارة">
-
-							</mat-form-field>
-						</div>
-					</div>
-					<div class="form-group kt-form__group row">
-						<b class="col-lg-2 col-form-label">مده الزيارة:</b>
-						<div class="col-lg-6">
-							<mat-form-field class="example-full-width">
-								<input [(ngModel)]="trip_duration" [ngModelOptions]="{standalone: true}" type="time" matInput placeholder="مده الزيارة">
-
-							</mat-form-field>
-						</div>
-					</div>
-
-
-					<div class="form-group kt-form__group row">
-						<div class="col-lg-2">
-
-							<input type="radio" id="department" name="bus" (change)="handleChange($event)" value="bus" checked>
-							<b for="department" style="margin:5px;">باص</b>
-
-						</div>
-						<div class="col-lg-2">
-
-							<input type="radio" id="department" name="bus" (change)="handleChange($event)" value="other">
-							<b for="department" style="margin:5px;">أخري</b>
-
-						</div>
-					</div>
-
-					<div class="form-group kt-form__group row">
-						<b class="col-lg-2 col-form-label">اهداف الزيارة:</b>
-						<div class="col-lg-6">
-							<mat-form-field class="example-full-width">
-								<textarea [(ngModel)]="trip_goals" [ngModelOptions]="{standalone: true}" type="text" matInput placeholder="اهداف الزيارة">
-</textarea>
-							</mat-form-field>
-						</div>
-					</div>
-
-					<div class="form-group kt-form__group row">
-						<b class="col-lg-2 col-form-label">ملاحظات/وصف:</b>
-						<div class="col-lg-6">
-							<mat-form-field class="example-full-width">
-								<textarea [(ngModel)]="trip_notes" [ngModelOptions]="{standalone: true}" type="text" matInput placeholder="ملاحظات/وصف">
-</textarea>
-							</mat-form-field>
-						</div>
-					</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 				</div>
-				<div class="kt-portlet__foot kt-portlet__no-border">
-					<div class="kt-form__actions kt-form__actions--solid">
-						<div class="row">
-							<div class="col-lg-2"></div>
-							<div class="col-lg-6">
-								<button id="save_btn" (click)="add_trip()" mat-raised-button color="primary">اضافة</button>&nbsp;
-								<button id="update_btn" (click)="update_trip()" mat-raised-button color="primary">تعديل</button>&nbsp;
-								<button id="cancel_btn" (click)="cancel_trip()" mat-raised-button color="primary">الغاء</button>&nbsp;
 
+				<form class="kt-form">
+					<div class="kt-portlet__body">
+						<div class="kt-form__section kt-form__section--first">
+
+
+							<div class="form-group kt-form__group row">
+								<label class="col-lg-3 col-form-label">
+									الطلاب
+									<span class="text-danger">*</span>
+								</label>
+								<div class="col-lg-6 example-container">
+									<mat-form-field class="example-full-width">
+										<mat-select required name="student"
+													#refCountry="ngModel"
+													[(ngModel)]="selectedstudent"
+													id="studentdropdown"
+													placeholder="أختر الطلاب" multiple>
+
+											<mat-option *ngFor="let student of students" [value]="student">
+												{{ student.student_name }}
+											</mat-option>
+										</mat-select>
+									</mat-form-field>
+								</div>
+							</div>
+
+
+							<div class="form-group kt-form__group row">
+								<label class="col-lg-3 col-form-label">
+									التاريخ الزيارة
+									<span class="text-danger">*</span>
+								</label>
+								<div class="col-lg-6 example-container">
+									<mat-form-field class="example-full-width">
+										<input [(ngModel)]="trip_date" [ngModelOptions]="{standalone: true}" matInput [matDatepicker]="dp3" placeholder="التاريخ" disabled>
+										<mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+										<mat-datepicker #dp3 disabled="false"></mat-datepicker>
+									</mat-form-field>
+								</div>
+							</div>
+
+							<div class="form-group kt-form__group row">
+								<label class="col-lg-3 col-form-label">
+									وقت الزيارة
+									<span class="text-danger">*</span>
+								</label>
+								<div class="col-lg-6 example-container">
+									<mat-form-field class="example-full-width">
+										<input [(ngModel)]="trip_time" [ngModelOptions]="{standalone: true}" type="time" matInput placeholder="وقت الزيارة">
+
+									</mat-form-field>
+								</div>
+							</div>
+							<div class="form-group kt-form__group row">
+								<label class="col-lg-3 col-form-label">
+									مده الزيارة
+									<span class="text-danger">*</span>
+								</label>
+								<div class="col-lg-6 example-container">
+									<mat-form-field class="example-full-width">
+										<input [(ngModel)]="trip_duration" [ngModelOptions]="{standalone: true}" type="time" matInput placeholder="مده الزيارة">
+
+									</mat-form-field>
+								</div>
+							</div>
+
+
+							<div class="form-group kt-form__group row">
+								<div class="col-lg-3">
+
+									<input type="radio" id="department" name="bus"  value="bus" checked>
+									<b for="department" style="margin:5px;">باص</b>
+
+								</div>
+								<div class="col-lg-3">
+
+									<input type="radio" id="department" name="bus"  value="other">
+									<b for="department" style="margin:5px;">أخري</b>
+
+								</div>
+							</div>
+
+							<div class="form-group kt-form__group row">
+								<label class="col-lg-3 col-form-label">اهداف الزيارة:</label>
+								<div class="col-lg-6 example-container">
+									<mat-form-field class="example-full-width">
+										<textarea [(ngModel)]="trip_goals" [ngModelOptions]="{standalone: true}" type="text" matInput placeholder="اهداف الزيارة">
+</textarea>
+									</mat-form-field>
+								</div>
+							</div>
+
+							<div class="form-group kt-form__group row">
+								<label class="col-lg-3 col-form-label">ملاحظات/وصف:</label>
+								<div class="col-lg-6 example-container">
+									<mat-form-field class="example-full-width">
+										<textarea [(ngModel)]="trip_notes" [ngModelOptions]="{standalone: true}" type="text" matInput placeholder="ملاحظات/وصف">
+</textarea>
+									</mat-form-field>
+								</div>
+							</div>
+
+
+
+						</div>
+					</div>
+					<div class="kt-portlet__foot">
+						<div class="kt-form__actions kt-form__actions">
+							<div class="row">
+
+								<div class="col-lg-6">
+									<button id="save_btn" (click)="add_trip()" mat-raised-button color="accent">اضافة</button>&nbsp;
+									<button id="update_btn" (click)="update_trip()" mat-raised-button color="accent">تعديل</button>&nbsp;
+									<button id="cancel_btn" (click)="cancel_trip()" mat-raised-button color="accent">الغاء</button>&nbsp;
+
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			</form>
-			<!--end::Form-->
+				</form>
+				<!--end::Form-->
+			</div>
 		</div>
 	</div>
-</div>
 <kt-trips-master-list></kt-trips-master-list>
 <!--End Activity Data-->

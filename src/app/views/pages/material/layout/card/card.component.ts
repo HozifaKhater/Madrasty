@@ -5,6 +5,9 @@ import { Ta7dier, Ta7dier_masterMaster } from '../../../../../Ta7dier_masterMast
 import { SubjectMaster, Subjects } from '../../../../../SubjectMaster.Model';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { ChangeEvent } from "@ckeditor/ckeditor5-angular/ckeditor.component";
+import { LevelsDataService } from '../../../../../Services/LevelsDataService';
+import { FormArray, FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Levels,LevelsMaster } from '../../../../../LevelsMaster.Model';
 @Component({
 	selector: 'kt-card',
 	templateUrl: './card.component.html',
@@ -71,13 +74,33 @@ export class CardComponent implements OnInit {
 		{ value: '2', viewValue: 'صف2' },
 		{ value: '3', viewValue: 'صف3' }
 	];
-	subjects: Subjects[];
-	selectedsubject: any;
-	data: any;
-	constructor(private ta7dier_masterDataService: ta7dier_masterDataService, private SubjectDataService: SubjectDataService) {
+    subjects: Subjects[];
+    levels: Levels[];
+    selectedsubject: any;
+
+    selectedlevel: any;
+    selectedday: any;
+    selectedweek: any;
+    data: any;
+    form1: FormGroup;
+    constructor(public _fb: FormBuilder,private LevelsDataService: LevelsDataService,private ta7dier_masterDataService: ta7dier_masterDataService, private SubjectDataService: SubjectDataService) {
 		this.SubjectDataService.GetAllSubject().subscribe(data => this.subjects = data,
 			error => console.log(error),
-			() => { console.log("department dropdown") });}
+            () => { console.log("department dropdown") });
+
+        this.LevelsDataService.GetAllLevels().subscribe(data => this.levels = data,
+            error => console.log(error),
+            () => { console.log("department dropdown") });
+
+        this.form1 = this._fb.group({
+            selectedsubject: [],
+            ta7dier_date: [''],
+            selectedweek: [''],
+            selectedday: [''],
+            selectedlevel: [''],
+            ta7dier_name: ['']
+        });
+    }
 	add_ta7dier_master() {
 		//var test1
 		//test1 = this.departments[this.selecteddepartment]
@@ -89,11 +112,11 @@ export class CardComponent implements OnInit {
 			emp_name: this.emp_name,
 			subject_id: Number(this.selectedsubject.subject_id),
 			subject_name: this.selectedsubject.subject_name,
-			grade_id: this.grade_id,
-			grade_name: this.grade_name,
+            grade_id: Number(this.selectedlevel.lev_id),
+            grade_name: this.selectedlevel.lev_name,
 			ta7dier_date: this.ta7dier_date,
-			ta7dier_week: Number(this.ta7dier_week),
-			ta7dier_day: this.ta7dier_day,
+            ta7dier_week: Number(this.selectedweek.value),
+            ta7dier_day: Number(this.selectedday.value),
 			ta7dier_state_id: Number(this.ta7dier_state_id),
 			state_name: this.state_name,
 			ta7dier_name: this.ta7dier_name,
@@ -107,16 +130,15 @@ export class CardComponent implements OnInit {
 		};
 		console.log("asd", val, this.selectedsubject)
 		this.ta7dier_masterDataService.addTa7dier_master(val).subscribe(res => {
-			alert(res.toString());
+            alert(res.toString());
+            this.ta7dier_masterDataService.BClicked("");
+            this.form1.reset();
 		})
 		console.log(val)
 	}
 	ta7diers: Ta7dier_masterMaster[];
 	/*	ta7dier_masterDataService: ta7dier_masterDataService;*/
-	bind_ta7diers(event) {
-		this.ta7dier_masterDataService.subject_id = event.source.value.subject_id;
-		this.ta7dier_masterDataService.BindClicked(event.source.value.subject_id);
-	}
+	
 	udpate_ta7dier_master() {
 
 
@@ -146,7 +168,9 @@ export class CardComponent implements OnInit {
 
 
 		this.ta7dier_masterDataService.updateTa7dier_master(val).subscribe(res => {
-			alert(res.toString());
+            alert(res.toString());
+            this.ta7dier_masterDataService.BClicked("");
+            this.form1.reset();
 			(<HTMLInputElement>document.getElementById("save_btn")).disabled = false;
 			(<HTMLInputElement>document.getElementById("save_btn")).hidden = false;
 			(<HTMLInputElement>document.getElementById("update_btn")).hidden = true;
@@ -154,7 +178,8 @@ export class CardComponent implements OnInit {
 		})
 
 	}
-	cancel_ta7dier_master() {
+    cancel_ta7dier_master() {
+        this.form1.reset();
 		(<HTMLInputElement>document.getElementById("save_btn")).disabled = false;
 		(<HTMLInputElement>document.getElementById("save_btn")).hidden = false;
 		(<HTMLInputElement>document.getElementById("update_btn")).hidden = true;
@@ -199,31 +224,33 @@ export class CardComponent implements OnInit {
 			/*	console.log("asdadas", selected_value_emp, this.employees)*/
 				this.selectedsubject = this.subjects[this.subjects.findIndex(function (el) {
 					return String(el.subject_id) == selected_value_emp
-				})];
+                })];
+
+                var selected_week = String(this.ta7dier_masterDataService.ta7dier_week);
+                this.selectedweek = this.weeks[this.weeks.findIndex(function (el) {
+
+                    return String(el.value) == selected_week;
+
+                })];
+
+                var selected_day = String(this.ta7dier_masterDataService.ta7dier_day);
+                this.selectedday = this.days[this.days.findIndex(function (el) {
+
+                    return String(el.value) == selected_day;
+
+                })];
+
+                var selected_level = String(this.ta7dier_masterDataService.grade_id);
+                this.selectedlevel = this.levels[this.levels.findIndex(function (el) {
+
+                    return String(el.lev_id) == selected_level;
+
+                })];
 				/*	document.getElementById("save_btn").innerHTML="asdasd"*/
 				console.log("edited")
 
 			});
-		this.ta7dier_id = this.ta7dier_id;
-		this.emp_id = this.emp_id;
-		this.emp_name = this.emp_name;
-		this.subject_id = this.subject_id;
-		this.subject_name = this.subject_name;
-		this.grade_id = this.grade_id;
-		this.grade_name = this.grade_name;
-		this.ta7dier_date = this.ta7dier_date;
-		this.ta7dier_week = this.ta7dier_week;
-		this.ta7dier_day = this.ta7dier_day;
-		this.ta7dier_state_id = this.ta7dier_state_id;
-		this.state_name = this.state_name;
-		this.ta7dier_name = this.ta7dier_name;
-		this.ta7dier_body = this.ta7dier_body;
-		this.ta7dier_notes = this.ta7dier_notes;
-		this.ta7dier_supervision_state_id = this.ta7dier_supervision_state_id;
-		this.ta7dier_supervision_state_name = this.ta7dier_supervision_state_name;
-		this.ta7dier_state_name = this.ta7dier_state_name;
-		this.data = this.data;
-		this.selectedsubject = this.selectedsubject;
+	
 		this.breadCrumbItems = [{ label: 'Forms' }, { label: 'Form Editor', active: true }];
 	}
 }
