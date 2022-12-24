@@ -1,0 +1,99 @@
+﻿<!-- Definitions Data -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="kt-portlet">
+            <div class="kt-portlet__head">
+                <div class="kt-portlet__head-caption">
+                    <div class="kt-portlet__head-title">
+                        <span class="kt-portlet__head-icon kt-hide">
+                            <i class="la la-gear"></i>
+                        </span>
+                        <h3 class="kt-portlet__head-text">
+                            التعريفات
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <!--begin::Form-->
+            <form class="kt-form kt-form--label-align-right" [formGroup]="form1">
+                <div class="kt-portlet__body">
+                    <div class="kt-form__section kt-form__section--first">
+
+                        <div class="form-group kt-form__group row">
+                            <label class="col-lg-2 col-form-label">مسلسل:</label>
+                            <div class="col-lg-6">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="" [(ngModel)]="def_id" name="def_id" disabled="disabled">
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="form-group kt-form__group row">
+                            <label class="col-lg-2 col-form-label">أسم التعريف:</label>
+                            <div class="col-lg-6">
+                                <mat-form-field class="example-full-width">
+
+                                    <input [(ngModel)]="def_name" name="def_name" formControlName="def_name_f" pattern="^[أ-ي-a-zA-Z-_. ]{0,200}"
+                                           required (childClick)="onChildButtonClick($event)" placeholder="اسم القسم" matInput>
+
+                                    <mat-error *ngIf="form1.controls.def_name_f.hasError('required') &&
+                                               (form1.controls.def_name_f.dirty || form1.controls.def_name_f.touched)">
+                                        ادخل اسم التعريف المكون من حروف فقط
+                                    </mat-error>
+
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="form-group kt-form__group row">
+                            <label class="col-lg-2 col-form-label">نوع التعريف:</label>
+                            <div class="col-lg-6">
+                                <mat-form-field class="example-full-width">
+
+                                    <mat-select required name="s_code_arabic"
+                                                [(ngModel)]="selectedCode"
+                                                placeholder="نوع التعريف"
+                                                id="definitionsDropdown"
+                                                formControlName="s_code_arabic"
+                                                [(value)]="selected">
+
+                                        <mat-option *ngFor="let definition of scodes" [value]="definition.s_code_arabic">
+                                            {{ definition.s_code_arabic }}
+                                        </mat-option>
+                                    </mat-select>
+
+                                    <mat-error *ngIf="form1.controls.s_code_arabic.hasError('required') &&
+                                                (form1.controls.s_code_arabic.dirty || form1.controls.s_code_arabic.touched)">
+                                        من فضلك اختر نوع التعريف
+                                    </mat-error>
+
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="kt-portlet__foot">
+                    <div class="kt-form__actions kt-form__actions">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <button id="save_btn" type="button" (click)="add_definition()" mat-raised-button color="primary">حفظ</button>&nbsp;
+                                <button id="update_btn" type="button" (click)="update_definition()" mat-raised-button color="primary">تعديل</button>&nbsp;
+                                <button id="cancel_btn" type="button" (click)="cancel_definition()" mat-raised-button color="primary">الغاء</button>&nbsp;
+                                <button mat-raised-button type="reset">حذف</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!--end::Form-->
+        </div>
+    </div>
+
+</div>
+
+
+<kt-Definition-list></kt-Definition-list>
+
+
+<!--End Defiitions Data-->

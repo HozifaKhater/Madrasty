@@ -1,0 +1,139 @@
+﻿
+<div class="row">
+	<div class="col-lg-12">
+		<div class="kt-portlet">
+			<div class="kt-portlet__head">
+				<div class="kt-portlet__head-caption">
+					<div class="kt-portlet__head-title">
+						<span class="kt-portlet__head-icon kt-hide">
+							<i class="la la-gear"></i>
+						</span>
+						<h3 class="kt-portlet__head-text">
+							اجتماع جماعة
+						</h3>
+					</div>
+				</div>
+			</div>
+			<!--begin::Form-->
+			<form class="kt-form kt-form--label-align-right kt-form--group-seperator-dashed">
+				<div class="kt-portlet__body">
+
+					<div class="form-group kt-form__group row">
+						<b class="col-lg-2 col-form-label">اسم الجماعة:</b>
+						<div class="col-lg-6">
+							<mat-form-field class="example-full-width">
+								<mat-select [(ngModel)]="selecteddepartment"
+											[ngModelOptions]="{standalone: true}"
+											id="departmentsdropdown"
+											placeholder="أختر الجماعة">
+
+									<mat-option *ngFor="let department of Departments" [value]="department">
+										{{ department.dep_name }}
+									</mat-option>
+								</mat-select>
+							</mat-form-field>
+						</div>
+					</div>
+
+					<div class="form-group kt-form__group row">
+						<b class="col-lg-2 col-form-label">رقم الجماعة:</b>
+						<div class="col-lg-6">
+							<mat-form-field class="example-full-width">
+								<input [(ngModel)]="meeting_no" [ngModelOptions]="{standalone: true}" type="number" matInput placeholder="رقم الجماعة">
+
+							</mat-form-field>
+						</div>
+					</div>
+
+
+					<div class="form-group kt-form__group row">
+						<b class="col-lg-2 col-form-label">تاريخ الاجتماع:</b>
+						<div class="col-lg-6">
+							<mat-form-field class="example-full-width">
+								<input [(ngModel)]="meeting_date" [ngModelOptions]="{standalone: true}" matInput [matDatepicker]="dp3" placeholder="التاريخ" disabled>
+								<mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+								<mat-datepicker #dp3 disabled="false"></mat-datepicker>
+							</mat-form-field>
+						</div>
+					</div>
+
+					<div class="form-group kt-form__group row">
+						<b class="col-lg-2 col-form-label">عدد الحاضرين:</b>
+						<div class="col-lg-6">
+							<mat-form-field class="example-full-width">
+								<input [(ngModel)]="meeting_mem_no" [ngModelOptions]="{standalone: true}" type="number" matInput placeholder="عدد الحاضرين">
+
+							</mat-form-field>
+						</div>
+					</div>
+
+
+					<div class="form-group kt-form__group row">
+						<b class="col-lg-2 col-form-label">مكان الاجتماع:</b>
+						<div class="col-lg-6">
+							<mat-form-field class="example-full-width">
+								<input [(ngModel)]="meeting_loc" [ngModelOptions]="{standalone: true}" type="text" matInput placeholder="مكان الاجتماع">
+
+							</mat-form-field>
+						</div>
+					</div>
+
+
+					<div class="form-group kt-form__group row">
+						<b class="col-lg-2 col-form-label">جدول الاعمال:</b>
+						<div class="col-lg-6">
+							<mat-form-field class="example-full-width">
+								<textarea [(ngModel)]="bus_table" [ngModelOptions]="{standalone: true}" type="text" matInput placeholder="جدول الاعمال">
+</textarea>
+							</mat-form-field>
+						</div>
+					</div>
+
+					<div class="form-group kt-form__group row">
+						<b class="col-lg-2 col-form-label">أهم التوصيات:</b>
+						<div class="col-lg-6">
+							<mat-form-field class="example-full-width">
+								<textarea [(ngModel)]="impor_recomm" [ngModelOptions]="{standalone: true}" type="text" matInput placeholder="أهم التوصيات">
+</textarea>
+							</mat-form-field>
+						</div>
+					</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				</div>
+				<div class="kt-portlet__foot kt-portlet__no-border">
+					<div class="kt-form__actions kt-form__actions--solid">
+						<div class="row">
+							<div class="col-lg-2"></div>
+							<div class="col-lg-6">
+								<button id="save_btn" (click)="add_meeting()" mat-raised-button color="primary">اضافة</button>&nbsp;
+								<button id="update_btn" (click)="update_meeting()" mat-raised-button color="primary">تعديل</button>&nbsp;
+								<button id="cancel_btn" (click)="cancel_meeting()" mat-raised-button color="primary">الغاء</button>&nbsp;
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+			<!--end::Form-->
+		</div>
+	</div>
+</div>
+<kt-group_meeting-list></kt-group_meeting-list>
+<!--End Activity Data-->

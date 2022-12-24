@@ -1,0 +1,100 @@
+﻿<!--Subjects Form-->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="kt-portlet">
+            <div class="kt-portlet__head">
+                <div class="kt-portlet__head-caption">
+                    <div class="kt-portlet__head-title">
+                        <span class="kt-portlet__head-icon kt-hide">
+                            <i class="la la-gear"></i>
+                        </span>
+                        <h3 class="kt-portlet__head-text">
+                            بيانات المادة 
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <!--begin::Form-->
+            <form class="kt-form kt-form--label-align-right" [formGroup]="form1">
+                <div class="kt-portlet__body">
+                    <div class="kt-form__section kt-form__section--first">
+                   
+                        <div class="form-group kt-form__group row">
+                            <label class="col-lg-2 col-form-label">مسلسل:</label>
+                            <div class="col-lg-6">
+                                <mat-form-field class="example-full-width">
+                                    <input 
+                                           matInput placeholder="" [(ngModel)]="subject_id" name="subject_id" readonly="readonly">
+                                  
+                                </mat-form-field>
+                               
+                            </div>
+                        </div>
+                        <div class="form-group kt-form__group row">
+                            <label class="col-lg-2 col-form-label">أسم المادة:</label>
+                            <div class="col-lg-6">
+                                <mat-form-field class="example-full-width">
+                                    <input [(ngModel)]="subject_name"  formControlName="subject_name"  pattern="^[أ-ي-a-zA-Z-_. ]{1,200}"
+                                           required  matInput placeholder="أدخل اسم الماده" type="email">
+                                    <mat-hint align="start">من فضلك ادخل اسم الماده</mat-hint>
+                                    <mat-error *ngIf="
+        form1.controls.subject_name.hasError('required') &&
+        (form1.controls.subject_name.dirty || form1.controls.subject_name.touched)
+      ">
+                                        ادخل اسم الماده المكون من حروف فقط
+                                    </mat-error>
+                                    <mat-error *ngIf="
+        form1.controls.subject_name.hasError('pattern') &&
+        (form1.controls.subject_name.dirty || form1.controls.subject_name.touched)
+      ">
+                                        ادخل اسم الماده المكون من حروف فقط
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="form-group kt-form__group row">
+                            <label class="col-lg-2 col-form-label">وصف\ملاحظات:</label>
+                            <div class="col-lg-6">
+                                <mat-form-field class="example-full-width">
+                                    <textarea pattern="^[أ-ي-a-zA-Z0-9-_.@_#!?^%$ ]{1,200}"
+                                              required [(ngModel)]="subject_desc" formControlName="subject_desc"  matInput placeholder="أدخل الوصف" type="email"></textarea>
+                                    <mat-hint align="start">من فضلك ادخل الوصف</mat-hint>
+                                    <mat-error *ngIf="
+        form1.controls.subject_desc.hasError('required') &&
+        (form1.controls.subject_desc.dirty || form1.controls.subject_desc.touched)
+      ">
+                                        ادخل وصف الماده 
+                                    </mat-error>
+                                    <mat-error *ngIf="
+        form1.controls.subject_desc.hasError('pattern') &&
+        (form1.controls.subject_desc.dirty || form1.controls.subject_desc.touched)
+      ">
+                                        ادخل وصف الماده
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                    </div>
+              
+                </div>
+                <div class="kt-portlet__foot">
+                    <div class="kt-form__actions kt-form__actions">
+                        <div class="row">
+                          
+                            <div class="col-lg-6">
+                                <button id="save_btn" (click)="add_subject()" type="button" mat-raised-button color="primary">حفظ</button>&nbsp;
+                                <button id="update_btn" (click)="update_subject()" mat-raised-button color="primary">تعديل</button>&nbsp;
+                                <button id="cancel_btn" (click)="cancel_subject()" mat-raised-button color="primary">الغاء</button>&nbsp;
+                                <button mat-raised-button type="reset">حذف</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!--end::Form-->
+        </div>
+    </div>
+</div>
+<kt-subjects-list></kt-subjects-list>
+<!--End Subjects Form-->

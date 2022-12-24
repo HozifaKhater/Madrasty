@@ -1,0 +1,183 @@
+﻿<!--Employees Data Form-->
+<div class="row">
+
+    <div class="col-lg-6">
+        <div class="kt-portlet">
+            <div class="kt-portlet__head">
+                <div class="kt-portlet__head-caption">
+                    <div class="kt-portlet__head-title">
+                        <span class="kt-portlet__head-icon kt-hide">
+                            <i class="la la-gear"></i>
+                        </span>
+                        <h3 class="kt-portlet__head-text">
+                            <i class="fas fa-tasks" style="margin:5px;"></i>
+                            بيانات الموظف
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <!--begin::Form-->
+            <form class="kt-form" [formGroup]="form1">
+                <div class="kt-portlet__body">
+                    <div class="kt-form__section kt-form__section--first">
+
+                        <div class="form-group kt-form__group row">
+                            <label class="col-lg-2 col-form-label">مسلسل:</label>
+                            <div class="col-lg-6">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput disabled>
+
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="form-group kt-form__group row">
+                            <b class="col-lg-3 col-form-label">تاريخ :</b>
+                            <div class="col-lg-6 example-container">
+                                <mat-form-field class="example-full-width">
+                                    <input [(ngModel)]="date" required (ngModelChange)="updateCalcs($event)" formControlName="date" matInput [matDatepicker]="dp3" placeholder="تاريخ " disabled>
+                                    <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+                                    <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+                                    <mat-error *ngIf="
+        form1.controls.date.hasError('required') &&
+        (form1.controls.date.dirty || form1.controls.date.touched)
+      ">
+                                        ادخل تاريخ
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="form-group kt-form__group row">
+                            <b class="col-lg-3 col-form-label">الصف:</b>
+                            <div class="col-lg-6 example-container">
+                                <mat-form-field class="example-full-width">
+                                    <input required
+                                           type="text"
+                                           matInput
+                                           [(ngModel)]="selected_level"
+                                           placeholder="الصف"
+                                           (ngModelChange)="change_level($event)"
+                                           [matAutocomplete]="auto"
+                                           forceSelection="lev_name"
+                                           formControlName="selected_level">
+                                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
+                                        <mat-option *ngFor="let level of filteredlevel  | async" [value]="level">
+                                            {{ level.lev_name }}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                    <mat-error *ngIf="
+        form1.controls.selected_level.hasError('required') &&
+        (form1.controls.selected_level.dirty || form1.controls.selected_level.touched)
+      ">
+                                        اختر الصف
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="form-group kt-form__group row">
+                            <b class="col-lg-3 col-form-label">الفصل:</b>
+                            <div class="col-lg-6 example-container">
+                                <mat-form-field class="example-full-width">
+                                    <input required
+                                           type="text"
+                                           matInput
+                                           [(ngModel)]="selected_class"
+                                           placeholder="الصف"
+                                           [matAutocomplete]="auto"
+                                           (ngModelChange)="change_class($event)"
+                                           forceSelection="class_name"
+                                           formControlName="selected_class">
+                                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
+
+                                        <mat-option *ngFor="let class of filteredclass | async" [value]="class">
+                                            {{ class.class_name }}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                    <mat-error *ngIf="
+        form1.controls.selected_class.hasError('required') &&
+        (form1.controls.selected_class.dirty || form1.controls.selected_class.touched)
+      ">
+                                        اختر الفصل
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group kt-form__group row">
+                            <b class="col-lg-3 col-form-label">الطالب:</b>
+                            <div class="col-lg-6 example-container">
+                                <mat-form-field class="example-full-width">
+                                    <input required
+                                           type="text"
+                                           matInput
+                                           [(ngModel)]="selected_student"
+                                           placeholder="الصف"
+                                           [matAutocomplete]="auto"
+                                           (ngModelChange)="change_student($event)"
+                                           forceSelection="student_name"
+                                           formControlName="selected_student">
+                                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
+                                        <mat-option *ngFor="let student of filteredstudent  | async" [value]="student">
+                                            {{ student.student_name }}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                    <mat-error *ngIf="
+        form1.controls.selected_student.hasError('required') &&
+        (form1.controls.selected_student.dirty || form1.controls.selected_student.touched)
+      ">
+                                        اختر الحالة الاجتماعية
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="form-group kt-form__group row">
+                            <label class="col-lg-2 col-form-label">أسباب الحضور:</label>
+                            <div class="col-lg-6">
+                                <mat-form-field class="example-full-width">
+                                    <textarea pattern="^[أ-ي-a-zA-Z0-9-_.@_#!?^%$ ]{1,200}"
+                                              required [(ngModel)]="reason" formControlName="reason" matInput placeholder="أدخل أسباب الحضور"></textarea>
+                                    <mat-hint align="start">من فضلك أدخل أسباب الحضور</mat-hint>
+                                    <mat-error *ngIf="
+        form1.controls.reason.hasError('required') &&
+        (form1.controls.reason.dirty || form1.controls.reason.touched)
+      ">
+                                        من فضلك ادخل أسباب الحضور
+                                    </mat-error>
+                                    <mat-error *ngIf="
+        form1.controls.reason.hasError('pattern') &&
+        (form1.controls.reason.dirty || form1.controls.reason.touched)
+      ">
+                                        من فضلك ادخل أسباب الحضور
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+
+                        <div class="kt-portlet__foot kt-portlet__no-border">
+                            <div class="kt-form__actions kt-form__actions--solid">
+                                <div class="row">
+                                    <div class="col-lg-2"></div>
+                                    <div class="col-lg-6">
+                                        <button id="save_btn" type="button" (click)="add_activity()" mat-raised-button color="primary">حفظ</button>&nbsp;
+                                        <button id="update_btn" type="button" (click)="update_department()" mat-raised-button color="primary">تعديل</button>&nbsp;
+                                        <button id="cancel_btn" type="button" (click)="cancel_department()" mat-raised-button color="primary">الغاء</button>&nbsp;
+                                        <button mat-raised-button type="reset">حذف</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+   
+</div>
+<!--<kt-emps-list></kt-emps-list>-->
+<!--End Employees Data-->

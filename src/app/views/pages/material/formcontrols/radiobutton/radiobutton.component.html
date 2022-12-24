@@ -1,0 +1,242 @@
+﻿<!--Activity Data-->
+    <div class="row">
+
+        <div class="col-lg-6">
+            <div class="kt-portlet">
+                <div class="kt-portlet__head">
+                    <div class="kt-portlet__head-caption">
+                        <div class="kt-portlet__head-title">
+                            <span class="kt-portlet__head-icon kt-hide">
+                                <i class="la la-gear"></i>
+                            </span>
+                            <h3 class="kt-portlet__head-text"><i class="fas fa-tasks" style="margin:5px;"></i>
+                                بيانات النشاط
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <!--begin::Form-->
+                <form class="kt-form">
+                    <div class="kt-portlet__body">
+                        <div class="kt-form__section kt-form__section--first">
+                            <div class="form-group kt-form__group row">
+
+
+                                <label class="col-lg-3 col-form-label">مسلسل:</label>
+                                <div class="col-lg-6 example-container">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="ادخل المسلسل الخاص بك" disabled>
+
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="form-group kt-form__group row">
+                                <label class="col-lg-3 col-form-label">أسم النشاط:</label>
+                                <div class="col-lg-6 example-container">
+                                    <mat-form-field class="example-full-width">
+                                        <input [(ngModel)]="activity_name" formControlName="activity_name" required pattern="^[أ-ي-a-zA-Z-_. ]{0,200}" matInput placeholder="أسم النشاط">
+                                        <mat-hint align="start">من فضلك ادخل أسم النشاط الخاص بك</mat-hint>
+                                        <mat-error *ngIf="
+        form1.controls.activity_name.hasError('required') &&
+        (form1.controls.activity_name.dirty || form1.controls.activity_name.touched)
+      ">
+                                            ادخل اسم القسم المكون من حروف فقط
+                                        </mat-error>
+                                        <mat-error *ngIf="
+        form1.controls.activity_name.hasError('pattern') &&
+        (form1.controls.activity_name.dirty || form1.controls.activity_name.touched)
+      ">
+                                            ادخل اسم القسم المكون من حروف فقط
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="form-group kt-form__group row">
+                                <label class="col-lg-3 col-form-label">القسم:</label>
+                                <div class="col-lg-6 example-container">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-select required
+                                                    formControlName="selecteddepartment"
+                                                    [(ngModel)]="selecteddepartment"
+                                                    (change)="selected()"
+                                                    placeholder="Please select Value">
+                                            <mat-option *ngFor="let department of departments" [value]="department">
+                                                {{ department.dep_name }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="
+        form1.controls.selecteddepartment.hasError('required') &&
+        (form1.controls.selecteddepartment.dirty || form1.controls.selecteddepartment.touched)
+      ">
+                                            اختر  القسم
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="form-group kt-form__group row">
+                                <label class="col-lg-3 col-form-label">العام الدراسي:</label>
+                                <div class="col-lg-6 example-container">
+                                    <mat-form-field class="example-full-width">
+                                        <input [(ngModel)]="activity_school_year" formControlName="activity_school_year" required pattern="^[أ-ي-a-zA-Z-_/. ]{0,200}" matInput placeholder="العام الدراسي">
+                                        <mat-hint align="start">من فضلك ادخل العام الدراسي</mat-hint>
+                                        <mat-error *ngIf="
+        form1.controls.activity_school_year.hasError('required') &&
+        (form1.controls.activity_school_year.dirty || form1.controls.activity_school_year.touched)
+      ">
+                                            من فضلك ادخل العام الدراسي
+                                        </mat-error>
+                                        <mat-error *ngIf="
+        form1.controls.activity_school_year.hasError('pattern') &&
+        (form1.controls.activity_school_year.dirty || form1.controls.activity_school_year.touched)
+      ">
+                                            امن فضلك ادخل العام الدراسي
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="form-group kt-form__group row">
+
+                                <label class="col-lg-3 col-form-label">مستوي النشاط:</label>
+                                <div class="col-lg-6 example-container">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-select [(ngModel)]="activity_level" formControlName="activity_level" required placeholder="مستوي النشاط">
+                                            <mat-option *ngFor="let food of foods" [value]="food.value">
+                                                {{ food.viewValue }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="
+        form1.controls.activity_level.hasError('required') &&
+        (form1.controls.activity_level.dirty || form1.controls.activity_level.touched)
+      ">
+                                            من فضلك ادخل مستوي النشاط
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="kt-portlet">
+                <div class="kt-portlet__head">
+                    <div class="kt-portlet__head-caption">
+                        <div class="kt-portlet__head-title">
+                            <span class="kt-portlet__head-icon kt-hide">
+                                <i class="la la-gear"></i>
+                            </span>
+                            <h3 class="kt-portlet__head-text">
+                                استكمال بيانات النشاط
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <!--begin::Form-->
+                <form class="kt-form">
+                    <div class="kt-portlet__body">
+                        <div class="kt-form__section kt-form__section--first">
+               
+                            <div class="form-group kt-form__group row">
+                                <label class="col-lg-3 col-form-label">تاريخ النشاط:</label>
+                                <div class="col-lg-6 example-container">
+                                    <mat-form-field class="example-full-width">
+                                        <input [(ngModel)]="activity_date" formControlName="activity_date" required matInput [matDatepicker]="picker" placeholder="أختر التاريخ">
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                        <mat-error *ngIf="
+        form1.controls.activity_date.hasError('required') &&
+        (form1.controls.activity_date.dirty || form1.controls.activity_date.touched)
+      ">
+                                            من فضلك ادخل تاريخ النشاط
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="form-group kt-form__group row">
+                                <label class="col-lg-3 col-form-label">الفصل الدراسي:</label>
+                                <div class="col-lg-6 example-container">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-select (change)="selected()"
+                                                    [(ngModel)]="activity_school_term" formControlName="activity_school_term" required placeholder="الفصل الدراسي">
+                                            <mat-option *ngFor="let semester of semesters" [value]="semester.value">
+                                                {{ semester.viewValue }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="
+        form1.controls.activity_school_term.hasError('required') &&
+        (form1.controls.activity_school_term.dirty || form1.controls.activity_school_term.touched)
+      ">
+                                            من فضلك ادخل الفصل الدراسي
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="form-group kt-form__group row">
+                                <label class="col-lg-3 col-form-label">وصف\ملاحظات:</label>
+                                <div class="col-lg-6 example-container">
+                                    <mat-form-field class="example-full-width">
+                                        <textarea [(ngModel)]="activity_notes" formControlName="activity_notes" pattern="^[أ-ي-a-zA-Z0-9-_.@_#!?^%$ ]{0,200}" required matInput placeholder="أدخل الوصف" type="email"></textarea>
+                                        <mat-hint align="start">من فضلك أدخل الوصف</mat-hint>
+                                        <mat-error *ngIf="
+        form1.controls.activity_notes.hasError('required') &&
+        (form1.controls.activity_notes.dirty || form1.controls.activity_notes.touched)
+      ">
+                                            ادخل ملاحظات
+                                        </mat-error>
+                                        <mat-error *ngIf="
+        form1.controls.activity_notes.hasError('pattern') &&
+        (form1.controls.activity_notes.dirty || form1.controls.activity_notes.touched)
+      ">
+                                            ادخل ملاحظات
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="kt-portlet__foot kt-portlet__no-border">
+                        <div class="kt-form__actions kt-form__actions--solid">
+                            <div class="row">
+                                <div class="col-lg-2"></div>
+                                <div class="col-lg-6">
+                                    <button id="save_btn" type="button" (click)="add_activity()" mat-raised-button color="primary">حفظ</button>&nbsp;
+                                    <button id="update_btn" type="button" (click)="update_department()" mat-raised-button color="primary">تعديل</button>&nbsp;
+                                    <button id="cancel_btn" type="button" (click)="cancel_department()" mat-raised-button color="primary">الغاء</button>&nbsp;
+                                    <button mat-raised-button type="reset">حذف</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+
+                    <div class="kt-portlet__foot">
+                        <div class="kt-form__actions kt-form__actions">
+                            <div class="row">
+                           
+                                <div class="col-lg-6">
+                                    <button id="save_btn" type="button" (click)="add_activity()" mat-raised-button color="accent">حفظ</button>&nbsp;
+                                    <button id="update_btn" type="button" (click)="update_department()" mat-raised-button color="accent">تعديل</button>&nbsp;
+                                    <button id="cancel_btn" type="button" (click)="cancel_department()" mat-raised-button color="accent">الغاء</button>&nbsp;
+                                    <button mat-raised-button type="reset">حذف</button>
+
+                                    <!--<button mat-raised-button color="accent">Submit</button>&nbsp;
+                                    <button mat-raised-button type="reset">Cancel</button>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+                <!--end::Form-->
+            </div>
+        </div>
+    </div>
+                            <kt-activities-list></kt-activities-list>
+                            <!--End Activity Data-->
+

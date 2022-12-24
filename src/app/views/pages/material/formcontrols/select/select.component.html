@@ -1,0 +1,268 @@
+﻿<!--Students Form-->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="kt-portlet">
+            <div class="kt-portlet__head">
+                <div class="kt-portlet__head-caption">
+                    <div class="kt-portlet__head-title">
+                        <span class="kt-portlet__head-icon kt-hide">
+                            <i class="la la-gear"></i>
+                        </span>
+                        <h3 class="kt-portlet__head-text">
+                            بيانات الطالب
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <!--begin::Form-->
+            <form class="kt-form kt-form--label-align-right">
+                <div class="kt-portlet__body">
+                    <div class="kt-form__section kt-form__section--first">
+                      
+                        <div class="form-group kt-form__group row">
+                            <label class="col-lg-2 col-form-label">الرقم المدني:</label>
+                            <div class="col-lg-6">
+                                <mat-form-field class="example-full-width">
+                                    <input [(ngModel)]="student_civilian_id" [ngModelOptions]="{standalone: true}" matInput placeholder="الرقم المدني">
+                                    <mat-hint align="start">من فضلك أدخل الرقم المدني</mat-hint>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="form-group kt-form__group row">
+                            <label class="col-lg-2 col-form-label">الجنسية:</label>
+                            <div class="col-lg-6">
+                                <mat-form-field class="example-full-width">
+                                    <mat-select placeholder="أختر الجنسيه">
+                                        <mat-option *ngFor="let nationality of nationalities" [value]="nationality.value">
+                                            {{ nationality.viewValue }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="form-group kt-form__group row">
+                            <label class="col-lg-2 col-form-label">الجنس:</label>
+                            <div class="col-lg-6">
+                                <mat-form-field class="example-full-width">
+                                    <mat-select placeholder="أختر الجنس">
+                                        <mat-option *ngFor="let sex of sexx" [value]="sex.value">
+                                            {{ sex.viewValue }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="form-group kt-form__group row">
+                            <label class="col-lg-2 col-form-label">أسم اللطالب:</label>
+                            <div class="col-lg-6">
+                                <mat-form-field class="example-full-width">
+                                    <input [(ngModel)]="student_name" [ngModelOptions]="{standalone: true}" matInput placeholder="أدخل اسم الطالب">
+                                    <mat-hint align="start">من فضلك أدخل اسم الطالب</mat-hint>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group kt-form__group row">
+                            <label class="col-lg-2 col-form-label">تاريخ الميلاد:</label>
+                            <div class="col-lg-6">
+                                <mat-form-field class="example-full-width">
+                                    <input [(ngModel)]="student_dob" (ngModelChange)="updateCalcs($event)" [ngModelOptions]="{standalone: true}" matInput [matDatepicker]="picker" placeholder="أختر التاريخ">
+                                    <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="form-group kt-form__group row">
+                            <label class="col-lg-2 col-form-label">العمر فى بداية العام الدراسي:</label>
+                            <div class="col-lg-6">
+
+                                <div class="kt-section">
+                                    <div class="kt-section__content">
+                                        <mat-form-field style="margin-right:5px;">
+                                            <input [(ngModel)]="student_age_day" [ngModelOptions]="{standalone: true}" matInput value="6" placeholder="يوم" type="number">
+                                        </mat-form-field>
+
+                                        <mat-form-field style="margin-right:5px;">
+                                            <input [(ngModel)]="student_age_month" [ngModelOptions]="{standalone: true}" matInput value="12" placeholder="شهر" type="number">
+                                        </mat-form-field>
+
+                                        <mat-form-field style="margin-right:5px;">
+                                            <input [(ngModel)]="student_age_year" [ngModelOptions]="{standalone: true}" matInput value="1999" placeholder="سنة" type="number">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group kt-form__group row">
+                            <label class="col-lg-2 col-form-label">سبب القبول:</label>
+                            <div class="col-lg-6">
+                                <mat-form-field class="example-full-width">
+                                    <mat-select placeholder="أختر سبب القبول">
+                                        <mat-option *ngFor="let reason of reasons" [value]="reason.value">
+                                            {{ reason.viewValue }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="form-group kt-form__group row">
+                            <label class="col-lg-2 col-form-label">الديانة:</label>
+                            <div class="col-lg-6">
+                                <mat-form-field class="example-full-width">
+                                    <mat-select placeholder="أختر الديانة">
+                                        <mat-option *ngFor="let rel of rels" [value]="rel.value">
+                                            {{ rel.viewValue }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="form-group kt-form__group row">
+                            <label class="col-lg-2 col-form-label">المنطقة:</label>
+                            <div class="col-lg-6">
+                                <mat-form-field class="example-full-width">
+                                    <mat-select placeholder="أختر المنطقة">
+                                        <mat-option *ngFor="let region of regions" [value]="region.value">
+                                            {{ region.viewValue }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="form-group kt-form__group row">
+                            <label class="col-lg-2 col-form-label">المدرسة:</label>
+                            <div class="col-lg-6">
+                                <mat-form-field class="example-full-width">
+                                    <mat-select placeholder="أختر المدرسة">
+                                        <mat-option *ngFor="let school of schools" [value]="school.value">
+                                            {{ school.viewValue }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="form-group kt-form__group row">
+                            <label class="col-lg-2 col-form-label">المرحلة:</label>
+                            <div class="col-lg-6">
+                                <mat-form-field class="example-full-width">
+                                    <mat-select placeholder="أختر المرحلة">
+                                        <mat-option *ngFor="let stage of stages" [value]="stage.value">
+                                            {{ stage.viewValue }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group kt-form__group row">
+                            <label class="col-lg-2 col-form-label">الصف:</label>
+                            <div class="col-lg-6">
+                                <mat-form-field class="example-full-width">
+                                    <mat-select placeholder="أختر الصف">
+                                        <mat-option *ngFor="let level of levels" [value]="level.value">
+                                            {{ level.viewValue }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group kt-form__group row">
+                            <label class="col-lg-2 col-form-label">الشعبة:</label>
+                            <div class="col-lg-6">
+                                <mat-form-field class="example-full-width">
+                                    <mat-select placeholder="أختر الشعبة ">
+                                        <mat-option *ngFor="let major of majors" [value]="major.value">
+                                            {{ major.viewValue }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group kt-form__group row">
+                            <label class="col-lg-2 col-form-label">التسلسل:</label>
+                            <div class="col-lg-6">
+                                <mat-form-field class="example-full-width">
+                                    <input [(ngModel)]="student_file_ser" [ngModelOptions]="{standalone: true}" matInput placeholder="أدخل تسلسل الطالب" type="number">
+                                    <mat-hint align="start">من فضلك أدخل تسلسل الطالب</mat-hint>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="form-group kt-form__group row">
+                            <label class="col-lg-2 col-form-label">الحالة الدراسية:</label>
+                            <div class="col-lg-6">
+                                <mat-form-field class="example-full-width">
+                                    <mat-select placeholder="أختر الحالة الدراسية">
+                                        <mat-option *ngFor="let state of stats" [value]="state.value">
+                                            {{ state.viewValue }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="form-group kt-form__group row">
+                            <label class="col-lg-2 col-form-label">عدد سنوات الرسوب في الصف الحالي:</label>
+                            <div class="col-lg-6">
+                                <mat-form-field class="example-full-width">
+                                    <input [(ngModel)]="student_failure_years" [ngModelOptions]="{standalone: true}" matInput placeholder="أدخل عدد السنوات" type="number">
+                                    <mat-hint align="start">من فضلك أدخل عدد سنوات الرسوب</mat-hint>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="form-group kt-form__group row">
+                            <label class="col-lg-2 col-form-label">حالة الطالب:</label>
+                            <div class="col-lg-6">
+                                <mat-form-field class="example-full-width">
+                                    <mat-select placeholder="أختر حالة الطالب">
+                                        <mat-option *ngFor="let status of statuss" [value]="status.value">
+                                            {{ status.viewValue }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="kt-portlet__foot kt-portlet__no-border">
+                    <div class="kt-form__actions kt-form__actions--solid">
+                        <div class="row">
+                          
+                            <div class="col-lg-6">
+                                <button id="save_btn" (click)="add_student()" mat-raised-button color="accent">حفظ</button>&nbsp;
+                                <button id="update_btn" (click)="update_student()" mat-raised-button color="primary">تعديل</button>&nbsp;
+                                <button id="cancel_btn" (click)="cancel_student()" mat-raised-button color="primary">الغاء</button>&nbsp;
+                                <button mat-raised-button type="reset">حذف</button>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!--end::Form-->
+        </div>
+
+    </div>
+</div>
+<kt-student-list></kt-student-list>
+<!--End Students Form-->

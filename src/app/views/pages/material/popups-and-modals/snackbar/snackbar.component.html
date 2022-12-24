@@ -1,0 +1,156 @@
+﻿<!--Activity Data-->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="kt-portlet">
+            <div class="kt-portlet__head">
+                <div class="kt-portlet__head-caption">
+                    <div class="kt-portlet__head-title">
+                        <span class="kt-portlet__head-icon kt-hide">
+                            <i class="la la-gear"></i>
+                        </span>
+                        <h3 class="kt-portlet__head-text">
+                            معلومات السنه الدراسيه
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <!--begin::Form-->
+            <form class="kt-form kt-form--label-align-right kt-form--group-seperator-dashed">
+                <div class="kt-portlet__body">
+
+
+
+
+                    
+                        <div class="form-group kt-form__group row">
+                            <label class="col-lg-2 col-form-label">تاريخ بدايه العام الدراسى:</label>
+                            <div class="col-lg-6">
+                                <mat-form-field class="example-full-width">
+                                    <input [(ngModel)]="year_date_from" [ngModelOptions]="{standalone: true}" matInput [matDatepicker]="pickera" placeholder="أختر التاريخ">
+                                    <mat-datepicker-toggle matSuffix [for]="pickera"></mat-datepicker-toggle>
+                                    <mat-datepicker #pickera></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                      
+                    </div>
+
+                 
+                        <div class="form-group kt-form__group row">
+                            <label class="col-lg-2 col-form-label">تاريخ نهايه العام الدراسى:   </label>
+                            <div class="col-lg-6">
+                                <mat-form-field class="example-full-width">
+                                    <input [(ngModel)]="year_date_to" [ngModelOptions]="{standalone: true}" matInput [matDatepicker]="pickerb" placeholder="أختر التاريخ">
+                                    <mat-datepicker-toggle matSuffix [for]="pickerb"></mat-datepicker-toggle>
+                                    <mat-datepicker #pickerb></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                       
+                    </div>
+
+
+
+
+
+                    <div *ngFor="let field of fieldArray; let i = index">
+                      
+                            <div class="input-group-prepend">
+                                <div (click)="deleteFieldValue(i)" class="input-group-text">
+                                    <i class="mdi mdi-close mdi-18px"></i>
+                                </div>
+                            </div>
+                            <div class="form-group kt-form__group row">
+
+                                <b class="col-lg-2 col-form-label">تاريخ بدايه الترم:</b>
+                                <div class="col-lg-6">
+
+
+
+
+                                    <mat-form-field class="example-full-width">
+                                        <input [(ngModel)]="field.name"
+                                               name="{{field.name}}"
+                                               matInput [matDatepicker]="i"
+                                               placeholder="أختر تاريخ بدايه الترم"
+                                               [ngModelOptions]="{standalone: true}">
+                                        <mat-datepicker-toggle matSuffix [for]="i"></mat-datepicker-toggle>
+                                        <mat-datepicker #i></mat-datepicker>
+                                    </mat-form-field>
+                                    <mat-hint align="start">من فضلك أدخل تاريخ بدايه الترم</mat-hint>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group kt-form__group row">
+                                <b class="col-lg-2 col-form-label">تاريخ نهايه الترم:</b>
+                                <div class="col-lg-6">
+
+                                    <mat-form-field class="example-full-width">
+                                        <input [(ngModel)]="field.name1"
+                                               name="{{field.name1}}"
+                                               matInput [matDatepicker]="x"
+                                               placeholder=" أختر تاريخ نهايه الترم"
+                                               [ngModelOptions]="{standalone: true}">
+                                        <mat-datepicker-toggle matSuffix [for]="x"></mat-datepicker-toggle>
+                                        <mat-datepicker #x></mat-datepicker>
+                                    </mat-form-field>
+                                    <mat-hint align="start">من فضلك أدخل تاريخ نهايه الترم</mat-hint>
+
+                                </div>
+
+
+                            </div>
+                       
+                        <!--<td>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div (click)="deleteFieldValue(i)" class="input-group-text">
+                    <i class="mdi mdi-close mdi-18px"></i>
+                </div>
+            </div>
+            <b class="col-lg-2 col-form-label">الدرجة:</b>
+            <input [(ngModel)]="field.name"
+                   class="form-control"
+                   type="text"
+                   name="{{ field.name }}"
+                   placeholder="Name..." [ngModelOptions]="{standalone: true}" />
+            <br />   <br />
+            <b class="col-lg-2 col-form-label">بند التقييم:</b>
+            <input [(ngModel)]="field.name1"
+                   class="form-control"
+                   type="text"
+                   name="{{ field.name1 }}"
+                   placeholder="Name..." [ngModelOptions]="{standalone: true}" />
+        </div>
+    </td>-->
+
+
+
+                    </div>
+                    <div align="right">
+                        <button (click)="addFieldValue(field)" mat-fab color="primary"><span style="font-size:30px;">+</span></button>&nbsp;
+                        <b>أضافه ترم</b>
+                        
+                    </div>
+                </div>
+              
+
+                <div class="kt-portlet__foot kt-portlet__no-border">
+                    <div class="kt-form__actions kt-form__actions--solid">
+                        <div class="row">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-6">
+                                <button id="save_btn" (click)="add_year()" mat-raised-button color="primary">أضافة</button>&nbsp;
+                                <button id="update_btn" (click)="update_year()" mat-raised-button color="primary">تعديل</button>&nbsp;
+                                <button id="cancel_btn" (click)="cancel_year()" mat-raised-button color="primary">الغاء</button>&nbsp;
+                                <!--<button mat-raised-button type="reset">حذف</button>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!--end::Form-->
+        </div>
+    </div>
+</div>
+<kt-school_year_data-list></kt-school_year_data-list>
+<!--End Activity Data-->

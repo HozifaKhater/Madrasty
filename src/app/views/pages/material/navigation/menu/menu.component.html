@@ -1,0 +1,212 @@
+﻿<!--Activity Data-->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="kt-portlet">
+            <div class="kt-portlet__head">
+                <div class="kt-portlet__head-caption">
+                    <div class="kt-portlet__head-title">
+                        <span class="kt-portlet__head-icon kt-hide">
+                            <i class="la la-gear"></i>
+                        </span>
+                        <h3 class="kt-portlet__head-text">
+                     بنود التقييم
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <!--begin::Form-->
+            <form class="kt-form kt-form--label-align-right kt-form--group-seperator-dashed">
+                <div class="kt-portlet__body">
+
+
+
+                    <div class="form-group kt-form__group row">
+                        <b class="col-lg-2 col-form-label">جهه التقييم:</b>
+                        <div class="col-lg-6">
+                            <mat-form-field class="example-full-width">
+                                <mat-select [(ngModel)]="selectedobject"
+                                            [ngModelOptions]="{standalone: true}"
+                                            id="objectsdropdown"
+                                            placeholder="أختر الجهه التي تود تقيمها">
+                                    <mat-option *ngFor="let geha of gehat" [value]="geha.value">
+                                        {{ geha.viewValue}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="form-group kt-form__group row">
+                        <b class="col-lg-2 col-form-label">المادة:</b>
+                        <div class="col-lg-6">
+                            <mat-form-field class="example-full-width">
+                                <mat-select [(ngModel)]="selectedsubject"
+                                            [ngModelOptions]="{standalone: true}"
+                                            id="subjectssdropdown"
+                                            placeholder="أختر المادة">
+                                    <mat-option *ngFor="let subjects of subjects" [value]="subjects">
+                                        {{ subjects.subject_name }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="form-group kt-form__group row">
+                        <b class="col-lg-2 col-form-label">بند التقييم:</b>
+                        <div class="col-lg-6">
+                            <mat-form-field class="example-full-width">
+                                <textarea [(ngModel)]="Evaluation_item_name" [ngModelOptions]="{standalone: true}" matInput placeholder="أدخل بند التقييم" type="email"></textarea>
+                                <mat-hint align="start">من فضلك أدخل بند التقييم</mat-hint>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+
+
+
+
+                    <div *ngFor="let field of fieldArray; let i = index">
+                        <div class="input-group-prepend" *ngIf="i>0">
+                            <div (click)="deleteFieldValue(i)"  class="input-group-text">
+                                <i class="mdi mdi-close mdi-18px"></i>
+                            </div>
+                        </div>
+                        <div class="form-group kt-form__group row">
+
+                            <b class="col-lg-2 col-form-label">التقدير:</b>
+                            <div class="col-lg-6">
+                                <mat-form-field class="example-full-width">
+
+
+
+
+                                    <input class="form-control"
+                                           type="text"
+                                           name="{{ field.name }}"
+                                           [ngModelOptions]="{standalone: true}"
+                                           [(ngModel)]="field.name"
+                                           matInput placeholder="أدخل التقدير الخاص بالبند">
+                                    <mat-hint align="start">من فضلك أدخل التقدير</mat-hint>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="form-group kt-form__group row">
+                            <b class="col-lg-2 col-form-label">الدرجة:</b>
+                            <div class="col-lg-6">
+                                <mat-form-field class="example-full-width">
+                                    <input [(ngModel)]="field.name1"
+                                           class="form-control"
+                                           type="text"
+                                           name="{{ field.name1 }}"
+                                           [ngModelOptions]="{standalone: true}"
+                                           matInput placeholder="أدخل الدرجة الخاصه بالبند" />
+                                    <mat-hint align="start">من فضلك أدخل الدرجة</mat-hint>
+                                </mat-form-field>
+                            </div>
+
+                            <!--<div class="button-row">
+
+
+            </div>-->
+                        </div>
+
+                        <!--<td>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div (click)="deleteFieldValue(i)" class="input-group-text">
+                        <i class="mdi mdi-close mdi-18px"></i>
+                    </div>
+                </div>
+                <b class="col-lg-2 col-form-label">الدرجة:</b>
+                <input [(ngModel)]="field.name"
+                       class="form-control"
+                       type="text"
+                       name="{{ field.name }}"
+                       placeholder="Name..." [ngModelOptions]="{standalone: true}" />
+                <br />   <br />
+                <b class="col-lg-2 col-form-label">بند التقييم:</b>
+                <input [(ngModel)]="field.name1"
+                       class="form-control"
+                       type="text"
+                       name="{{ field.name1 }}"
+                       placeholder="Name..." [ngModelOptions]="{standalone: true}" />
+            </div>
+        </td>-->
+
+
+
+                    </div>
+                    <div align="right">
+                        <button (click)="addFieldValue(field)" mat-fab color="primary"><span style="font-size:30px;">+</span></button>&nbsp;
+                        <b>أضافه تقدير</b>
+                        <!--<button class="btn btn-secondary btn-lg1"
+                type="button"
+                (click)="addFieldValue(field)"
+                style="margin-right:10px">
+            Add More Item
+        </button>-->
+                    </div>
+                </div>
+                    <!--<div class="form-group kt-form__group row" style="border-bottom:0px;">
+        <b class="col-lg-2 col-form-label">التقدير:</b>
+        <div class="col-lg-6">
+            <mat-form-field class="example-full-width">
+                <input [(ngModel)]="Evaluation_appreciation" [ngModelOptions]="{standalone: true}" matInput placeholder="أدخل التقدير الخاص بالبند">
+                <mat-hint align="start">من فضلك أدخل التقدير</mat-hint>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="form-group kt-form__group row">
+        <b class="col-lg-2 col-form-label">الدرجة:</b>
+        <div class="col-lg-6">
+            <mat-form-field class="example-full-width">
+                <input [(ngModel)]="Evaluation_score" [ngModelOptions]="{standalone: true}" matInput placeholder="أدخل الدرجة الخاصه بالبند">
+                <mat-hint align="start">من فضلك أدخل الدرجة</mat-hint>
+            </mat-form-field>
+        </div>
+
+        <div class="button-row">
+
+            <button mat-fab color="primary"><span style="font-size:30px;">+</span></button>&nbsp;
+            <b>أضافه تقدير</b>
+        </div>
+        <div id="content">
+            <div class="contentInside"
+                 *ngFor="let container of containers; let i = index">
+                I'm number {{ i }}
+                <button (click)="saveMe(index)">Save</button>
+                <button (click)="deleteMe(index)">Delete</button>
+            </div>
+            <button (click)="add()">Add</button>
+        </div>
+    </div>-->
+            
+                <!--<button [(ngModel)]="buttons_takem" [ngModelOptions]="{standalone: true}" *ngFor="let buttonText of buttonsTexts; let i = index;"
+            (click)="addButton(i)">
+        {{buttonText}}
+    </button>-->
+
+         
+                <div class="kt-portlet__foot kt-portlet__no-border">
+                    <div class="kt-form__actions kt-form__actions--solid">
+                        <div class="row">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-6">
+                                <button id="save_btn" (click)="add_Evaluation_items()" mat-raised-button color="primary">أضافة بند</button>&nbsp;
+                                <button id="update_btn" (click)="update_Evaluation_items()" mat-raised-button color="primary">تعديل</button>&nbsp;
+                                <button id="cancel_btn" (click)="cancel_Evaluation_items()" mat-raised-button color="primary">الغاء</button>&nbsp;
+                                <!--<button mat-raised-button type="reset">حذف</button>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </form>
+            <!--end::Form-->
+        </div>
+    </div>
+</div>
+<kt-Evaluationitems-list></kt-Evaluationitems-list>
+<!--End Activity Data-->

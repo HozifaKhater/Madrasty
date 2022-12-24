@@ -1,0 +1,137 @@
+﻿<!--Departments Data-->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="kt-portlet">
+            <div class="kt-portlet__head">
+                <div class="kt-portlet__head-caption">
+                    <div class="kt-portlet__head-title">
+                        <span class="kt-portlet__head-icon kt-hide">
+                            <i class="la la-gear"></i>
+                        </span>
+                        <h3 class="kt-portlet__head-text">
+                            كتابة التحضير
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <!--begin::Form-->
+            <form class="kt-form kt-form--label-align-right">
+                <div class="kt-portlet__body">
+                    <div class="kt-form__section kt-form__section--first">
+
+                        <div class="form-group kt-form__group row">
+                            <b class="col-lg-2 col-form-label">المادة:</b>
+                            <div class="col-lg-6">
+                                <mat-form-field class="example-full-width">
+                                    <mat-select placeholder="المادة"  name="subjects"   [(ngModel)]="selectedsubject">
+                                        <mat-option *ngFor="let subjects of subjects" [value]="subjects"  (onSelectionChange)="bind_ta7diers($event)">
+                                            {{ subjects.subject_name }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="form-group kt-form__group row">
+                            <b class="col-lg-2 col-form-label">التاريخ:</b>
+                            <div class="col-lg-6">
+                                <mat-form-field class="example-full-width">
+                                    <input [(ngModel)]="ta7dier_date" [ngModelOptions]="{standalone: true}" matInput [matDatepicker]="picker" placeholder="أختر التاريخ">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="form-group kt-form__group row">
+                            <b class="col-lg-2 col-form-label">الأسبوع:</b>
+                            <div class="col-lg-6">
+                                <mat-form-field class="example-full-width">
+                                    <mat-select placeholder="الأسبوع">
+                                        <mat-option *ngFor="let weeks of weeks" [value]="weeks.value">
+                                            {{ weeks.viewValue }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="form-group kt-form__group row">
+                            <b class="col-lg-2 col-form-label">اليوم:</b>
+                            <div class="col-lg-6">
+                                <mat-form-field class="example-full-width">
+                                    <mat-select placeholder="اليوم">
+                                        <mat-option *ngFor="let days of days" [value]="days.value">
+                                            {{ days.viewValue }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="form-group kt-form__group row">
+                            <b class="col-lg-2 col-form-label">الصف:</b>
+                            <div class="col-lg-6">
+                                <mat-form-field class="example-full-width">
+                                    <mat-select placeholder="الصف">
+                                        <mat-option *ngFor="let class of class" [value]="class.value">
+                                            {{ class.viewValue }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="form-group kt-form__group row">
+                            <b class="col-lg-2 col-form-label">عنوان الدرس:</b>
+                            <div class="col-lg-6">
+                                <mat-form-field class="example-full-width">
+                                    <input  [(ngModel)]="ta7dier_name" matInput placeholder="أدخل عنوان الدرس" type="email">
+                                    <mat-hint align="start">من فضلك أدخل عنوان الدرس</mat-hint>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="kt-form__group kt-form__group--last form-group row">
+                            <b class="col-lg-2 col-form-label">الحالة:</b>
+                            <div class="col-lg-6">
+                                <div class="kt-checkbox-list">
+                                    <p style="float:right;margin:5px;">
+                                        <mat-checkbox>تم الشرح</mat-checkbox>
+                                    </p>
+                                    <p style="float:right;margin:5px;">
+                                        <mat-checkbox>متأخر</mat-checkbox>
+                                    </p>
+
+                                </div>
+                                <button mat-raised-button color="primary">أختر ملف</button>&nbsp;
+                            </div>
+
+                        </div>
+                
+
+                    </div>
+                    <ckeditor   [editor]="Editor" [data]="data" [(ngModel)]="data" (change)="onChange($event)" [ngModelOptions]="{standalone: true}"></ckeditor>
+                        <!--<app-editor></app-editor>-->
+
+                    </div>
+                    <div class="kt-portlet__foot">
+                        <div class="kt-form__actions kt-form__actions">
+                            <div class="row">
+
+                                <div class="col-lg-6">
+                                    <button id="save_btn" (click)="add_ta7dier_master()" mat-raised-button color="primary">اضافة</button>&nbsp;
+                                    <button id="update_btn" (click)="udpate_ta7dier_master()" mat-raised-button color="primary">تعديل</button>&nbsp;
+                                    <button id="cancel_btn" (click)="cancel_ta7dier_master()" mat-raised-button color="primary">الغاء</button>&nbsp;
+                                    <button mat-raised-button type="reset">تراجع</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+</form>
+            <!--end::Form-->
+        </div>
+    </div>
+</div>
+<kt-ta7deirs-list></kt-ta7deirs-list>
+<!--End Departments Data-->

@@ -1,0 +1,302 @@
+﻿<!--Activity Data-->
+    <!--<style>
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding: 8px;
+         
+        }
+
+    </style>-->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="kt-portlet">
+            <div class="kt-portlet__head">
+                <div class="kt-portlet__head-caption">
+                    <div class="kt-portlet__head-title">
+                        <span class="kt-portlet__head-icon kt-hide">
+                            <i class="la la-gear"></i>
+                        </span>
+                        <h3 class="kt-portlet__head-text">
+                            أداء التقييم
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <!--begin::Form-->
+            <form class="kt-form kt-form--label-align-right kt-form--group-seperator-dashed">
+                <div class="kt-portlet__body">
+
+
+
+                    <div class="form-group kt-form__group row">
+                        <b class="col-lg-2 col-form-label">جهه التقييم:</b>
+                        <div class="col-lg-6">
+                            <mat-form-field class="example-full-width">
+                                <mat-select placeholder="أختر الجهه التي تود تقيمها">
+                                    <mat-option *ngFor="let geha of gehat" [value]="geha.value">
+                                        {{ geha.viewValue }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="form-group kt-form__group row">
+                        <b class="col-lg-2 col-form-label">القسم:</b>
+                        <div class="col-lg-6">
+                            <mat-form-field class="example-full-width">
+                                <mat-select placeholder="أختر القسم">
+                                    <mat-option *ngFor="let departments of departments" [value]="departments">
+                                        {{ departments.dep_name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="form-group kt-form__group row">
+                        <b class="col-lg-2 col-form-label">الوظيفه:</b>
+                        <div class="col-lg-6">
+                            <mat-form-field class="example-full-width">
+                                <mat-select placeholder="أختر الوظيفه">
+                                    <mat-option *ngFor="let jobs of jobs" [value]="jobs">
+                                        {{ jobs.job_name }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="form-group kt-form__group row">
+                        <b class="col-lg-2 col-form-label">الأسم:</b>
+                        <div class="col-lg-6">
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="أدخل الأسم">
+                                <mat-hint align="start">من فضلك أدخل الأسم</mat-hint>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="form-group kt-form__group row">
+                        <b class="col-lg-2 col-form-label">الرقم المدني:</b>
+                        <div class="col-lg-6">
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="الرقم المدني" type="number">
+                                <mat-hint align="start">من فضلك أدخل الرقم المدني</mat-hint>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="form-group kt-form__group row">
+                        <b class="col-lg-2 col-form-label">رقم الملف:</b>
+                        <div class="col-lg-6">
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="رقم الملف" type="number">
+                                <mat-hint align="start">من فضلك أدخل رقم الملف</mat-hint>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="form-group kt-form__group row">
+                        <b class="col-lg-2 col-form-label">تاريخ التعيين:</b>
+                        <div class="col-lg-6">
+                            <mat-form-field class="example-full-width">
+                                <input matInput [matDatepicker]="dp3" placeholder="Input disabled" disabled>
+                                <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+                                <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <kt-Takeem_master-details-list></kt-Takeem_master-details-list>
+                    <!--<div class="form-group kt-form__group row">
+                        <div class="col-lg-6">
+                            <div class="tableFixHead">
+                                <table>
+                                    <tr>
+                                        <th>البند</th>
+                                        <th>التقدير</th>
+
+                                    </tr>
+                                    <tr>
+                                        <td>
+
+                                            <b>تحقيق الأهداف التربويه</b>&nbsp;&nbsp;
+                                        </td>
+                                        <td>
+                                            <mat-form-field>
+                                                <mat-select class="example-select" value="التزام عالي جدا">
+                                                    <mat-option value="التزام عالي جدا">التزام عالي جدا</mat-option>
+                                                    <mat-option value="التزام عالي">التزام عالي</mat-option>
+                                                    <mat-option value="التزام جيد جدا">التزام جيد جدا</mat-option>
+                                                    <mat-option value="التزام جيد">التزام جيد</mat-option>
+                                                    <mat-option value="التزام لحد ما">التزام لحد ما</mat-option>
+                                                    <mat-option value="التزام مقبول">التزام مقبول</mat-option>
+                                                    <mat-option value="التزام ضعيف">التزام ضعيف</mat-option>
+                                                    <mat-option value="التزام ضعيف جدا">التزام ضعيف جدا</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+
+                                            <b>التمكن من المادة العلمية</b>&nbsp;&nbsp;
+                                        </td>
+                                        <td>
+                                            <mat-form-field>
+                                                <mat-select class="example-select" value="التزام عالي جدا">
+                                                    <mat-option value="التزام عالي جدا">التزام عالي جدا</mat-option>
+                                                    <mat-option value="التزام عالي">التزام عالي</mat-option>
+                                                    <mat-option value="التزام جيد جدا">التزام جيد جدا</mat-option>
+                                                    <mat-option value="التزام جيد">التزام جيد</mat-option>
+                                                    <mat-option value="التزام لحد ما">التزام لحد ما</mat-option>
+                                                    <mat-option value="التزام مقبول">التزام مقبول</mat-option>
+                                                    <mat-option value="التزام ضعيف">التزام ضعيف</mat-option>
+                                                    <mat-option value="التزام ضعيف جدا">التزام ضعيف جدا</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+
+                                            <b>عرض المفاهيم والمعلومات</b>&nbsp;&nbsp;
+                                        </td>
+                                        <td>
+                                            <mat-form-field>
+                                                <mat-select class="example-select" value="التزام عالي جدا">
+                                                    <mat-option value="التزام عالي جدا">التزام عالي جدا</mat-option>
+                                                    <mat-option value="التزام عالي">التزام عالي</mat-option>
+                                                    <mat-option value="التزام جيد جدا">التزام جيد جدا</mat-option>
+                                                    <mat-option value="التزام جيد">التزام جيد</mat-option>
+                                                    <mat-option value="التزام لحد ما">التزام لحد ما</mat-option>
+                                                    <mat-option value="التزام مقبول">التزام مقبول</mat-option>
+                                                    <mat-option value="التزام ضعيف">التزام ضعيف</mat-option>
+                                                    <mat-option value="التزام ضعيف جدا">التزام ضعيف جدا</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+
+                                            <b>تنمية المهارات المتنوعة</b>&nbsp;&nbsp;
+                                        </td>
+                                        <td>
+                                            <mat-form-field>
+                                                <mat-select class="example-select" value="التزام عالي جدا">
+                                                    <mat-option value="التزام عالي جدا">التزام عالي جدا</mat-option>
+                                                    <mat-option value="التزام عالي">التزام عالي</mat-option>
+                                                    <mat-option value="التزام جيد جدا">التزام جيد جدا</mat-option>
+                                                    <mat-option value="التزام جيد">التزام جيد</mat-option>
+                                                    <mat-option value="التزام لحد ما">التزام لحد ما</mat-option>
+                                                    <mat-option value="التزام مقبول">التزام مقبول</mat-option>
+                                                    <mat-option value="التزام ضعيف">التزام ضعيف</mat-option>
+                                                    <mat-option value="التزام ضعيف جدا">التزام ضعيف جدا</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+
+                                            <b>قوة الشخصيه وثباتها</b>&nbsp;&nbsp;
+                                        </td>
+                                        <td>
+                                            <mat-form-field>
+                                                <mat-select class="example-select" value="التزام عالي جدا">
+                                                    <mat-option value="التزام عالي جدا">التزام عالي جدا</mat-option>
+                                                    <mat-option value="التزام عالي">التزام عالي</mat-option>
+                                                    <mat-option value="التزام جيد جدا">التزام جيد جدا</mat-option>
+                                                    <mat-option value="التزام جيد">التزام جيد</mat-option>
+                                                    <mat-option value="التزام لحد ما">التزام لحد ما</mat-option>
+                                                    <mat-option value="التزام مقبول">التزام مقبول</mat-option>
+                                                    <mat-option value="التزام ضعيف">التزام ضعيف</mat-option>
+                                                    <mat-option value="التزام ضعيف جدا">التزام ضعيف جدا</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+
+                                            <b>شرح المعني الاجمالي للدرس</b>&nbsp;&nbsp;
+                                        </td>
+                                        <td>
+                                            <mat-form-field>
+                                                <mat-select class="example-select" value="التزام عالي جدا">
+                                                    <mat-option value="التزام عالي جدا">التزام عالي جدا</mat-option>
+                                                    <mat-option value="التزام عالي">التزام عالي</mat-option>
+                                                    <mat-option value="التزام جيد جدا">التزام جيد جدا</mat-option>
+                                                    <mat-option value="التزام جيد">التزام جيد</mat-option>
+                                                    <mat-option value="التزام لحد ما">التزام لحد ما</mat-option>
+                                                    <mat-option value="التزام مقبول">التزام مقبول</mat-option>
+                                                    <mat-option value="التزام ضعيف">التزام ضعيف</mat-option>
+                                                    <mat-option value="التزام ضعيف جدا">التزام ضعيف جدا</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>-->
+                    <div class="form-group kt-form__group row">
+                        <b class="col-lg-2 col-form-label">المجموع الكلي:</b>
+                        <div class="col-lg-6">
+
+                            <div class="kt-section">
+
+
+                                <div class="kt-section__content">
+                                    <mat-form-field style="margin-right:10px;">
+                                        <input matInput value="100" placeholder="الدرجة النهائية" type="number">
+                                    </mat-form-field>
+
+                                    <mat-form-field style="margin-right:10px;">
+                                        <input matInput value="50" placeholder="النسبة المئوية" type="number">
+                                    </mat-form-field>
+                                    <b>%</b>
+                                    <mat-form-field style="margin-right:10px;">
+                                        <mat-select class="example-select" placeholder="التقدير اللفظي" value="التزام جيد">
+                                            <mat-option value="التزام عالي جدا">التزام عالي جدا</mat-option>
+                                            <mat-option value="التزام عالي">التزام عالي</mat-option>
+                                            <mat-option value="التزام جيد جدا">التزام جيد جدا</mat-option>
+                                            <mat-option value="التزام جيد">التزام جيد</mat-option>
+                                            <mat-option value="التزام لحد ما">التزام لحد ما</mat-option>
+                                            <mat-option value="التزام مقبول">التزام مقبول</mat-option>
+                                            <mat-option value="التزام ضعيف">التزام ضعيف</mat-option>
+                                            <mat-option value="التزام ضعيف جدا">التزام ضعيف جدا</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                    <div class="kt-portlet__foot kt-portlet__no-border">
+                        <div class="kt-form__actions kt-form__actions--solid">
+                            <div class="row">
+                                <div class="col-lg-2"></div>
+                                <div class="col-lg-6">
+                                    <button mat-raised-button color="primary"> حفظ</button>&nbsp;
+                                    <button mat-raised-button type="reset">طباعة</button>&nbsp;
+                                    <button mat-raised-button type="reset">اغلاق</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+</form>
+            <!--end::Form-->
+        </div>
+    </div>
+</div>
+<!--End Activity Data-->

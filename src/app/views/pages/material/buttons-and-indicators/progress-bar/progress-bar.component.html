@@ -1,0 +1,103 @@
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="kt-portlet">
+            <div class="kt-portlet__head">
+                <div class="kt-portlet__head-caption">
+                    <div class="kt-portlet__head-title">
+                        <span class="kt-portlet__head-icon kt-hide">
+                            <i class="la la-gear"></i>
+                        </span>
+                        <h3 class="kt-portlet__head-text">
+                            الصفوف
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <!--begin::Form-->
+            <form class="kt-form kt-form--label-align-right kt-form--group-seperator-dashed" [formGroup]="form1">
+                <div class="kt-portlet__body">
+
+                    <div class="form-group kt-form__group row">
+                        <b class="col-lg-2 col-form-label">اسم الصف:</b>
+                        <div class="col-lg-6">
+                            <mat-form-field class="example-full-width">
+                                <input [(ngModel)]="lev_name" formControlName="lev_name" pattern="^[أ-ي-a-zA-Z-_. ]{0,200}"
+                                       required type="text" matInput placeholder="اسم الصف">
+                                <mat-error *ngIf="
+        form1.controls.lev_name.hasError('required') &&
+        (form1.controls.lev_name.dirty || form1.controls.lev_name.touched)
+      ">
+                                    ادخل اسم الصف المكون من حروف فقط
+                                </mat-error>
+                                <mat-error *ngIf="
+        form1.controls.lev_name.hasError('pattern') &&
+        (form1.controls.lev_name.dirty || form1.controls.lev_name.touched)
+      ">
+                                    ادخل اسم الصف المكون من حروف فقط
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="form-group kt-form__group row">
+                        <b class="col-lg-2 col-form-label">وصف:</b>
+                        <div class="col-lg-6">
+                            <mat-form-field class="example-full-width">
+                                <textarea [(ngModel)]="lev_desc" formControlName="lev_desc" pattern="^[أ-ي-a-zA-Z0-9-_.@_#!?^%$ ]{0,200}"
+                                          required type="text" matInput placeholder="وصف">
+</textarea> 
+                                <mat-error *ngIf="
+        form1.controls.lev_desc.hasError('required') &&
+        (form1.controls.lev_desc.dirty || form1.controls.lev_desc.touched)
+      ">
+    ادخل وصف
+</mat-error>
+            <mat-error *ngIf="
+        form1.controls.lev_desc.hasError('pattern') &&
+        (form1.controls.lev_desc.dirty || form1.controls.lev_desc.touched)
+      ">
+                ادخل وصف
+            </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="form-group kt-form__group row">
+                        <b class="col-lg-2 col-form-label">عدد الفصول:</b>
+                        <div class="col-lg-6">
+                            <mat-form-field class="example-full-width">
+                                <input [(ngModel)]="lev_class_no" formControlName="lev_class_no" required type="number" matInput placeholder="عدد الفصول">
+                                <mat-error *ngIf="
+        form1.controls.lev_class_no.hasError('required') &&
+        (form1.controls.lev_class_no.dirty || form1.controls.lev_class_no.touched)
+      ">
+                                    ادخل عدد الفصول
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="kt-portlet__foot kt-portlet__no-border">
+                    <div class="kt-form__actions kt-form__actions--solid">
+                        <div class="row">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-6">
+                                <button id="save_btn" type="button" (click)="add_level()" mat-raised-button color="primary">اضافة</button>&nbsp;
+                                <button id="update_btn"  type="button" (click)="update_level()" mat-raised-button color="primary">تعديل</button>&nbsp;
+                                <button id="cancel_btn"  type="button" (click)="cancel_level()" mat-raised-button color="primary">الغاء</button>&nbsp;
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!--end::Form-->
+        </div>
+    </div>
+</div>
+<kt-levels-list></kt-levels-list>
+<!--End Activity Data-->
